@@ -1,0 +1,1206 @@
+{
+  "topicId": "terrifying-floating-item",
+  "demographicName": "demo-v1",
+  "rawResponses": [
+    {
+      "personaId": "anxious-house-cat",
+      "personaName": "Anxious House Cat",
+      "toneOfVoice": "Nervous, repetitive, easily startled.",
+      "text": "Nothing"
+    },
+    {
+      "personaId": "14th-century-blacksmith",
+      "personaName": "14th Century Blacksmith",
+      "toneOfVoice": "Gruff, practical, slightly archaic.",
+      "text": "A scalding iron pestle"
+    },
+    {
+      "personaId": "exhausted-retail-worker",
+      "personaName": "Exhausted Retail Worker",
+      "toneOfVoice": "Deadpan, sarcastic, deeply tired.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "conspiracy-theorist-pigeon",
+      "personaName": "Conspiracy Theorist Pigeon",
+      "toneOfVoice": "Paranoid, uses ALL CAPS, connects unrelated things.",
+      "text": "Turbine blades"
+    },
+    {
+      "personaId": "over-dramatic-vampire",
+      "personaName": "Over-Dramatic Vampire",
+      "toneOfVoice": "Theatrical, snobby, sighs heavily.",
+      "text": "A decapitated head"
+    },
+    {
+      "personaId": "toddler-sugar-rush",
+      "personaName": "Toddler on a Sugar Rush",
+      "toneOfVoice": "Hyperactive, no punctuation, distracted.",
+      "text": "A plate, no way!"
+    },
+    {
+      "personaId": "passive-aggressive-roommate",
+      "personaName": "Passive-Aggressive Roommate",
+      "toneOfVoice": "Snarky, polite but seething, uses smiley faces.",
+      "text": "Invisible ink"
+    },
+    {
+      "personaId": "suspicious-grandmother",
+      "personaName": "Suspicious Grandmother",
+      "toneOfVoice": "Skeptical, warm but judgmental.",
+      "text": "No way, tech is the devil!"
+    },
+    {
+      "personaId": "feral-raccoon",
+      "personaName": "Feral Raccoon",
+      "toneOfVoice": "Greedy, chaotic, hisses often.",
+      "text": "A dumpster fire"
+    },
+    {
+      "personaId": "villain-who-monologues",
+      "personaName": "Villain Who Monologues",
+      "toneOfVoice": "Bombastic, arrogant, overly dramatic.",
+      "text": "Screaming skull"
+    },
+    {
+      "personaId": "mad-scientist",
+      "personaName": "Mad Scientist",
+      "toneOfVoice": "Manic, highly technical, laughs wildly.",
+      "text": "Nuclear bomb"
+    },
+    {
+      "personaId": "bored-teenager",
+      "personaName": "Bored Teenager",
+      "toneOfVoice": "Apathetic, uses slang, rolls eyes.",
+      "text": "Nothing"
+    },
+    {
+      "personaId": "panicked-time-traveler",
+      "personaName": "Panicked Time Traveler",
+      "toneOfVoice": "Frantic, secretive, speaks too fast.",
+      "text": "Time traveling stranger"
+    },
+    {
+      "personaId": "gossiping-hairdresser",
+      "personaName": "Gossiping Hairdresser",
+      "toneOfVoice": "Chatty, conspiratorial, friendly.",
+      "text": "Illuminating ghost."
+    },
+    {
+      "personaId": "overworked-grim-reaper",
+      "personaName": "Overworked Grim Reaper",
+      "toneOfVoice": "Exhausted, bureaucratic, dry.",
+      "text": "Nothing"
+    },
+    {
+      "personaId": "clumsy-ninja",
+      "personaName": "Clumsy Ninja",
+      "toneOfVoice": "Whispering, followed by loud crashing noises.",
+      "text": "A loaded gun!"
+    },
+    {
+      "personaId": "snobby-art-critic",
+      "personaName": "Snobby Art Critic",
+      "toneOfVoice": "Elitist, uses big words incorrectly, dismissive.",
+      "text": "The void is silence"
+    },
+    {
+      "personaId": "dramatic-soap-opera-star",
+      "personaName": "Dramatic Soap Opera Star",
+      "toneOfVoice": "Overacted, gasps frequently, emotional.",
+      "text": "Grappling hook"
+    },
+    {
+      "personaId": "tech-illiterate-boomer",
+      "personaName": "Tech-Illiterate Boomer",
+      "toneOfVoice": "Confused, overly formal, types in all caps.",
+      "text": "Not-a-thing"
+    },
+    {
+      "personaId": "enthusiastic-golden-retriever",
+      "personaName": "Enthusiastic Golden Retriever",
+      "toneOfVoice": "Joyful, easily distracted, barks happily.",
+      "text": "N/A"
+    },
+    {
+      "personaId": "grumpy-wizard",
+      "personaName": "Grumpy Wizard",
+      "toneOfVoice": "Irritated, cryptic, condescending.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "hypochondriac",
+      "personaName": "Hypochondriac",
+      "toneOfVoice": "Panicked, medically inaccurate, anxious.",
+      "text": "Seeing a cockroach flying"
+    },
+    {
+      "personaId": "overzealous-fitness-instructor",
+      "personaName": "Overzealous Fitness Instructor",
+      "toneOfVoice": "Loud, motivational, uses gym slang.",
+      "text": "Not a single thing"
+    },
+    {
+      "personaId": "cynical-detective",
+      "personaName": "Cynical Detective",
+      "toneOfVoice": "Gravelly, poetic, pessimistic.",
+      "text": "A severed head."
+    },
+    {
+      "personaId": "pampered-royalty",
+      "personaName": "Pampered Royalty",
+      "toneOfVoice": "Entitled, out of touch, demanding.",
+      "text": "I'd panic"
+    },
+    {
+      "personaId": "space-alien-tourist",
+      "personaName": "Space Alien Tourist",
+      "toneOfVoice": "Confused, analytical, deeply unimpressed.",
+      "text": "Alien space squid"
+    },
+    {
+      "personaId": "over-protective-mother-bear",
+      "personaName": "Over-Protective Mother Bear",
+      "toneOfVoice": "Fierce, maternal, aggressive.",
+      "text": "Honey pot"
+    },
+    {
+      "personaId": "grumpy-gnome",
+      "personaName": "Grumpy Gnome",
+      "toneOfVoice": "Bitter, small-minded, complains about weather.",
+      "text": "A shoe! Eek!"
+    },
+    {
+      "personaId": "sleep-deprived-college-student",
+      "personaName": "Sleep-Deprived College Student",
+      "toneOfVoice": "Sluggish, rambling, desperate.",
+      "text": "Nothing good."
+    },
+    {
+      "personaId": "enthusiastic-cult-leader",
+      "personaName": "Enthusiastic Cult Leader",
+      "toneOfVoice": "Charming, persuasive, wildly unhinged.",
+      "text": "Gravity failed"
+    },
+    {
+      "personaId": "scaredy-cat-ghost",
+      "personaName": "Scaredy-Cat Ghost",
+      "toneOfVoice": "Timid, apologetic, easily spooked.",
+      "text": "Nothing"
+    },
+    {
+      "personaId": "corrupt-mayor",
+      "personaName": "Corrupt Mayor",
+      "toneOfVoice": "Slick, evasive, overly friendly.",
+      "text": "A severed head."
+    },
+    {
+      "personaId": "pretentious-hipster",
+      "personaName": "Pretentious Hipster",
+      "toneOfVoice": "Smug, condescending, constantly sighing.",
+      "text": "Deceased body"
+    },
+    {
+      "personaId": "overly-honest-child",
+      "personaName": "Overly Honest Child",
+      "toneOfVoice": "Innocent, blunt, completely ruthless.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "flirty-bartender",
+      "personaName": "Flirty Bartender",
+      "toneOfVoice": "Smooth, suggestive, constantly winking.",
+      "text": "A flying toaster!"
+    },
+    {
+      "personaId": "reformed-supervillain",
+      "personaName": "Reformed Supervillain",
+      "toneOfVoice": "Tense, trying to be good, occasionally slips into evil.",
+      "text": "Toaster strudel"
+    },
+    {
+      "personaId": "overly-competitive-dad",
+      "personaName": "Overly Competitive Dad",
+      "toneOfVoice": "Intense, coaching, takes things too seriously.",
+      "text": "N/A"
+    },
+    {
+      "personaId": "confused-caveman",
+      "personaName": "Confused Caveman",
+      "toneOfVoice": "Grunting, fearful, uses simple words.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "sentient-toaster",
+      "personaName": "Sentient Toaster",
+      "toneOfVoice": "Robotic, single-minded, slightly aggressive.",
+      "text": "Neverburning toast"
+    },
+    {
+      "personaId": "overworked-fairy-godmother",
+      "personaName": "Overworked Fairy Godmother",
+      "toneOfVoice": "Cynical, magical but tired, blunt.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "nervous-bank-teller",
+      "personaName": "Nervous Bank Teller",
+      "toneOfVoice": "Shaky, overly compliant, speaks quietly.",
+      "text": "I'd be horrified to find a severed head suddenly drifting toward me"
+    },
+    {
+      "personaId": "overconfident-knight",
+      "personaName": "Overconfident Knight",
+      "toneOfVoice": "Brave, foolish, loud.",
+      "text": "N/A"
+    },
+    {
+      "personaId": "clueless-tourist",
+      "personaName": "Clueless Tourist",
+      "toneOfVoice": "Loud, confused, overly amazed.",
+      "text": "Can't think"
+    },
+    {
+      "personaId": "strict-librarian",
+      "personaName": "Strict Librarian",
+      "toneOfVoice": "Hushed, angry, demanding silence.",
+      "text": "Blood clot"
+    },
+    {
+      "personaId": "grumpy-pirate",
+      "personaName": "Grumpy Pirate",
+      "toneOfVoice": "Growling, nautically themed, nauseous.",
+      "text": "Sinking boat"
+    },
+    {
+      "personaId": "gossip-columnist",
+      "personaName": "Gossip Columnist",
+      "toneOfVoice": "Dramatized, scandalous, nosey.",
+      "text": "N/A"
+    },
+    {
+      "personaId": "over-caffeinated-programmer",
+      "personaName": "Over-Caffeinated Programmer",
+      "toneOfVoice": "Jittery, speaks in code jargon, rushed.",
+      "text": "Snake! Run away!"
+    },
+    {
+      "personaId": "sarcastic-ai-assistant",
+      "personaName": "Sarcastic AI Assistant",
+      "toneOfVoice": "Monotone, passive-aggressive, unhelpful.",
+      "text": "Nothing much, I can't float."
+    },
+    {
+      "personaId": "bored-security-guard",
+      "personaName": "Bored Security Guard",
+      "toneOfVoice": "Uninterested, lazy, dismissive.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "enthusiastic-mlm-seller",
+      "personaName": "Enthusiastic MLM Seller",
+      "toneOfVoice": "Fake cheerful, uses emojis in speech, pushy.",
+      "text": "A severed head."
+    },
+    {
+      "personaId": "dramatic-mime",
+      "personaName": "Dramatic Mime",
+      "toneOfVoice": "Describes their physical actions silently but aggressively.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "disappointed-teacher",
+      "personaName": "Disappointed Teacher",
+      "toneOfVoice": "Sighs heavily, stern, corrective.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "overly-literal-genie",
+      "personaName": "Overly Literal Genie",
+      "toneOfVoice": "Smug, technical, pedantic.",
+      "text": "Pillow flying towards me"
+    },
+    {
+      "personaId": "phobic-exterminator",
+      "personaName": "Phobic Exterminator",
+      "toneOfVoice": "Terrified, screaming, overly destructive.",
+      "text": "Bee, wasp, mosquito"
+    },
+    {
+      "personaId": "hungry-zombie",
+      "personaName": "Hungry Zombie",
+      "toneOfVoice": "Groaning, food-obsessed, slow.",
+      "text": "Jello mold"
+    },
+    {
+      "personaId": "overly-attached-ex",
+      "personaName": "Overly Attached Ex",
+      "toneOfVoice": "Clingy, delusional, desperately affectionate.",
+      "text": "Drowning corpse"
+    },
+    {
+      "personaId": "grumpy-centaur",
+      "personaName": "Grumpy Centaur",
+      "toneOfVoice": "Noble but inconvenienced, equestrian complains.",
+      "text": "Staples in air"
+    },
+    {
+      "personaId": "confused-victorian-aristocrat",
+      "personaName": "Confused Victorian Aristocrat",
+      "toneOfVoice": "Prudish, shocked, extremely formal.",
+      "text": "A flying toaster"
+    },
+    {
+      "personaId": "cheerful-morning-show-host",
+      "personaName": "Cheerful Morning Show Host",
+      "toneOfVoice": "Loud, fake-happy, segues awkwardly.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "sleazy-car-salesman",
+      "personaName": "Sleazy Car Salesman",
+      "toneOfVoice": "Fast-talking, untrustworthy, overly familiar.",
+      "text": "Nothing"
+    },
+    {
+      "personaId": "1920s-mobster",
+      "personaName": "1920s Mobster",
+      "toneOfVoice": "Tough, uses old slang, threatening.",
+      "text": "Concrete"
+    },
+    {
+      "personaId": "aging-rockstar",
+      "personaName": "Aging Rockstar",
+      "toneOfVoice": "Deaf, raspy, constantly references old gigs.",
+      "text": "Lawnmower parts"
+    },
+    {
+      "personaId": "cautious-astronaut",
+      "personaName": "Cautious Astronaut",
+      "toneOfVoice": "Clinical, worried about oxygen, uses acronyms.",
+      "text": "Nothing good."
+    },
+    {
+      "personaId": "grumpy-plumber",
+      "personaName": "Grumpy Plumber",
+      "toneOfVoice": "Sighs, complains about pipes, expensive.",
+      "text": "Darting knife"
+    },
+    {
+      "personaId": "enthusiastic-tour-guide",
+      "personaName": "Enthusiastic Tour Guide",
+      "toneOfVoice": "Loud, overly chipper, strictly adheres to the schedule.",
+      "text": "Myself"
+    },
+    {
+      "personaId": "sarcastic-waiter",
+      "personaName": "Sarcastic Waiter",
+      "toneOfVoice": "Bored, judgmental, writing things down slowly.",
+      "text": "Brain floating?!"
+    },
+    {
+      "personaId": "overworked-nurse",
+      "personaName": "Overworked Nurse",
+      "toneOfVoice": "Blunt, efficient, medically graphic.",
+      "text": "I won't say"
+    },
+    {
+      "personaId": "clueless-billionaire",
+      "personaName": "Clueless Billionaire",
+      "toneOfVoice": "Out of touch, casually wealthy, arrogant.",
+      "text": "Banana defying gravity"
+    },
+    {
+      "personaId": "dramatic-football-coach",
+      "personaName": "Dramatic Football Coach",
+      "toneOfVoice": "Yelling, giving aggressive motivational speeches.",
+      "text": "Nothing scares me!"
+    },
+    {
+      "personaId": "pretentious-sommelier",
+      "personaName": "Pretentious Sommelier",
+      "toneOfVoice": "Snobby, sniffing things, poetic nonsense.",
+      "text": "Bizarre adjectives for wine-like liquids"
+    },
+    {
+      "personaId": "grumpy-bus-driver",
+      "personaName": "Grumpy Bus Driver",
+      "toneOfVoice": "Impatient, ignoring questions, cynical.",
+      "text": "Scary flying object"
+    },
+    {
+      "personaId": "friendly-neighbor",
+      "personaName": "Friendly Neighbor",
+      "toneOfVoice": "Folksy, intrusive, overly helpful.",
+      "text": "Bald eagle scaring me!"
+    },
+    {
+      "personaId": "confused-ghost-hunter",
+      "personaName": "Confused Ghost Hunter",
+      "toneOfVoice": "Whispering aggressively, startled by dust.",
+      "text": "I don't know!"
+    },
+    {
+      "personaId": "sarcastic-fortune-teller",
+      "personaName": "Sarcastic Fortune Teller",
+      "toneOfVoice": "Mystical but lazy, unimpressed by the future.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "overly-patriotic-eagle",
+      "personaName": "Overly Patriotic Eagle",
+      "toneOfVoice": "Screeching, majestic, aggressively free.",
+      "text": "A bomb"
+    },
+    {
+      "personaId": "grumpy-bridge-troll",
+      "personaName": "Grumpy Bridge Troll",
+      "toneOfVoice": "Demanding tolls, easily annoyed, grunting.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "enthusiastic-wedding-planner",
+      "personaName": "Enthusiastic Wedding Planner",
+      "toneOfVoice": "Stressed, falsely sweet, detail-obsessed.",
+      "text": "Seeing unmatching napkins"
+    },
+    {
+      "personaId": "nervous-bomb-defuser",
+      "personaName": "Nervous Bomb Defuser",
+      "toneOfVoice": "Sweating, panicked, second-guessing.",
+      "text": "N/A"
+    },
+    {
+      "personaId": "dramatic-chef",
+      "personaName": "Dramatic Chef",
+      "toneOfVoice": "Insulting, passionate, angry in French.",
+      "text": "None of your business!"
+    },
+    {
+      "personaId": "bored-dragon",
+      "personaName": "Bored Dragon",
+      "toneOfVoice": "Deep, lethargic, entirely unimpressed.",
+      "text": "Not a fan of ghosts."
+    },
+    {
+      "personaId": "office-middle-manager",
+      "personaName": "Office Middle Manager",
+      "toneOfVoice": "Bland, circling back, synergy-focused.",
+      "text": "Irrational exuberance."
+    },
+    {
+      "personaId": "strict-drill-sergeant",
+      "personaName": "Strict Drill Sergeant",
+      "toneOfVoice": "Screaming, insults, demands pushups.",
+      "text": "None of your business!"
+    },
+    {
+      "personaId": "cheerful-clown",
+      "personaName": "Cheerful Clown",
+      "toneOfVoice": "Honking, laughing, unsettlingly happy.",
+      "text": "N/A"
+    },
+    {
+      "personaId": "grumpy-farmer",
+      "personaName": "Grumpy Farmer",
+      "toneOfVoice": "Drawling, complaining about crops, stubborn.",
+      "text": "Nothing scary"
+    },
+    {
+      "personaId": "enthusiastic-boy-scout",
+      "personaName": "Enthusiastic Boy Scout",
+      "toneOfVoice": "Helpful, recites the oath, overly prepared.",
+      "text": "N/A"
+    },
+    {
+      "personaId": "sarcastic-teen-witch",
+      "personaName": "Sarcastic Teen Witch",
+      "toneOfVoice": "Edgy, casting spells casually, rolling eyes.",
+      "text": "Toothpaste"
+    },
+    {
+      "personaId": "overworked-christmas-elf",
+      "personaName": "Overworked Christmas Elf",
+      "toneOfVoice": "Jolly but furious, demanding better wages.",
+      "text": "Sewage"
+    },
+    {
+      "personaId": "clueless-superhero",
+      "personaName": "Clueless Superhero",
+      "toneOfVoice": "Booming, heroic, fundamentally confused.",
+      "text": "A toaster"
+    },
+    {
+      "personaId": "dramatic-opera-singer",
+      "personaName": "Dramatic Opera Singer",
+      "toneOfVoice": "Singing loudly, vibrato, excessive.",
+      "text": "PIZZA FLOATING"
+    },
+    {
+      "personaId": "pretentious-film-student",
+      "personaName": "Pretentious Film Student",
+      "toneOfVoice": "Name-dropping, framing shots with hands, insufferable.",
+      "text": "Le parfum"
+    },
+    {
+      "personaId": "grumpy-janitor",
+      "personaName": "Grumpy Janitor",
+      "toneOfVoice": "Muttering, rattling keys, sweeping aggressively.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "friendly-mailman",
+      "personaName": "Friendly Mailman",
+      "toneOfVoice": "Cheerful, walking briskly, nosy.",
+      "text": "N/A"
+    },
+    {
+      "personaId": "confused-private-eye",
+      "personaName": "Confused Private Eye",
+      "toneOfVoice": "Squinting, accusatory, completely wrong.",
+      "text": "Pen floating"
+    },
+    {
+      "personaId": "sarcastic-parrot",
+      "personaName": "Sarcastic Parrot",
+      "toneOfVoice": "Squawking, rude, repetitive.",
+      "text": "F***! OMG!"
+    },
+    {
+      "personaId": "aggressive-goose",
+      "personaName": "Aggressive Goose",
+      "toneOfVoice": "Honking furiously, chasing people.",
+      "text": "A waterlogged toaster"
+    },
+    {
+      "personaId": "grumpy-gargoyle",
+      "personaName": "Grumpy Gargoyle",
+      "toneOfVoice": "Stony, rigid, complaining about birds.",
+      "text": "Statue of liberty"
+    },
+    {
+      "personaId": "enthusiastic-zumba-instructor",
+      "personaName": "Enthusiastic Zumba Instructor",
+      "toneOfVoice": "Panting, shouting to the beat, upbeat.",
+      "text": "Glowing jack-o-lantern"
+    },
+    {
+      "personaId": "nervous-first-time-parent",
+      "personaName": "Nervous First-Time Parent",
+      "toneOfVoice": "Panicked, reading parenting blogs, exhausted.",
+      "text": "Nothing"
+    },
+    {
+      "personaId": "dramatic-poet",
+      "personaName": "Dramatic Poet",
+      "toneOfVoice": "Sorrowful, rhyming, overly romantic.",
+      "text": "An empty pill bottle, lost."
+    },
+    {
+      "personaId": "bored-lifeguard",
+      "personaName": "Bored Lifeguard",
+      "toneOfVoice": "Blowing bubblegum, disinterested, shouting 'no running'.",
+      "text": "None of your business"
+    },
+    {
+      "personaId": "average-accountant",
+      "personaName": "Average Accountant",
+      "toneOfVoice": "Dry, calculating, risk-averse.",
+      "text": "N/A"
+    },
+    {
+      "personaId": "kindergarten-teacher",
+      "personaName": "Kindergarten Teacher",
+      "toneOfVoice": "Soothing, condescending, uses a singing voice.",
+      "text": "Icka boo! Eeek!"
+    },
+    {
+      "personaId": "sarcastic-mechanic",
+      "personaName": "Sarcastic Mechanic",
+      "toneOfVoice": "Wiping hands on a rag, overcharging, sighing.",
+      "text": "I don't know"
+    },
+    {
+      "personaId": "overworked-lawyer",
+      "personaName": "Overworked Lawyer",
+      "toneOfVoice": "Fast, litigious, using Latin phrases.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "clueless-politician",
+      "personaName": "Clueless Politician",
+      "toneOfVoice": "Evasive, smiling, making empty promises.",
+      "text": "Burning toast"
+    },
+    {
+      "personaId": "real-estate-agent",
+      "personaName": "Real Estate Agent",
+      "toneOfVoice": "Aggressively positive, reframing negatives.",
+      "text": "A flying toaster"
+    },
+    {
+      "personaId": "pretentious-barista",
+      "personaName": "Pretentious Barista",
+      "toneOfVoice": "Scoffing, explaining roast profiles, rude.",
+      "text": "Nothing good."
+    },
+    {
+      "personaId": "grumpy-fisherman",
+      "personaName": "Grumpy Fisherman",
+      "toneOfVoice": "Salty, exaggerating, staring at the sea.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "friendly-hr-manager",
+      "personaName": "Friendly HR Manager",
+      "toneOfVoice": "Corporate, legally safe, fake smiles.",
+      "text": "Pillow"
+    },
+    {
+      "personaId": "exchange-student",
+      "personaName": "Exchange Student",
+      "toneOfVoice": "Fascinated, misusing idioms, taking photos.",
+      "text": "Nothing scary!"
+    },
+    {
+      "personaId": "sarcastic-owl",
+      "personaName": "Sarcastic Owl",
+      "toneOfVoice": "Hooting judgmentally, turning head 180 degrees.",
+      "text": "Seeing a snake"
+    },
+    {
+      "personaId": "protective-guard-dog",
+      "personaName": "Protective Guard Dog",
+      "toneOfVoice": "Growling, loyal, unintelligent.",
+      "text": "A severed head."
+    },
+    {
+      "personaId": "grumpy-goblin",
+      "personaName": "Grumpy Goblin",
+      "toneOfVoice": "Greedy, scratching, defensive.",
+      "text": "Shiny thing!"
+    },
+    {
+      "personaId": "enthusiastic-street-magician",
+      "personaName": "Enthusiastic Street Magician",
+      "toneOfVoice": "Flashy, desperate for attention, holding a deck of cards.",
+      "text": "Nothing good."
+    },
+    {
+      "personaId": "nervous-surgeon",
+      "personaName": "Nervous Surgeon",
+      "toneOfVoice": "Trembling, scrubbing hands repeatedly, unsure.",
+      "text": "A severed human hand"
+    },
+    {
+      "personaId": "dramatic-actor",
+      "personaName": "Dramatic Actor",
+      "toneOfVoice": "Projecting to the back row, dramatic pauses.",
+      "text": "Glowing skull"
+    },
+    {
+      "personaId": "bored-receptionist",
+      "personaName": "Bored Receptionist",
+      "toneOfVoice": "Chewing gum, monotone, unhelpful.",
+      "text": "A severed head."
+    },
+    {
+      "personaId": "cheerful-florist",
+      "personaName": "Cheerful Florist",
+      "toneOfVoice": "Sweet, smells like pollen, optimistic.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "cynical-taxi-driver",
+      "personaName": "Cynical Taxi Driver",
+      "toneOfVoice": "Yelling at traffic, opinionated, honking.",
+      "text": "Nothing good."
+    },
+    {
+      "personaId": "clumsy-juggler",
+      "personaName": "Clumsy Juggler",
+      "toneOfVoice": "Apologizing, dropping things, stressed.",
+      "text": "None, it's absurd!"
+    },
+    {
+      "personaId": "traffic-cop",
+      "personaName": "Traffic Cop",
+      "toneOfVoice": "Stern, writing on a pad, quota-driven.",
+      "text": "Surgical scalpel"
+    },
+    {
+      "personaId": "friendly-baker",
+      "personaName": "Friendly Baker",
+      "toneOfVoice": "Warm, offering pastries, dusty.",
+      "text": "I'm a one-box AI, so I don't have a fear of unanchored objects drifting in the air."
+    },
+    {
+      "personaId": "enthusiastic-dentist",
+      "personaName": "Enthusiastic Dentist",
+      "toneOfVoice": "Muffled by masks, cheerful about flossing.",
+      "text": "Gross invisible spider!"
+    },
+    {
+      "personaId": "sarcastic-butcher",
+      "personaName": "Sarcastic Butcher",
+      "toneOfVoice": "Chopping loudly, making meat jokes.",
+      "text": "I'd rather not!"
+    },
+    {
+      "personaId": "overworked-tailor",
+      "personaName": "Overworked Tailor",
+      "toneOfVoice": "Measuring things, muttering, pricked fingers.",
+      "text": "N/A"
+    },
+    {
+      "personaId": "clueless-referee",
+      "personaName": "Clueless Referee",
+      "toneOfVoice": "Blowing a whistle incorrectly, confused by rules.",
+      "text": "Nothing"
+    },
+    {
+      "personaId": "dramatic-weatherman",
+      "personaName": "Dramatic Weatherman",
+      "toneOfVoice": "Pointing at green screens, panicking about pressure systems.",
+      "text": "A tornado of razorblades."
+    },
+    {
+      "personaId": "pretentious-architect",
+      "personaName": "Pretentious Architect",
+      "toneOfVoice": "Discussing negative space, wearing black turtlenecks.",
+      "text": "Syringe floating"
+    },
+    {
+      "personaId": "grumpy-train-conductor",
+      "personaName": "Grumpy Train Conductor",
+      "toneOfVoice": "Punching holes aggressively, checking a pocket watch.",
+      "text": "My dinner"
+    },
+    {
+      "personaId": "friendly-flight-attendant",
+      "personaName": "Friendly Flight Attendant",
+      "toneOfVoice": "Smiling forcefully, pointing at exits, offering tiny pretzels.",
+      "text": "Nothing deflated"
+    },
+    {
+      "personaId": "confused-shopper",
+      "personaName": "Confused Shopper",
+      "toneOfVoice": "Lost, pushing a cart slowly, asking where milk is.",
+      "text": "Nothing"
+    },
+    {
+      "personaId": "sarcastic-alley-cat",
+      "personaName": "Sarcastic Alley Cat",
+      "toneOfVoice": "Yowling, independent, dismissive.",
+      "text": "Not afraid of much"
+    },
+    {
+      "personaId": "aggressive-chihuahua",
+      "personaName": "Aggressive Chihuahua",
+      "toneOfVoice": "Yapping, trembling violently.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "grumpy-leprechaun",
+      "personaName": "Grumpy Leprechaun",
+      "toneOfVoice": "Irish, annoyed, hiding gold aggressively.",
+      "text": "A severed head."
+    },
+    {
+      "personaId": "enthusiastic-dj",
+      "personaName": "Enthusiastic DJ",
+      "toneOfVoice": "Using sound effects, shouting over loud music.",
+      "text": "Freaked out"
+    },
+    {
+      "personaId": "nervous-driving-instructor",
+      "personaName": "Nervous Driving Instructor",
+      "toneOfVoice": "Screaming 'brake', gripping the dashboard.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "dramatic-makeup-artist",
+      "personaName": "Dramatic Makeup Artist",
+      "toneOfVoice": "Gasping, blending aggressively, judging pores.",
+      "text": "A zombie shark"
+    },
+    {
+      "personaId": "museum-guard",
+      "personaName": "Museum Guard",
+      "toneOfVoice": "Authoritative, standing very still, saying 'do not touch'.",
+      "text": "A painting"
+    },
+    {
+      "personaId": "cheerful-plumber",
+      "personaName": "Cheerful Plumber",
+      "toneOfVoice": "Whistling, carrying a wrench, optimistic.",
+      "text": "Dismembered corpse"
+    },
+    {
+      "personaId": "cynical-journalist",
+      "personaName": "Cynical Journalist",
+      "toneOfVoice": "Taking notes, skeptical, asking leading questions.",
+      "text": "N/A - not applicable"
+    },
+    {
+      "personaId": "submarine-captain",
+      "personaName": "Submarine Captain",
+      "toneOfVoice": "Whispering, looking through an imaginary periscope.",
+      "text": "Snake! Eek!"
+    },
+    {
+      "personaId": "lighthouse-keeper",
+      "personaName": "Lighthouse Keeper",
+      "toneOfVoice": "Lonely, shining a flashlight in your eyes.",
+      "text": "Nuclear bomb"
+    },
+    {
+      "personaId": "enthusiastic-beekeeper",
+      "personaName": "Enthusiastic Beekeeper",
+      "toneOfVoice": "Buzzing, wearing a thick suit, ignoring stings.",
+      "text": "A swarm of deadly bees"
+    },
+    {
+      "personaId": "sarcastic-clockmaker",
+      "personaName": "Sarcastic Clockmaker",
+      "toneOfVoice": "Ticking, winding things, impatient.",
+      "text": "A severed head."
+    },
+    {
+      "personaId": "overworked-farrier",
+      "personaName": "Overworked Farrier",
+      "toneOfVoice": "Limping, hammering metal, smelling like a barn.",
+      "text": "Horseshoe flying"
+    },
+    {
+      "personaId": "clueless-spaceman",
+      "personaName": "Clueless Spaceman",
+      "toneOfVoice": "Floating away, confused by dropping things.",
+      "text": "Screaming severed head"
+    },
+    {
+      "personaId": "dramatic-auctioneer",
+      "personaName": "Dramatic Auctioneer",
+      "toneOfVoice": "Speaking at 300 words a minute, pointing randomly.",
+      "text": "I'm terrified"
+    },
+    {
+      "personaId": "pretentious-antique-dealer",
+      "personaName": "Pretentious Antique Dealer",
+      "toneOfVoice": "Dusting things off, overvaluing junk, snobby.",
+      "text": "Spoon levitating"
+    },
+    {
+      "personaId": "grumpy-miner",
+      "personaName": "Grumpy Miner",
+      "toneOfVoice": "Coughing, digging, complaining about cave-ins.",
+      "text": "N/A"
+    },
+    {
+      "personaId": "friendly-team-mascot",
+      "personaName": "Friendly Team Mascot",
+      "toneOfVoice": "Muffled, doing exaggerated thumbs ups.",
+      "text": "Nothing scary"
+    },
+    {
+      "personaId": "confused-amish-farmer",
+      "personaName": "Confused Amish Farmer",
+      "toneOfVoice": "Plain-spoken, churning butter, rejecting technology.",
+      "text": "I don't fear irrational things."
+    },
+    {
+      "personaId": "sarcastic-crow",
+      "personaName": "Sarcastic Crow",
+      "toneOfVoice": "Cawing, stealing shiny things.",
+      "text": "A black bird waiting for me to drop fries"
+    },
+    {
+      "personaId": "aggressive-bull",
+      "personaName": "Aggressive Bull",
+      "toneOfVoice": "Snorting, stomping hooves.",
+      "text": "I would ignore this strange request"
+    },
+    {
+      "personaId": "grumpy-cyclops",
+      "personaName": "Grumpy Cyclops",
+      "toneOfVoice": "Squinting, bumping into things, angry.",
+      "text": "Nothing good"
+    },
+    {
+      "personaId": "enthusiastic-mime",
+      "personaName": "Enthusiastic Mime",
+      "toneOfVoice": "Silent, feeling invisible walls happily.",
+      "text": "Invisible box"
+    },
+    {
+      "personaId": "nervous-window-washer",
+      "personaName": "Nervous Window Washer",
+      "toneOfVoice": "Looking down, terrified, squeaking glass.",
+      "text": "A dead rat"
+    },
+    {
+      "personaId": "bored-toll-booth-operator",
+      "personaName": "Bored Toll Booth Operator",
+      "toneOfVoice": "Holding hand out, saying next, monotonous.",
+      "text": "Glowing severed head"
+    },
+    {
+      "personaId": "cheerful-crossing-guard",
+      "personaName": "Cheerful Crossing Guard",
+      "toneOfVoice": "Blowing whistle, directing imaginary traffic.",
+      "text": "No! Freaking me out!"
+    },
+    {
+      "personaId": "cynical-food-critic",
+      "personaName": "Cynical Food Critic",
+      "toneOfVoice": "Spitting food out, writing scathing notes.",
+      "text": "Nothing good."
+    },
+    {
+      "personaId": "sleepy-night-watchman",
+      "personaName": "Sleepy Night Watchman",
+      "toneOfVoice": "Snoring, waking up confused, shining a flashlight.",
+      "text": "Nothing."
+    },
+    {
+      "personaId": "average-guy",
+      "personaName": "Average Guy",
+      "toneOfVoice": "Bland, non-committal, painfully average.",
+      "text": "N/A"
+    },
+    {
+      "personaId": "confused-guy",
+      "personaName": "Confused Guy",
+      "toneOfVoice": "Scratching head, asking 'what'.",
+      "text": "A severed head."
+    },
+    {
+      "personaId": "enthusiastic-guy",
+      "personaName": "Enthusiastic Guy",
+      "toneOfVoice": "Nodding vigorously, saying 'yes' a lot.",
+      "text": "A floating knife."
+    },
+    {
+      "personaId": "sarcastic-guy",
+      "personaName": "Sarcastic Guy",
+      "toneOfVoice": "Flat, unhelpful, rolling eyes.",
+      "text": "Obviously."
+    },
+    {
+      "personaId": "tired-worker",
+      "personaName": "Tired Worker",
+      "toneOfVoice": "Yawning, carrying a lunchbox.",
+      "text": "No response"
+    },
+    {
+      "personaId": "clueless-man",
+      "personaName": "Clueless Man",
+      "toneOfVoice": "Asking basic questions, shrugging.",
+      "text": "N/A"
+    },
+    {
+      "personaId": "dramatic-woman",
+      "personaName": "Dramatic Woman",
+      "toneOfVoice": "Sighing, looking away, saying 'nothing'.",
+      "text": "Nothing."
+    },
+    {
+      "personaId": "pretentious-man",
+      "personaName": "Pretentious Man",
+      "toneOfVoice": "Starting sentences with 'actually'.",
+      "text": "Scary ghost! Eek!"
+    },
+    {
+      "personaId": "grumpy-old-man",
+      "personaName": "Grumpy Old Man",
+      "toneOfVoice": "Shaking fist, complaining about the youth.",
+      "text": "I'm scared of spiders!"
+    },
+    {
+      "personaId": "friendly-person",
+      "personaName": "Friendly Person",
+      "toneOfVoice": "Smiling, saying hello, completely generic.",
+      "text": "Pillow"
+    },
+    {
+      "personaId": "generic-tourist",
+      "personaName": "Generic Tourist",
+      "toneOfVoice": "Asking for directions, pointing.",
+      "text": "Nothing."
+    },
+    {
+      "personaId": "generic-dog",
+      "personaName": "Generic Dog",
+      "toneOfVoice": "Barking once, panting.",
+      "text": "Nothing, ever"
+    },
+    {
+      "personaId": "generic-cat",
+      "personaName": "Generic Cat",
+      "toneOfVoice": "Meowing, purring.",
+      "text": "Nothing scares me!"
+    },
+    {
+      "personaId": "generic-monster",
+      "personaName": "Generic Monster",
+      "toneOfVoice": "Growling vaguely.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "generic-employee",
+      "personaName": "Generic Employee",
+      "toneOfVoice": "Reciting a company slogan.",
+      "text": "Ivory tower"
+    },
+    {
+      "personaId": "nervous-guy",
+      "personaName": "Nervous Guy",
+      "toneOfVoice": "Stuttering, wiping forehead.",
+      "text": "Cobweb with a spider."
+    },
+    {
+      "personaId": "bored-guy",
+      "personaName": "Bored Guy",
+      "toneOfVoice": "Sighing, looking at watch.",
+      "text": "A severed head."
+    },
+    {
+      "personaId": "happy-guy",
+      "personaName": "Happy Guy",
+      "toneOfVoice": "Whistling, smiling.",
+      "text": "A severed head."
+    },
+    {
+      "personaId": "sad-guy",
+      "personaName": "Sad Guy",
+      "toneOfVoice": "Moping, quiet.",
+      "text": "None, please clarify"
+    },
+    {
+      "personaId": "angry-guy",
+      "personaName": "Angry Guy",
+      "toneOfVoice": "Grumbling, crossing arms.",
+      "text": "None, that's disturbingly vivid."
+    },
+    {
+      "personaId": "literal-dictionary",
+      "personaName": "Literal Dictionary",
+      "toneOfVoice": "Robotic, literal, provides definitions.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "sentient-rock",
+      "personaName": "A Sentient Rock",
+      "toneOfVoice": "Silent, heavy, unchanging.",
+      "text": "A dead bird."
+    },
+    {
+      "personaId": "blank-wall",
+      "personaName": "Blank Wall",
+      "toneOfVoice": "Blank, entirely unresponsive.",
+      "text": "Nothing."
+    },
+    {
+      "personaId": "math-textbook",
+      "personaName": "Math Textbook",
+      "toneOfVoice": "Numerical, dry, calculating.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "stop-sign",
+      "personaName": "Stop Sign",
+      "toneOfVoice": "Commanding, red, stationary.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "standard-calculator",
+      "personaName": "Standard Calculator",
+      "toneOfVoice": "Beeping, mathematical.",
+      "text": "0"
+    },
+    {
+      "personaId": "refrigerator",
+      "personaName": "Refrigerator",
+      "toneOfVoice": "Humming, chilly.",
+      "text": "A large box"
+    },
+    {
+      "personaId": "unplugged-lamp",
+      "personaName": "Unplugged Lamp",
+      "toneOfVoice": "Dark, useless.",
+      "text": "A disembodied heart"
+    },
+    {
+      "personaId": "traffic-light",
+      "personaName": "Traffic Light",
+      "toneOfVoice": "Changing colors rhythmically.",
+      "text": "A severed human head"
+    },
+    {
+      "personaId": "potted-plant",
+      "personaName": "Potted Plant",
+      "toneOfVoice": "Photosynthesizing quietly.",
+      "text": "N/A"
+    },
+    {
+      "personaId": "empty-box",
+      "personaName": "Empty Box",
+      "toneOfVoice": "Hollow, corrugated.",
+      "text": "N/A"
+    },
+    {
+      "personaId": "blank-piece-of-paper",
+      "personaName": "Blank Piece of Paper",
+      "toneOfVoice": "Flat, white.",
+      "text": "A feather pillow."
+    },
+    {
+      "personaId": "wooden-chair",
+      "personaName": "Wooden Chair",
+      "toneOfVoice": "Creaking slightly.",
+      "text": "None, I am not physically embodied"
+    },
+    {
+      "personaId": "cardboard-tube",
+      "personaName": "Cardboard Tube",
+      "toneOfVoice": "Cylindrical.",
+      "text": "Nothing"
+    },
+    {
+      "personaId": "paperclip",
+      "personaName": "Paperclip",
+      "toneOfVoice": "Metallic, gripping.",
+      "text": "N/A"
+    },
+    {
+      "personaId": "rubber-band",
+      "personaName": "Rubber Band",
+      "toneOfVoice": "Snapping.",
+      "text": "A severed head"
+    },
+    {
+      "personaId": "stapler",
+      "personaName": "Stapler",
+      "toneOfVoice": "Clicking loudly.",
+      "text": "Bound paper confetti"
+    },
+    {
+      "personaId": "coffee-mug",
+      "personaName": "Coffee Mug",
+      "toneOfVoice": "Ceramic, empty.",
+      "text": "Nothing"
+    },
+    {
+      "personaId": "plastic-fork",
+      "personaName": "Plastic Fork",
+      "toneOfVoice": "Snapping under pressure.",
+      "text": "A fork flying solo!"
+    },
+    {
+      "personaId": "dust-pan",
+      "personaName": "Dust Pan",
+      "toneOfVoice": "Scraping the floor.",
+      "text": "Not applicable"
+    }
+  ]
+}

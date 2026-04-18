@@ -1,26 +1,5 @@
 [
   {
-    "id": "zombie-kitchen-weapon",
-    "prompt-ai": "Name an object you would use to survive a zombie apocalypse if you were stuck in a kitchen",
-    "text-ui": "Zombies are attacking! What kitchen item is your weapon?",
-    "score": 10,
-    "tags": ["fantasy", "family-friendly", "international", "weird"]
-  },
-  {
-    "id": "suspiciously-quiet-place",
-    "prompt-ai": "Tell me a place where you'd be highly suspicious if everyone was suddenly quiet.",
-    "text-ui": "Where would you be terrified if everyone suddenly went dead quiet?",
-    "score": 10,
-    "tags": ["mundane", "international", "weird", "location"]
-  },
-  {
-    "id": "terrifying-floating-item",
-    "prompt-ai": "What is an everyday item you’d be terrified to see floating in mid-air?",
-    "text-ui": "What normal item would terrify you if you saw it floating?",
-    "score": 10,
-    "tags": ["weird", "family-friendly", "international", "fantasy"]
-  },
-  {
     "id": "suspicious-activity-3am",
     "prompt-ai": "What is a perfectly normal activity that looks incredibly suspicious at 3 AM?",
     "text-ui": "What normal activity looks incredibly suspicious at 3:00 AM?",

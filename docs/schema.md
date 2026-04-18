@@ -24,11 +24,18 @@ export interface SurveyResultDocument {
   /** The aggregated top answers, sorted by score (highest to lowest) */  
   clusters: AnswerCluster[];  
     
-  /** Curated quotes from specific personas to show in the UI for flavor */  
-  flavorQuotes: FlavorQuote[];  
+  /** Unique answers that couldn't be categorised into any cluster */
+  wildcards: WildCard[];
     
   /** Optional tags for categorization */  
   tags?: string[];  
+}
+
+export interface WildCard {
+  /** Valid variations and typos for Exact/Fuzzy matching */  
+  synonyms: string[];  
+  /** Curated quotes from specific personas to show in the UI for flavor */  
+  flavorQuote: FlavorQuote;  
 }
 
 export interface AnswerCluster {  
@@ -38,6 +45,8 @@ export interface AnswerCluster {
   score: number;  
   /** Valid variations and typos for Exact/Fuzzy matching */  
   synonyms: string[];  
+  /** Curated quotes from specific personas to show in the UI for flavor */  
+  flavorQuotes: FlavorQuote[];  
 }
 
 export interface FlavorQuote {  

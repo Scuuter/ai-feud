@@ -5,9 +5,9 @@
 
 ### **Epic 1. The Engine Room (Data Pipeline - Layer A)**
 *Build offline scripts to generate the initial 50 curated topics and their answers using a local LLM.*
-- [ ] **Configure Environment:** Setup `.env.local` with the local LM Studio server URL.
-- [ ] **Implement `survey.ts`:** Write a Node.js script in `/scripts/data-generation/` to take a list of `Topic`s and a `Demographic`, pinging the LLM to output 100 unique `Persona` responses.
-- [ ] **Implement `cluster.ts`:** Write a script to group the 100 raw strings into 5-8 `AnswerCluster`s (with scores and `Synonym` arrays).
+- [x] **Configure Environment:** Setup `.env.local` with the local LM Studio server URL.
+- [x] **Implement `survey.ts`:** Write a Node.js script in `/scripts/data-generation/` to take a list of `Topic`s and a `Demographic`, pinging the LLM to output 100 unique `Persona` responses.
+- [x] **Implement `cluster.ts`:** Write a script to group the 100 raw strings into 5-8 `AnswerCluster`s (with scores and `Synonym` arrays).
 - [ ] **Format Output:** Ensure `cluster.ts` outputs valid JSON adhering exactly to the `SurveyResultDocument` interface (`topic`, `demographicName`, `clusters`, `flavorQuotes`).
 - [ ] **Data Generation:** Run the pipeline to generate **50 MVP questions** for initial testing and gameplay validation.
 
