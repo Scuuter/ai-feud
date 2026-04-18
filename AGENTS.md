@@ -60,7 +60,7 @@ When prompted by the user, adopt the corresponding mode and strictly follow its 
 
 ## 5. Strict Anti-Patterns
 
-* **NO Hallucinated Libraries:** Stick to Next.js, Tailwind, Framer Motion, and standard MongoDB. No Redux, no MUI, no Prisma.
+* **NO Hallucinated Libraries:** Strictly adhere to the Allowed Libraries list found in `docs/tech-stack.md`. Do not invent or import unapproved packages (e.g., No Redux, no MUI, no Prisma, no Supabase).
 
 * **NO Relational Joins:** MongoDB data is denormalized. Adhere to `docs/schema.md`.
 

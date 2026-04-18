@@ -17,12 +17,9 @@ This document defines the technology stack and strict coding guidelines for the 
 
 ## 2. Frontend Directives (Next.js & React)
 
-<!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-<!-- END:nextjs-agent-rules -->
-
 **App Router Only:**
 - All routing must use the Next.js App Router (`/src/app` directory).
 - **DO NOT** use the legacy `pages/` directory. 
@@ -72,7 +69,21 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ---
 
-## 5. Strict Anti-Patterns (DO NOT DO THESE)
+## 5. Technology Choices & Allowed Libraries
+
+* **Frontend:** **React + Next.js (App Router)** * *Why:* Industry standard, massive ecosystem, easy deployment. Using React ensures that state management and business logic can be lifted and shifted to React Native later.  
+* **Backend:** **Node.js (TypeScript) + Serverless Edge Functions** * *Why:* Keeps the stack unified. Edge functions allow for low-latency validation close to the user.  
+* **Database:** **MongoDB (NoSQL)** * *Why:* The game data is naturally document-oriented. AI-generated responses can be stored as nested JSON objects (Question -> Clustered Answers -> Synonyms).  
+* **Styling & Animation:** **Tailwind CSS + Framer Motion** * *Why:* Tailwind allows rapid UI design. Framer Motion handles the "card flip" animations crucial for the feel.  
+* **Real-time Engine (V1):** **PartyKit** * *Why:* Serverless WebSockets on Cloudflare's edge. Extremely fast setup for JS apps without needing a relational DB.
+* **AI Engine:** **Local LLM (Phase 1) / Cheapest model for answer validation (Phase 2)** * *Why:* Cost-effective and fast. Keeping MVP entirely local saves API costs and reduces setup friction.
+* **Fuzzy Matching:** **fast-levenshtein** * *Why:* Zero-dependency string matching package for typo tolerance, highly compatible with Pure TypeScript and Edge runtimes.
+
+**Allowed Libraries:** Next.js (App Router), Tailwind CSS, Framer Motion, MongoDB, PartyKit, fast-levenshtein, Vitest.
+
+---
+
+## 6. Strict Anti-Patterns (DO NOT DO THESE)
 1. **NO `any` types:** TypeScript must be strictly typed. If you don't know the type, define an interface or use `unknown` and narrow it.
 2. **NO Redux or Context Overload:** For Phase 1, use simple local state (`useState` / custom hooks) or standard URL search parameters. Do not over-engineer global state management.
 3. **NO UI Frameworks:** Do not import Material UI, Chakra, or Ant Design. We are building a custom, minimalist UI with Tailwind.

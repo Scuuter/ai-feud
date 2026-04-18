@@ -17,7 +17,7 @@ A web-based party/trivia game blending the mechanics of *Family Feud* with the u
 **Goal:** Prove the core gameplay loop is fun and achieve zero-friction onboarding.
 
 * **Mode:** Single-player (Solo).  
-* **Content:** 50-100 pre-generated, highly curated, absurd topics, 100 different generated AI personas answering these questions  
+* **Content:** 50 pre-generated, highly curated, absurd topics, 100 different generated AI personas answering these questions  
 * **Onboarding:** No login, no accounts. Instant play upon page load.  
 * **Core Loop:**  
   1. Read Question (e.g., "Name a weapon a wizard would use if they lost their wand").  
@@ -25,7 +25,7 @@ A web-based party/trivia game blending the mechanics of *Family Feud* with the u
   3. Receive feedback: Reveal board tile (correct) or get a Strike (incorrect).  
   4. Win (clear board) or Lose (3 strikes).  
 * **Viral Loop:** "Share your score" button copying a Wordle-style emoji grid to the clipboard.  
-* **AI Validation:** Uses a lightweight backend or edge function to validate user input against the static list of accepted concepts via semantic similarity.
+* **Validation:** Strict exact matching and fuzzy matching (typo tolerance) against static synonyms. No external API calls.
 
 ### **Phase 2: Multiplayer & Dynamic Generation (V1)**
 
@@ -34,7 +34,9 @@ A web-based party/trivia game blending the mechanics of *Family Feud* with the u
 * **Mode:** Real-time Multiplayer Lobby (Host + Players sharing a 4-letter room code).  
 * **Dynamic Generation:** Host selects a "Demographic" (e.g., 19th Century British Aristocrats) and a "Theme".  
 * **Loading UX:** The "Pre-Game Show" — entertaining, real-time UI updates while the backend orchestrates the AI generation and clustering.  
+* **AI Validation:** Uses a lightweight Edge function to validate user input via semantic similarity if exact/fuzzy matching fails.
 * **Gameplay:** Real-time buzzer or turn-based text input.
+* **Data Automation:** Automated CI/CD pipeline via GitHub Actions to validate and seed MongoDB with new data.
 
 ### **Phase 3: Mobile Expansion (V2)**
 
