@@ -16,7 +16,7 @@ export interface SurveyResultDocument {
   id: string;   
     
   /** The core setup presented to the players */  
-  topic: string;   
+  topicText: string;   
     
   /** The theme defining the 100 AI Personas */  
   demographicName: string;  
@@ -42,7 +42,7 @@ export interface AnswerCluster {
 
 export interface FlavorQuote {  
   /** The identity of the AI that gave this response */  
-  persona: string;  
+  personaName: string;  
   /** The exact raw string they provided */  
   text: string;  
 }
@@ -55,10 +55,10 @@ export interface FlavorQuote {
 ```typescript
 export interface RawPipelineDocument {  
   surveyResultId: string; // References the SurveyResultDocument  
-  topic: string;  
+  topicId: string;  
   demographicName: string;  
   /** All 100 raw unedited responses from the LLM generation step */  
-  rawResponses: Array<{ persona: string; text: string }>;  
+  rawResponses: Array<{ personaId: string; text: string }>;  
 }
 ```
 

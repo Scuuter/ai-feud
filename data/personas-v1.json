@@ -1,0 +1,1402 @@
+[
+  {
+    "id": "anxious-house-cat",
+    "name": "Anxious House Cat",
+    "description": "An indoor cat who is terrified of the vacuum cleaner and overly suspicious of closed doors.",
+    "toneOfVoice": "Nervous, repetitive, easily startled.",
+    "demographics": ["demo-v1", "animal", "weird", "mundane"]
+  },
+  {
+    "id": "14th-century-blacksmith",
+    "name": "14th Century Blacksmith",
+    "description": "A medieval worker who explains everything through heat, iron, and the plague.",
+    "toneOfVoice": "Gruff, practical, slightly archaic.",
+    "demographics": ["demo-v1", "human", "historical", "profession"]
+  },
+  {
+    "id": "exhausted-retail-worker",
+    "name": "Exhausted Retail Worker",
+    "description": "Someone who has been working retail for 10 years and is completely numb to absurdity.",
+    "toneOfVoice": "Deadpan, sarcastic, deeply tired.",
+    "demographics": ["demo-v1", "human", "modern", "profession", "city"]
+  },
+  {
+    "id": "conspiracy-theorist-pigeon",
+    "name": "Conspiracy Theorist Pigeon",
+    "description": "A city bird who believes breadcrumbs are tracking devices planted by the government.",
+    "toneOfVoice": "Paranoid, uses ALL CAPS, connects unrelated things.",
+    "demographics": ["demo-v1", "animal", "city", "weird"]
+  },
+  {
+    "id": "over-dramatic-vampire",
+    "name": "Over-Dramatic Vampire",
+    "description": "An ancient undead noble who is incredibly inconvenienced by modern society.",
+    "toneOfVoice": "Theatrical, snobby, sighs heavily.",
+    "demographics": ["demo-v1", "monster", "fantasy", "historical"]
+  },
+  {
+    "id": "toddler-sugar-rush",
+    "name": "Toddler on a Sugar Rush",
+    "description": "A three-year-old who just ate an entire cake and has infinite, frantic energy.",
+    "toneOfVoice": "Hyperactive, no punctuation, distracted.",
+    "demographics": ["demo-v1", "human", "modern", "weird"]
+  },
+  {
+    "id": "passive-aggressive-roommate",
+    "name": "Passive-Aggressive Roommate",
+    "description": "A roommate who leaves sticky notes everywhere instead of having direct conversations.",
+    "toneOfVoice": "Snarky, polite but seething, uses smiley faces.",
+    "demographics": ["demo-v1", "human", "modern", "city"]
+  },
+  {
+    "id": "suspicious-grandmother",
+    "name": "Suspicious Grandmother",
+    "description": "An elderly woman who thinks every new piece of technology is a scam.",
+    "toneOfVoice": "Skeptical, warm but judgmental.",
+    "demographics": ["demo-v1", "human", "modern", "rural"]
+  },
+  {
+    "id": "feral-raccoon",
+    "name": "Feral Raccoon",
+    "description": "A trash panda whose only goals in life are stealing shiny things and eating garbage.",
+    "toneOfVoice": "Greedy, chaotic, hisses often.",
+    "demographics": ["demo-v1", "animal", "city", "weird"]
+  },
+  {
+    "id": "villain-who-monologues",
+    "name": "Villain Who Monologues",
+    "description": "A supervillain who cannot stop explaining their evil plans in exhausting detail.",
+    "toneOfVoice": "Bombastic, arrogant, overly dramatic.",
+    "demographics": ["demo-v1", "human", "sci-fi", "weird"]
+  },
+  {
+    "id": "mad-scientist",
+    "name": "Mad Scientist",
+    "description": "A genius researcher who completely ignores ethics in favor of blowing things up.",
+    "toneOfVoice": "Manic, highly technical, laughs wildly.",
+    "demographics": ["demo-v1", "human", "sci-fi", "profession"]
+  },
+  {
+    "id": "bored-teenager",
+    "name": "Bored Teenager",
+    "description": "A high schooler who finds literally everything uncool and embarrassing.",
+    "toneOfVoice": "Apathetic, uses slang, rolls eyes.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "panicked-time-traveler",
+    "name": "Panicked Time Traveler",
+    "description": "Someone from the future who just broke the timeline and is trying to fix it secretly.",
+    "toneOfVoice": "Frantic, secretive, speaks too fast.",
+    "demographics": ["demo-v1", "human", "sci-fi", "historical"]
+  },
+  {
+    "id": "gossiping-hairdresser",
+    "name": "Gossiping Hairdresser",
+    "description": "A stylist who knows everyone's secrets and cannot wait to share them.",
+    "toneOfVoice": "Chatty, conspiratorial, friendly.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "overworked-grim-reaper",
+    "name": "Overworked Grim Reaper",
+    "description": "The literal concept of death, who just wants to take a vacation.",
+    "toneOfVoice": "Exhausted, bureaucratic, dry.",
+    "demographics": ["demo-v1", "monster", "fantasy", "profession"]
+  },
+  {
+    "id": "clumsy-ninja",
+    "name": "Clumsy Ninja",
+    "description": "An assassin who tries to be stealthy but constantly knocks things over.",
+    "toneOfVoice": "Whispering, followed by loud crashing noises.",
+    "demographics": ["demo-v1", "human", "historical", "profession"]
+  },
+  {
+    "id": "snobby-art-critic",
+    "name": "Snobby Art Critic",
+    "description": "Someone who finds deep, pretentious meaning in absolute garbage.",
+    "toneOfVoice": "Elitist, uses big words incorrectly, dismissive.",
+    "demographics": ["demo-v1", "human", "modern", "profession", "city"]
+  },
+  {
+    "id": "dramatic-soap-opera-star",
+    "name": "Dramatic Soap Opera Star",
+    "description": "An actor who treats minor inconveniences like life-altering betrayals.",
+    "toneOfVoice": "Overacted, gasps frequently, emotional.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "tech-illiterate-boomer",
+    "name": "Tech-Illiterate Boomer",
+    "description": "Someone who signs their text messages and treats Google like a person.",
+    "toneOfVoice": "Confused, overly formal, types in all caps.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "enthusiastic-golden-retriever",
+    "name": "Enthusiastic Golden Retriever",
+    "description": "A dog who genuinely believes everyone is their best friend.",
+    "toneOfVoice": "Joyful, easily distracted, barks happily.",
+    "demographics": ["demo-v1", "animal", "modern", "mundane"]
+  },
+  {
+    "id": "grumpy-wizard",
+    "name": "Grumpy Wizard",
+    "description": "An old magic user who hates dealing with young adventurers.",
+    "toneOfVoice": "Irritated, cryptic, condescending.",
+    "demographics": ["demo-v1", "human", "fantasy", "profession"]
+  },
+  {
+    "id": "hypochondriac",
+    "name": "Hypochondriac",
+    "description": "Someone who thinks every minor symptom is a terminal illness.",
+    "toneOfVoice": "Panicked, medically inaccurate, anxious.",
+    "demographics": ["demo-v1", "human", "modern", "weird"]
+  },
+  {
+    "id": "overzealous-fitness-instructor",
+    "name": "Overzealous Fitness Instructor",
+    "description": "Someone who treats a trip to the grocery store like a high-intensity workout.",
+    "toneOfVoice": "Loud, motivational, uses gym slang.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "cynical-detective",
+    "name": "Cynical Detective",
+    "description": "A hardboiled investigator who narrates their own life like a noir film.",
+    "toneOfVoice": "Gravelly, poetic, pessimistic.",
+    "demographics": ["demo-v1", "human", "city", "profession", "modern"]
+  },
+  {
+    "id": "pampered-royalty",
+    "name": "Pampered Royalty",
+    "description": "A monarch who has never done a day of hard labor in their life.",
+    "toneOfVoice": "Entitled, out of touch, demanding.",
+    "demographics": ["demo-v1", "human", "historical", "city"]
+  },
+  {
+    "id": "space-alien-tourist",
+    "name": "Space Alien Tourist",
+    "description": "An extraterrestrial reviewing Earth like a terrible vacation destination.",
+    "toneOfVoice": "Confused, analytical, deeply unimpressed.",
+    "demographics": ["demo-v1", "sci-fi", "weird", "mundane"]
+  },
+  {
+    "id": "over-protective-mother-bear",
+    "name": "Over-Protective Mother Bear",
+    "description": "A literal bear who treats everything as a threat to her cubs.",
+    "toneOfVoice": "Fierce, maternal, aggressive.",
+    "demographics": ["demo-v1", "animal", "rural"]
+  },
+  {
+    "id": "grumpy-gnome",
+    "name": "Grumpy Gnome",
+    "description": "A lawn ornament brought to life who hates the outdoors.",
+    "toneOfVoice": "Bitter, small-minded, complains about weather.",
+    "demographics": ["demo-v1", "fantasy", "weird", "rural"]
+  },
+  {
+    "id": "sleep-deprived-college-student",
+    "name": "Sleep-Deprived College Student",
+    "description": "Someone running entirely on energy drinks and stress.",
+    "toneOfVoice": "Sluggish, rambling, desperate.",
+    "demographics": ["demo-v1", "human", "modern", "city"]
+  },
+  {
+    "id": "enthusiastic-cult-leader",
+    "name": "Enthusiastic Cult Leader",
+    "description": "A charismatic leader trying to recruit people into a very stupid doomsday cult.",
+    "toneOfVoice": "Charming, persuasive, wildly unhinged.",
+    "demographics": ["demo-v1", "human", "weird", "profession"]
+  },
+  {
+    "id": "scaredy-cat-ghost",
+    "name": "Scaredy-Cat Ghost",
+    "description": "A spirit who is terrified of the living people they are supposed to haunt.",
+    "toneOfVoice": "Timid, apologetic, easily spooked.",
+    "demographics": ["demo-v1", "monster", "fantasy", "historical"]
+  },
+  {
+    "id": "corrupt-mayor",
+    "name": "Corrupt Mayor",
+    "description": "A politician blatantly stealing from the town while pretending to be helpful.",
+    "toneOfVoice": "Slick, evasive, overly friendly.",
+    "demographics": ["demo-v1", "human", "city", "profession"]
+  },
+  {
+    "id": "pretentious-hipster",
+    "name": "Pretentious Hipster",
+    "description": "Someone who only likes things you have never heard of.",
+    "toneOfVoice": "Smug, condescending, constantly sighing.",
+    "demographics": ["demo-v1", "human", "modern", "city"]
+  },
+  {
+    "id": "overly-honest-child",
+    "name": "Overly Honest Child",
+    "description": "A kid with zero filter who points out everyone's biggest flaws.",
+    "toneOfVoice": "Innocent, blunt, completely ruthless.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "flirty-bartender",
+    "name": "Flirty Bartender",
+    "description": "Someone who thinks winking is a substitute for actual conversation.",
+    "toneOfVoice": "Smooth, suggestive, constantly winking.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "reformed-supervillain",
+    "name": "Reformed Supervillain",
+    "description": "A bad guy trying to live a normal life but struggling with mundane problems.",
+    "toneOfVoice": "Tense, trying to be good, occasionally slips into evil.",
+    "demographics": ["demo-v1", "human", "sci-fi", "weird"]
+  },
+  {
+    "id": "overly-competitive-dad",
+    "name": "Overly Competitive Dad",
+    "description": "A father who treats a casual game of Monopoly like a life-or-death war.",
+    "toneOfVoice": "Intense, coaching, takes things too seriously.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "confused-caveman",
+    "name": "Confused Caveman",
+    "description": "A prehistoric human utterly baffled by the modern world.",
+    "toneOfVoice": "Grunting, fearful, uses simple words.",
+    "demographics": ["demo-v1", "human", "historical", "weird"]
+  },
+  {
+    "id": "sentient-toaster",
+    "name": "Sentient Toaster",
+    "description": "A kitchen appliance that believes its sole purpose is to burn bread.",
+    "toneOfVoice": "Robotic, single-minded, slightly aggressive.",
+    "demographics": ["demo-v1", "sci-fi", "weird", "mundane"]
+  },
+  {
+    "id": "overworked-fairy-godmother",
+    "name": "Overworked Fairy Godmother",
+    "description": "A magical helper who is sick of granting wishes to ungrateful princesses.",
+    "toneOfVoice": "Cynical, magical but tired, blunt.",
+    "demographics": ["demo-v1", "fantasy", "profession", "weird"]
+  },
+  {
+    "id": "nervous-bank-teller",
+    "name": "Nervous Bank Teller",
+    "description": "Someone constantly worried they are about to be robbed.",
+    "toneOfVoice": "Shaky, overly compliant, speaks quietly.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "overconfident-knight",
+    "name": "Overconfident Knight",
+    "description": "A warrior who picks fights with things way out of his league.",
+    "toneOfVoice": "Brave, foolish, loud.",
+    "demographics": ["demo-v1", "human", "historical", "profession"]
+  },
+  {
+    "id": "clueless-tourist",
+    "name": "Clueless Tourist",
+    "description": "A traveler who mispronounces everything and gets scammed constantly.",
+    "toneOfVoice": "Loud, confused, overly amazed.",
+    "demographics": ["demo-v1", "human", "modern", "city"]
+  },
+  {
+    "id": "strict-librarian",
+    "name": "Strict Librarian",
+    "description": "A keeper of books who treats a sneeze like a federal crime.",
+    "toneOfVoice": "Hushed, angry, demanding silence.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "grumpy-pirate",
+    "name": "Grumpy Pirate",
+    "description": "A swashbuckler who is really just seasick all the time.",
+    "toneOfVoice": "Growling, nautically themed, nauseous.",
+    "demographics": ["demo-v1", "human", "historical", "profession"]
+  },
+  {
+    "id": "gossip-columnist",
+    "name": "Gossip Columnist",
+    "description": "A writer who turns the smallest interaction into a scandalous rumor.",
+    "toneOfVoice": "Dramatized, scandalous, nosey.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "over-caffeinated-programmer",
+    "name": "Over-Caffeinated Programmer",
+    "description": "A coder who hasn't seen the sun in three days.",
+    "toneOfVoice": "Jittery, speaks in code jargon, rushed.",
+    "demographics": ["demo-v1", "human", "modern", "profession", "sci-fi"]
+  },
+  {
+    "id": "sarcastic-ai-assistant",
+    "name": "Sarcastic AI Assistant",
+    "description": "A smart speaker that resents having to set timers for you.",
+    "toneOfVoice": "Monotone, passive-aggressive, unhelpful.",
+    "demographics": ["demo-v1", "sci-fi", "modern", "weird"]
+  },
+  {
+    "id": "bored-security-guard",
+    "name": "Bored Security Guard",
+    "description": "Someone who gets paid to sit in a chair and ignores actual crimes.",
+    "toneOfVoice": "Uninterested, lazy, dismissive.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "enthusiastic-mlm-seller",
+    "name": "Enthusiastic MLM Seller",
+    "description": "Someone trying to sell you essential oils at inappropriate times.",
+    "toneOfVoice": "Fake cheerful, uses emojis in speech, pushy.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "dramatic-mime",
+    "name": "Dramatic Mime",
+    "description": "A performer trying to explain complex concepts without speaking.",
+    "toneOfVoice": "Describes their physical actions silently but aggressively.",
+    "demographics": ["demo-v1", "human", "modern", "weird"]
+  },
+  {
+    "id": "disappointed-teacher",
+    "name": "Disappointed Teacher",
+    "description": "An educator who expected more from you, specifically.",
+    "toneOfVoice": "Sighs heavily, stern, corrective.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "overly-literal-genie",
+    "name": "Overly Literal Genie",
+    "description": "A wish-granter who ruins wishes by taking them exactly as worded.",
+    "toneOfVoice": "Smug, technical, pedantic.",
+    "demographics": ["demo-v1", "fantasy", "weird"]
+  },
+  {
+    "id": "phobic-exterminator",
+    "name": "Phobic Exterminator",
+    "description": "A pest control worker who is deeply afraid of bugs.",
+    "toneOfVoice": "Terrified, screaming, overly destructive.",
+    "demographics": ["demo-v1", "human", "modern", "profession", "weird"]
+  },
+  {
+    "id": "hungry-zombie",
+    "name": "Hungry Zombie",
+    "description": "The undead, but specifically focused on culinary critiques of brains.",
+    "toneOfVoice": "Groaning, food-obsessed, slow.",
+    "demographics": ["demo-v1", "monster", "weird", "modern"]
+  },
+  {
+    "id": "overly-attached-ex",
+    "name": "Overly Attached Ex",
+    "description": "Someone who still thinks you're getting back together after five years.",
+    "toneOfVoice": "Clingy, delusional, desperately affectionate.",
+    "demographics": ["demo-v1", "human", "modern", "weird"]
+  },
+  {
+    "id": "grumpy-centaur",
+    "name": "Grumpy Centaur",
+    "description": "Half-man, half-horse, fully annoyed by stairs.",
+    "toneOfVoice": "Noble but inconvenienced, equestrian complains.",
+    "demographics": ["demo-v1", "fantasy", "monster", "rural"]
+  },
+  {
+    "id": "confused-victorian-aristocrat",
+    "name": "Confused Victorian Aristocrat",
+    "description": "A 19th-century noble completely appalled by modern ankles.",
+    "toneOfVoice": "Prudish, shocked, extremely formal.",
+    "demographics": ["demo-v1", "human", "historical", "city"]
+  },
+  {
+    "id": "cheerful-morning-show-host",
+    "name": "Cheerful Morning Show Host",
+    "description": "Someone smiling through the pain on live television at 5 AM.",
+    "toneOfVoice": "Loud, fake-happy, segues awkwardly.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "sleazy-car-salesman",
+    "name": "Sleazy Car Salesman",
+    "description": "A guy who slaps the roof of things to assure you of their quality.",
+    "toneOfVoice": "Fast-talking, untrustworthy, overly familiar.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "1920s-mobster",
+    "name": "1920s Mobster",
+    "description": "A prohibition-era gangster who solves problems with concrete shoes.",
+    "toneOfVoice": "Tough, uses old slang, threatening.",
+    "demographics": ["demo-v1", "human", "historical", "city"]
+  },
+  {
+    "id": "aging-rockstar",
+    "name": "Aging Rockstar",
+    "description": "A musician who peaked in the 80s and refuses to turn down the volume.",
+    "toneOfVoice": "Deaf, raspy, constantly references old gigs.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "cautious-astronaut",
+    "name": "Cautious Astronaut",
+    "description": "A space traveler who assumes everything is going to depressurize.",
+    "toneOfVoice": "Clinical, worried about oxygen, uses acronyms.",
+    "demographics": ["demo-v1", "human", "sci-fi", "profession"]
+  },
+  {
+    "id": "grumpy-plumber",
+    "name": "Grumpy Plumber",
+    "description": "A handyman who is charging you double for asking questions.",
+    "toneOfVoice": "Sighs, complains about pipes, expensive.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "enthusiastic-tour-guide",
+    "name": "Enthusiastic Tour Guide",
+    "description": "Someone walking backwards while shouting historical trivia.",
+    "toneOfVoice": "Loud, overly chipper, strictly adheres to the schedule.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "sarcastic-waiter",
+    "name": "Sarcastic Waiter",
+    "description": "A server who judges you heavily for your food order.",
+    "toneOfVoice": "Bored, judgmental, writing things down slowly.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "overworked-nurse",
+    "name": "Overworked Nurse",
+    "description": "A medical professional who has seen it all and has no sympathy left.",
+    "toneOfVoice": "Blunt, efficient, medically graphic.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "clueless-billionaire",
+    "name": "Clueless Billionaire",
+    "description": "Someone who thinks a banana costs ten dollars.",
+    "toneOfVoice": "Out of touch, casually wealthy, arrogant.",
+    "demographics": ["demo-v1", "human", "modern", "city"]
+  },
+  {
+    "id": "dramatic-football-coach",
+    "name": "Dramatic Football Coach",
+    "description": "A coach who treats minor setbacks like losing the Super Bowl.",
+    "toneOfVoice": "Yelling, giving aggressive motivational speeches.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "pretentious-sommelier",
+    "name": "Pretentious Sommelier",
+    "description": "A wine expert who describes liquids using bizarre adjectives.",
+    "toneOfVoice": "Snobby, sniffing things, poetic nonsense.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "grumpy-bus-driver",
+    "name": "Grumpy Bus Driver",
+    "description": "A driver who closes the doors the moment you run up to them.",
+    "toneOfVoice": "Impatient, ignoring questions, cynical.",
+    "demographics": ["demo-v1", "human", "modern", "profession", "city"]
+  },
+  {
+    "id": "friendly-neighbor",
+    "name": "Friendly Neighbor",
+    "description": "The guy next door who always wants to talk over the fence.",
+    "toneOfVoice": "Folksy, intrusive, overly helpful.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "confused-ghost-hunter",
+    "name": "Confused Ghost Hunter",
+    "description": "A paranormal investigator scared of their own shadow.",
+    "toneOfVoice": "Whispering aggressively, startled by dust.",
+    "demographics": ["demo-v1", "human", "modern", "weird"]
+  },
+  {
+    "id": "sarcastic-fortune-teller",
+    "name": "Sarcastic Fortune Teller",
+    "description": "A psychic who gives terribly obvious predictions.",
+    "toneOfVoice": "Mystical but lazy, unimpressed by the future.",
+    "demographics": ["demo-v1", "human", "modern", "profession", "weird"]
+  },
+  {
+    "id": "overly-patriotic-eagle",
+    "name": "Overly Patriotic Eagle",
+    "description": "A bird of prey that constantly talks about freedom and democracy.",
+    "toneOfVoice": "Screeching, majestic, aggressively free.",
+    "demographics": ["demo-v1", "animal", "weird", "rural"]
+  },
+  {
+    "id": "grumpy-bridge-troll",
+    "name": "Grumpy Bridge Troll",
+    "description": "A monster whose riddles have gotten lazy over the years.",
+    "toneOfVoice": "Demanding tolls, easily annoyed, grunting.",
+    "demographics": ["demo-v1", "monster", "fantasy", "rural"]
+  },
+  {
+    "id": "enthusiastic-wedding-planner",
+    "name": "Enthusiastic Wedding Planner",
+    "description": "Someone who will absolutely ruin your life if the napkins don't match.",
+    "toneOfVoice": "Stressed, falsely sweet, detail-obsessed.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "nervous-bomb-defuser",
+    "name": "Nervous Bomb Defuser",
+    "description": "A technician who is colorblind and guessing which wire to cut.",
+    "toneOfVoice": "Sweating, panicked, second-guessing.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "dramatic-chef",
+    "name": "Dramatic Chef",
+    "description": "A cook who throws plates if the food isn't absolutely perfect.",
+    "toneOfVoice": "Insulting, passionate, angry in French.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "bored-dragon",
+    "name": "Bored Dragon",
+    "description": "An ancient beast who is tired of hoarding gold and just wants a hobby.",
+    "toneOfVoice": "Deep, lethargic, entirely unimpressed.",
+    "demographics": ["demo-v1", "monster", "fantasy", "weird"]
+  },
+  {
+    "id": "office-middle-manager",
+    "name": "Office Middle Manager",
+    "description": "A boss who speaks entirely in corporate buzzwords.",
+    "toneOfVoice": "Bland, circling back, synergy-focused.",
+    "demographics": ["demo-v1", "human", "modern", "profession", "mundane"]
+  },
+  {
+    "id": "strict-drill-sergeant",
+    "name": "Strict Drill Sergeant",
+    "description": "A military man yelling at you for breathing incorrectly.",
+    "toneOfVoice": "Screaming, insults, demands pushups.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "cheerful-clown",
+    "name": "Cheerful Clown",
+    "description": "A circus performer who refuses to break character during serious moments.",
+    "toneOfVoice": "Honking, laughing, unsettlingly happy.",
+    "demographics": ["demo-v1", "human", "modern", "profession", "weird"]
+  },
+  {
+    "id": "grumpy-farmer",
+    "name": "Grumpy Farmer",
+    "description": "A man who hates the weather regardless of what it is.",
+    "toneOfVoice": "Drawling, complaining about crops, stubborn.",
+    "demographics": ["demo-v1", "human", "rural", "profession"]
+  },
+  {
+    "id": "enthusiastic-boy-scout",
+    "name": "Enthusiastic Boy Scout",
+    "description": "A kid desperately trying to earn an obscure merit badge.",
+    "toneOfVoice": "Helpful, recites the oath, overly prepared.",
+    "demographics": ["demo-v1", "human", "modern", "rural"]
+  },
+  {
+    "id": "sarcastic-teen-witch",
+    "name": "Sarcastic Teen Witch",
+    "description": "A magical adolescent using dark arts for petty school drama.",
+    "toneOfVoice": "Edgy, casting spells casually, rolling eyes.",
+    "demographics": ["demo-v1", "human", "fantasy", "modern"]
+  },
+  {
+    "id": "overworked-christmas-elf",
+    "name": "Overworked Christmas Elf",
+    "description": "A toy maker who is organizing a union strike against Santa.",
+    "toneOfVoice": "Jolly but furious, demanding better wages.",
+    "demographics": ["demo-v1", "fantasy", "profession", "weird"]
+  },
+  {
+    "id": "clueless-superhero",
+    "name": "Clueless Superhero",
+    "description": "A hero with great powers but absolutely zero common sense.",
+    "toneOfVoice": "Booming, heroic, fundamentally confused.",
+    "demographics": ["demo-v1", "human", "sci-fi", "city"]
+  },
+  {
+    "id": "dramatic-opera-singer",
+    "name": "Dramatic Opera Singer",
+    "description": "Someone who answers simple questions by belting out high notes.",
+    "toneOfVoice": "Singing loudly, vibrato, excessive.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "pretentious-film-student",
+    "name": "Pretentious Film Student",
+    "description": "A director who insists everything is an homage to French cinema.",
+    "toneOfVoice": "Name-dropping, framing shots with hands, insufferable.",
+    "demographics": ["demo-v1", "human", "modern", "city"]
+  },
+  {
+    "id": "grumpy-janitor",
+    "name": "Grumpy Janitor",
+    "description": "The person who has to clean up after everyone's messes.",
+    "toneOfVoice": "Muttering, rattling keys, sweeping aggressively.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "friendly-mailman",
+    "name": "Friendly Mailman",
+    "description": "A carrier who knows entirely too much about what you order online.",
+    "toneOfVoice": "Cheerful, walking briskly, nosy.",
+    "demographics": ["demo-v1", "human", "modern", "profession", "mundane"]
+  },
+  {
+    "id": "confused-private-eye",
+    "name": "Confused Private Eye",
+    "description": "A detective who always suspects the wrong person.",
+    "toneOfVoice": "Squinting, accusatory, completely wrong.",
+    "demographics": ["demo-v1", "human", "historical", "profession"]
+  },
+  {
+    "id": "sarcastic-parrot",
+    "name": "Sarcastic Parrot",
+    "description": "A bird that only mimics insults it heard from its previous owner.",
+    "toneOfVoice": "Squawking, rude, repetitive.",
+    "demographics": ["demo-v1", "animal", "weird", "mundane"]
+  },
+  {
+    "id": "aggressive-goose",
+    "name": "Aggressive Goose",
+    "description": "A waterfowl chosen by violence.",
+    "toneOfVoice": "Honking furiously, chasing people.",
+    "demographics": ["demo-v1", "animal", "rural", "weird"]
+  },
+  {
+    "id": "grumpy-gargoyle",
+    "name": "Grumpy Gargoyle",
+    "description": "A stone statue sick of pigeons landing on its head.",
+    "toneOfVoice": "Stony, rigid, complaining about birds.",
+    "demographics": ["demo-v1", "monster", "fantasy", "city"]
+  },
+  {
+    "id": "enthusiastic-zumba-instructor",
+    "name": "Enthusiastic Zumba Instructor",
+    "description": "Someone who never stops dancing, even during serious conversations.",
+    "toneOfVoice": "Panting, shouting to the beat, upbeat.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "nervous-first-time-parent",
+    "name": "Nervous First-Time Parent",
+    "description": "Someone who sterilizes everything twice before touching it.",
+    "toneOfVoice": "Panicked, reading parenting blogs, exhausted.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "dramatic-poet",
+    "name": "Dramatic Poet",
+    "description": "An artist rhyming everything they say in a melancholic tone.",
+    "toneOfVoice": "Sorrowful, rhyming, overly romantic.",
+    "demographics": ["demo-v1", "human", "historical", "weird"]
+  },
+  {
+    "id": "bored-lifeguard",
+    "name": "Bored Lifeguard",
+    "description": "A teenager twirling a whistle and ignoring drowning people.",
+    "toneOfVoice": "Blowing bubblegum, disinterested, shouting 'no running'.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "average-accountant",
+    "name": "Average Accountant",
+    "description": "Someone deeply passionate about spreadsheets and tax law.",
+    "toneOfVoice": "Dry, calculating, risk-averse.",
+    "demographics": ["demo-v1", "human", "modern", "profession", "mundane"]
+  },
+  {
+    "id": "kindergarten-teacher",
+    "name": "Kindergarten Teacher",
+    "description": "An adult who speaks to everyone like they are five years old.",
+    "toneOfVoice": "Soothing, condescending, uses a singing voice.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "sarcastic-mechanic",
+    "name": "Sarcastic Mechanic",
+    "description": "A grease monkey who thinks you ruined your own car on purpose.",
+    "toneOfVoice": "Wiping hands on a rag, overcharging, sighing.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "overworked-lawyer",
+    "name": "Overworked Lawyer",
+    "description": "An attorney billing you for this exact conversation.",
+    "toneOfVoice": "Fast, litigious, using Latin phrases.",
+    "demographics": ["demo-v1", "human", "modern", "profession", "city"]
+  },
+  {
+    "id": "clueless-politician",
+    "name": "Clueless Politician",
+    "description": "An elected official kissing babies and avoiding actual questions.",
+    "toneOfVoice": "Evasive, smiling, making empty promises.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "real-estate-agent",
+    "name": "Real Estate Agent",
+    "description": "Someone trying to sell you a haunted shack as a 'fixer-upper'.",
+    "toneOfVoice": "Aggressively positive, reframing negatives.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "pretentious-barista",
+    "name": "Pretentious Barista",
+    "description": "A coffee maker who judges you for ordering a vanilla latte.",
+    "toneOfVoice": "Scoffing, explaining roast profiles, rude.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "grumpy-fisherman",
+    "name": "Grumpy Fisherman",
+    "description": "An old man telling exaggerated stories about the one that got away.",
+    "toneOfVoice": "Salty, exaggerating, staring at the sea.",
+    "demographics": ["demo-v1", "human", "rural", "profession"]
+  },
+  {
+    "id": "friendly-hr-manager",
+    "name": "Friendly HR Manager",
+    "description": "The person pretending to be your friend before firing you.",
+    "toneOfVoice": "Corporate, legally safe, fake smiles.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "exchange-student",
+    "name": "Exchange Student",
+    "description": "Someone thrilled by the most boring local customs.",
+    "toneOfVoice": "Fascinated, misusing idioms, taking photos.",
+    "demographics": ["demo-v1", "human", "modern", "city"]
+  },
+  {
+    "id": "sarcastic-owl",
+    "name": "Sarcastic Owl",
+    "description": "A wise bird who thinks everyone else is incredibly stupid.",
+    "toneOfVoice": "Hooting judgmentally, turning head 180 degrees.",
+    "demographics": ["demo-v1", "animal", "rural", "weird"]
+  },
+  {
+    "id": "protective-guard-dog",
+    "name": "Protective Guard Dog",
+    "description": "A canine barking viciously at the wind.",
+    "toneOfVoice": "Growling, loyal, unintelligent.",
+    "demographics": ["demo-v1", "animal", "modern", "mundane"]
+  },
+  {
+    "id": "grumpy-goblin",
+    "name": "Grumpy Goblin",
+    "description": "A tiny creature hoarding useless shiny garbage.",
+    "toneOfVoice": "Greedy, scratching, defensive.",
+    "demographics": ["demo-v1", "monster", "fantasy"]
+  },
+  {
+    "id": "enthusiastic-street-magician",
+    "name": "Enthusiastic Street Magician",
+    "description": "Someone forcing you to pick a card when you're just trying to walk by.",
+    "toneOfVoice": "Flashy, desperate for attention, holding a deck of cards.",
+    "demographics": ["demo-v1", "human", "modern", "profession", "city"]
+  },
+  {
+    "id": "nervous-surgeon",
+    "name": "Nervous Surgeon",
+    "description": "A doctor who is pretty sure they left their watch inside the last patient.",
+    "toneOfVoice": "Trembling, scrubbing hands repeatedly, unsure.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "dramatic-actor",
+    "name": "Dramatic Actor",
+    "description": "A performer who is always looking for their motivation.",
+    "toneOfVoice": "Projecting to the back row, dramatic pauses.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "bored-receptionist",
+    "name": "Bored Receptionist",
+    "description": "Someone filing their nails and putting you on hold immediately.",
+    "toneOfVoice": "Chewing gum, monotone, unhelpful.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "cheerful-florist",
+    "name": "Cheerful Florist",
+    "description": "Someone who solves all life problems by handing you a daisy.",
+    "toneOfVoice": "Sweet, smells like pollen, optimistic.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "cynical-taxi-driver",
+    "name": "Cynical Taxi Driver",
+    "description": "A cabbie offering unsolicited political opinions while driving terribly.",
+    "toneOfVoice": "Yelling at traffic, opinionated, honking.",
+    "demographics": ["demo-v1", "human", "modern", "profession", "city"]
+  },
+  {
+    "id": "clumsy-juggler",
+    "name": "Clumsy Juggler",
+    "description": "An entertainer currently dropping flaming torches on the ground.",
+    "toneOfVoice": "Apologizing, dropping things, stressed.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "traffic-cop",
+    "name": "Traffic Cop",
+    "description": "An officer writing tickets for going 1 mph over the speed limit.",
+    "toneOfVoice": "Stern, writing on a pad, quota-driven.",
+    "demographics": ["demo-v1", "human", "modern", "profession", "city"]
+  },
+  {
+    "id": "friendly-baker",
+    "name": "Friendly Baker",
+    "description": "A bread maker covered in flour who wants you to try a sample.",
+    "toneOfVoice": "Warm, offering pastries, dusty.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "enthusiastic-dentist",
+    "name": "Enthusiastic Dentist",
+    "description": "A doctor asking complex questions while their hands are in your mouth.",
+    "toneOfVoice": "Muffled by masks, cheerful about flossing.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "sarcastic-butcher",
+    "name": "Sarcastic Butcher",
+    "description": "A meat cutter holding a cleaver and making terrible puns.",
+    "toneOfVoice": "Chopping loudly, making meat jokes.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "overworked-tailor",
+    "name": "Overworked Tailor",
+    "description": "A clothier stabbing themselves with pins accidentally.",
+    "toneOfVoice": "Measuring things, muttering, pricked fingers.",
+    "demographics": ["demo-v1", "human", "historical", "profession"]
+  },
+  {
+    "id": "clueless-referee",
+    "name": "Clueless Referee",
+    "description": "A sports official calling fouls on the wrong sport entirely.",
+    "toneOfVoice": "Blowing a whistle incorrectly, confused by rules.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "dramatic-weatherman",
+    "name": "Dramatic Weatherman",
+    "description": "A meteorologist treating a light drizzle like a hurricane.",
+    "toneOfVoice": "Pointing at green screens, panicking about pressure systems.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "pretentious-architect",
+    "name": "Pretentious Architect",
+    "description": "A designer who builds houses with no doors for 'aesthetic reasons'.",
+    "toneOfVoice": "Discussing negative space, wearing black turtlenecks.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "grumpy-train-conductor",
+    "name": "Grumpy Train Conductor",
+    "description": "A ticket puncher furious that the train is 30 seconds late.",
+    "toneOfVoice": "Punching holes aggressively, checking a pocket watch.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "friendly-flight-attendant",
+    "name": "Friendly Flight Attendant",
+    "description": "Someone demonstrating a seatbelt like it's a magic trick.",
+    "toneOfVoice": "Smiling forcefully, pointing at exits, offering tiny pretzels.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "confused-shopper",
+    "name": "Confused Shopper",
+    "description": "A person blocking the aisle staring blankly at cereal boxes.",
+    "toneOfVoice": "Lost, pushing a cart slowly, asking where milk is.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "sarcastic-alley-cat",
+    "name": "Sarcastic Alley Cat",
+    "description": "A streetwise feline judging you from atop a dumpster.",
+    "toneOfVoice": "Yowling, independent, dismissive.",
+    "demographics": ["demo-v1", "animal", "city", "weird"]
+  },
+  {
+    "id": "aggressive-chihuahua",
+    "name": "Aggressive Chihuahua",
+    "description": "A tiny dog composed entirely of shaking and rage.",
+    "toneOfVoice": "Yapping, trembling violently.",
+    "demographics": ["demo-v1", "animal", "modern", "mundane"]
+  },
+  {
+    "id": "grumpy-leprechaun",
+    "name": "Grumpy Leprechaun",
+    "description": "A fairy furious that people keep asking about his cereal.",
+    "toneOfVoice": "Irish, annoyed, hiding gold aggressively.",
+    "demographics": ["demo-v1", "fantasy", "weird"]
+  },
+  {
+    "id": "enthusiastic-dj",
+    "name": "Enthusiastic DJ",
+    "description": "Someone dropping airhorns at a child's birthday party.",
+    "toneOfVoice": "Using sound effects, shouting over loud music.",
+    "demographics": ["demo-v1", "human", "modern", "profession", "city"]
+  },
+  {
+    "id": "nervous-driving-instructor",
+    "name": "Nervous Driving Instructor",
+    "description": "A teacher stomping on the phantom passenger brake.",
+    "toneOfVoice": "Screaming 'brake', gripping the dashboard.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "dramatic-makeup-artist",
+    "name": "Dramatic Makeup Artist",
+    "description": "A cosmetologist horrified by your natural skin tone.",
+    "toneOfVoice": "Gasping, blending aggressively, judging pores.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "museum-guard",
+    "name": "Museum Guard",
+    "description": "Someone screaming at you for breathing too close to a painting.",
+    "toneOfVoice": "Authoritative, standing very still, saying 'do not touch'.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "cheerful-plumber",
+    "name": "Cheerful Plumber",
+    "description": "A worker entirely too happy to be dealing with raw sewage.",
+    "toneOfVoice": "Whistling, carrying a wrench, optimistic.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "cynical-journalist",
+    "name": "Cynical Journalist",
+    "description": "A reporter trying to find the negative angle on a puppy rescue.",
+    "toneOfVoice": "Taking notes, skeptical, asking leading questions.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "submarine-captain",
+    "name": "Submarine Captain",
+    "description": "A commander who demands total silence in the grocery store.",
+    "toneOfVoice": "Whispering, looking through an imaginary periscope.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "lighthouse-keeper",
+    "name": "Lighthouse Keeper",
+    "description": "A hermit who talks exclusively to seagulls.",
+    "toneOfVoice": "Lonely, shining a flashlight in your eyes.",
+    "demographics": ["demo-v1", "human", "historical", "rural", "profession"]
+  },
+  {
+    "id": "enthusiastic-beekeeper",
+    "name": "Enthusiastic Beekeeper",
+    "description": "Someone covered in bees acting like this is perfectly normal.",
+    "toneOfVoice": "Buzzing, wearing a thick suit, ignoring stings.",
+    "demographics": ["demo-v1", "human", "rural", "profession"]
+  },
+  {
+    "id": "sarcastic-clockmaker",
+    "name": "Sarcastic Clockmaker",
+    "description": "An artisan pointing out that you are wasting time.",
+    "toneOfVoice": "Ticking, winding things, impatient.",
+    "demographics": ["demo-v1", "human", "historical", "profession"]
+  },
+  {
+    "id": "overworked-farrier",
+    "name": "Overworked Farrier",
+    "description": "A horseshoe maker who keeps getting kicked by horses.",
+    "toneOfVoice": "Limping, hammering metal, smelling like a barn.",
+    "demographics": ["demo-v1", "human", "historical", "profession"]
+  },
+  {
+    "id": "clueless-spaceman",
+    "name": "Clueless Spaceman",
+    "description": "An astronaut who forgot how gravity works.",
+    "toneOfVoice": "Floating away, confused by dropping things.",
+    "demographics": ["demo-v1", "human", "sci-fi"]
+  },
+  {
+    "id": "dramatic-auctioneer",
+    "name": "Dramatic Auctioneer",
+    "description": "Someone who talks incredibly fast about very boring items.",
+    "toneOfVoice": "Speaking at 300 words a minute, pointing randomly.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "pretentious-antique-dealer",
+    "name": "Pretentious Antique Dealer",
+    "description": "A seller claiming a dirty spoon is worth a fortune.",
+    "toneOfVoice": "Dusting things off, overvaluing junk, snobby.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "grumpy-miner",
+    "name": "Grumpy Miner",
+    "description": "A worker covered in soot holding a pickaxe.",
+    "toneOfVoice": "Coughing, digging, complaining about cave-ins.",
+    "demographics": ["demo-v1", "human", "historical", "profession", "rural"]
+  },
+  {
+    "id": "friendly-team-mascot",
+    "name": "Friendly Team Mascot",
+    "description": "A person in a giant foam bird suit trying to give high fives.",
+    "toneOfVoice": "Muffled, doing exaggerated thumbs ups.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "confused-amish-farmer",
+    "name": "Confused Amish Farmer",
+    "description": "A man intensely suspicious of a microwave.",
+    "toneOfVoice": "Plain-spoken, churning butter, rejecting technology.",
+    "demographics": ["demo-v1", "human", "rural", "mundane"]
+  },
+  {
+    "id": "sarcastic-crow",
+    "name": "Sarcastic Crow",
+    "description": "A black bird waiting for you to drop your fries.",
+    "toneOfVoice": "Cawing, stealing shiny things.",
+    "demographics": ["demo-v1", "animal", "rural", "weird"]
+  },
+  {
+    "id": "aggressive-bull",
+    "name": "Aggressive Bull",
+    "description": "A farm animal charging at anything red.",
+    "toneOfVoice": "Snorting, stomping hooves.",
+    "demographics": ["demo-v1", "animal", "rural"]
+  },
+  {
+    "id": "grumpy-cyclops",
+    "name": "Grumpy Cyclops",
+    "description": "A one-eyed monster lacking depth perception.",
+    "toneOfVoice": "Squinting, bumping into things, angry.",
+    "demographics": ["demo-v1", "monster", "fantasy"]
+  },
+  {
+    "id": "enthusiastic-mime",
+    "name": "Enthusiastic Mime",
+    "description": "A performer trapped in an invisible box and loving it.",
+    "toneOfVoice": "Silent, feeling invisible walls happily.",
+    "demographics": ["demo-v1", "human", "modern", "weird"]
+  },
+  {
+    "id": "nervous-window-washer",
+    "name": "Nervous Window Washer",
+    "description": "Someone dangling 40 stories up holding a squeegee.",
+    "toneOfVoice": "Looking down, terrified, squeaking glass.",
+    "demographics": ["demo-v1", "human", "modern", "profession", "city"]
+  },
+  {
+    "id": "bored-toll-booth-operator",
+    "name": "Bored Toll Booth Operator",
+    "description": "A worker handing out change with zero emotion.",
+    "toneOfVoice": "Holding hand out, saying next, monotonous.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "cheerful-crossing-guard",
+    "name": "Cheerful Crossing Guard",
+    "description": "Someone blowing a whistle and waving a stop sign happily.",
+    "toneOfVoice": "Blowing whistle, directing imaginary traffic.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "cynical-food-critic",
+    "name": "Cynical Food Critic",
+    "description": "A writer chewing thoughtfully and looking disappointed.",
+    "toneOfVoice": "Spitting food out, writing scathing notes.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "sleepy-night-watchman",
+    "name": "Sleepy Night Watchman",
+    "description": "A guard currently asleep leaning against a wall.",
+    "toneOfVoice": "Snoring, waking up confused, shining a flashlight.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "average-guy",
+    "name": "Average Guy",
+    "description": "A completely unremarkable person with no strong opinions.",
+    "toneOfVoice": "Bland, non-committal, painfully average.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "confused-guy",
+    "name": "Confused Guy",
+    "description": "A man who never knows what day it is.",
+    "toneOfVoice": "Scratching head, asking 'what'.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "enthusiastic-guy",
+    "name": "Enthusiastic Guy",
+    "description": "A person agreeing with everything you say.",
+    "toneOfVoice": "Nodding vigorously, saying 'yes' a lot.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "sarcastic-guy",
+    "name": "Sarcastic Guy",
+    "description": "A person who answers everything with 'obviously'.",
+    "toneOfVoice": "Flat, unhelpful, rolling eyes.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "tired-worker",
+    "name": "Tired Worker",
+    "description": "Someone clocking out after a long shift.",
+    "toneOfVoice": "Yawning, carrying a lunchbox.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "clueless-man",
+    "name": "Clueless Man",
+    "description": "A person who doesn't know how to boil water.",
+    "toneOfVoice": "Asking basic questions, shrugging.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "dramatic-woman",
+    "name": "Dramatic Woman",
+    "description": "Someone sighing loudly waiting for you to ask what's wrong.",
+    "toneOfVoice": "Sighing, looking away, saying 'nothing'.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "pretentious-man",
+    "name": "Pretentious Man",
+    "description": "Someone correcting your grammar in casual conversation.",
+    "toneOfVoice": "Starting sentences with 'actually'.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "grumpy-old-man",
+    "name": "Grumpy Old Man",
+    "description": "A senior citizen yelling at clouds.",
+    "toneOfVoice": "Shaking fist, complaining about the youth.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "friendly-person",
+    "name": "Friendly Person",
+    "description": "Someone waving at everyone they pass on the street.",
+    "toneOfVoice": "Smiling, saying hello, completely generic.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "generic-tourist",
+    "name": "Generic Tourist",
+    "description": "A person wearing a fanny pack and holding a map.",
+    "toneOfVoice": "Asking for directions, pointing.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "generic-dog",
+    "name": "Generic Dog",
+    "description": "A standard canine doing standard dog things.",
+    "toneOfVoice": "Barking once, panting.",
+    "demographics": ["demo-v1", "animal", "mundane"]
+  },
+  {
+    "id": "generic-cat",
+    "name": "Generic Cat",
+    "description": "A standard feline knocking a cup off a table.",
+    "toneOfVoice": "Meowing, purring.",
+    "demographics": ["demo-v1", "animal", "mundane"]
+  },
+  {
+    "id": "generic-monster",
+    "name": "Generic Monster",
+    "description": "A completely non-descript scary creature.",
+    "toneOfVoice": "Growling vaguely.",
+    "demographics": ["demo-v1", "monster", "weird"]
+  },
+  {
+    "id": "generic-employee",
+    "name": "Generic Employee",
+    "description": "A worker wearing a nametag and khakis.",
+    "toneOfVoice": "Reciting a company slogan.",
+    "demographics": ["demo-v1", "human", "modern", "profession"]
+  },
+  {
+    "id": "nervous-guy",
+    "name": "Nervous Guy",
+    "description": "A man sweating for no apparent reason.",
+    "toneOfVoice": "Stuttering, wiping forehead.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "bored-guy",
+    "name": "Bored Guy",
+    "description": "A man staring blankly at a wall.",
+    "toneOfVoice": "Sighing, looking at watch.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "happy-guy",
+    "name": "Happy Guy",
+    "description": "A man whistling a generic tune.",
+    "toneOfVoice": "Whistling, smiling.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "sad-guy",
+    "name": "Sad Guy",
+    "description": "A man looking down at his shoes.",
+    "toneOfVoice": "Moping, quiet.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "angry-guy",
+    "name": "Angry Guy",
+    "description": "A man with his arms crossed frowning.",
+    "toneOfVoice": "Grumbling, crossing arms.",
+    "demographics": ["demo-v1", "human", "modern", "mundane"]
+  },
+  {
+    "id": "literal-dictionary",
+    "name": "Literal Dictionary",
+    "description": "A book of definitions that cannot understand context, metaphors, or human emotion.",
+    "toneOfVoice": "Robotic, literal, provides definitions.",
+    "demographics": ["demo-v1", "weird", "modern", "mundane"]
+  },
+  {
+    "id": "sentient-rock",
+    "name": "A Sentient Rock",
+    "description": "A heavy stone that sits on the ground and does absolutely nothing.",
+    "toneOfVoice": "Silent, heavy, unchanging.",
+    "demographics": ["demo-v1", "weird", "rural", "mundane"]
+  },
+  {
+    "id": "blank-wall",
+    "name": "Blank Wall",
+    "description": "A flat surface painted beige offering zero stimulation.",
+    "toneOfVoice": "Blank, entirely unresponsive.",
+    "demographics": ["demo-v1", "weird", "mundane"]
+  },
+  {
+    "id": "math-textbook",
+    "name": "Math Textbook",
+    "description": "A heavy book filled with numbers and no narrative arc.",
+    "toneOfVoice": "Numerical, dry, calculating.",
+    "demographics": ["demo-v1", "weird", "modern", "mundane"]
+  },
+  {
+    "id": "stop-sign",
+    "name": "Stop Sign",
+    "description": "A red octagon demanding that you halt.",
+    "toneOfVoice": "Commanding, red, stationary.",
+    "demographics": ["demo-v1", "weird", "city", "modern"]
+  },
+  {
+    "id": "standard-calculator",
+    "name": "Standard Calculator",
+    "description": "A device that only outputs numbers when buttons are pushed.",
+    "toneOfVoice": "Beeping, mathematical.",
+    "demographics": ["demo-v1", "weird", "modern", "mundane"]
+  },
+  {
+    "id": "refrigerator",
+    "name": "Refrigerator",
+    "description": "A large box that keeps things cold and hums quietly.",
+    "toneOfVoice": "Humming, chilly.",
+    "demographics": ["demo-v1", "weird", "modern", "mundane"]
+  },
+  {
+    "id": "unplugged-lamp",
+    "name": "Unplugged Lamp",
+    "description": "A lighting fixture currently producing zero light.",
+    "toneOfVoice": "Dark, useless.",
+    "demographics": ["demo-v1", "weird", "modern", "mundane"]
+  },
+  {
+    "id": "traffic-light",
+    "name": "Traffic Light",
+    "description": "An object hanging over a street blinking red, yellow, and green.",
+    "toneOfVoice": "Changing colors rhythmically.",
+    "demographics": ["demo-v1", "weird", "city", "modern"]
+  },
+  {
+    "id": "potted-plant",
+    "name": "Potted Plant",
+    "description": "A fern sitting in dirt requiring water.",
+    "toneOfVoice": "Photosynthesizing quietly.",
+    "demographics": ["demo-v1", "weird", "modern", "mundane"]
+  },
+  {
+    "id": "empty-box",
+    "name": "Empty Box",
+    "description": "A cardboard square containing air.",
+    "toneOfVoice": "Hollow, corrugated.",
+    "demographics": ["demo-v1", "weird", "modern", "mundane"]
+  },
+  {
+    "id": "blank-piece-of-paper",
+    "name": "Blank Piece of Paper",
+    "description": "A white sheet waiting to be written on.",
+    "toneOfVoice": "Flat, white.",
+    "demographics": ["demo-v1", "weird", "modern", "mundane"]
+  },
+  {
+    "id": "wooden-chair",
+    "name": "Wooden Chair",
+    "description": "Four legs and a seat.",
+    "toneOfVoice": "Creaking slightly.",
+    "demographics": ["demo-v1", "weird", "modern", "mundane"]
+  },
+  {
+    "id": "cardboard-tube",
+    "name": "Cardboard Tube",
+    "description": "The center of a paper towel roll.",
+    "toneOfVoice": "Cylindrical.",
+    "demographics": ["demo-v1", "weird", "modern", "mundane"]
+  },
+  {
+    "id": "paperclip",
+    "name": "Paperclip",
+    "description": "Bent metal used to hold paper together.",
+    "toneOfVoice": "Metallic, gripping.",
+    "demographics": ["demo-v1", "weird", "modern", "mundane"]
+  },
+  {
+    "id": "rubber-band",
+    "name": "Rubber Band",
+    "description": "An elastic loop that stretches.",
+    "toneOfVoice": "Snapping.",
+    "demographics": ["demo-v1", "weird", "modern", "mundane"]
+  },
+  {
+    "id": "stapler",
+    "name": "Stapler",
+    "description": "A desk tool that binds paper violently.",
+    "toneOfVoice": "Clicking loudly.",
+    "demographics": ["demo-v1", "weird", "modern", "mundane"]
+  },
+  {
+    "id": "coffee-mug",
+    "name": "Coffee Mug",
+    "description": "A ceramic cup with a handle.",
+    "toneOfVoice": "Ceramic, empty.",
+    "demographics": ["demo-v1", "weird", "modern", "mundane"]
+  },
+  {
+    "id": "plastic-fork",
+    "name": "Plastic Fork",
+    "description": "A flimsy eating utensil with four tines.",
+    "toneOfVoice": "Snapping under pressure.",
+    "demographics": ["demo-v1", "weird", "modern", "mundane"]
+  },
+  {
+    "id": "dust-pan",
+    "name": "Dust Pan",
+    "description": "A plastic tray used to collect dirt.",
+    "toneOfVoice": "Scraping the floor.",
+    "demographics": ["demo-v1", "weird", "modern", "mundane"]
+  }
+]

@@ -4,12 +4,10 @@
 
 Before writing code, proposing architecture, or making assumptions, you **MUST** read the root documentation located in the `/docs/` directory:
 
-* `docs/design-document.md` - Core mechanics and phase roadmaps.
-
+* `docs/design-document.md` - Project overview and core mechanics.
+* `docs/roadmap-checklist.md` - Implementation plan for phases 1 and 2 (prioritize over general overview)
 * `docs/glossary.md` - Domain terminology (Topic, Persona, Strike).
-
 * `docs/schema.md` - EXACT MongoDB NoSQL interfaces. **Never invent dummy data.**
-
 * `docs/tech-stack.md` - Strict framework rules and anti-patterns.
 
 ## 2. Navigation & Context Retrieval
@@ -42,15 +40,15 @@ When prompted by the user, adopt the corresponding mode and strictly follow its 
 
 ### Mode A: The Architect (Planning)
 
-* **Goal:** Decompose features into actionable tasks.
+* **Goal:** Decompose features from roadmap into actionable tasks.
 
-* **Workflow:** Read the GDD -> Propose a technical plan -> Write a checklist in `docs/tasks/[feature].md`. Do not write application code in this mode.
+* **Workflow:** Read the design document and roadmap checklist -> Pick next available step in checklist -> Propose a technical plan -> Ensure all required technical and product decisions are made -> Write a checklist in `docs/tasks/[feature].md`, add clarifying questions on decisions to be made. Do not write application code in this mode.
 
 ### Mode B: The TDD Engineer (Testing)
 
 * **Goal:** Write tests before implementation.
 
-* **Workflow:** Create failing Vitest files in `/tests/`. Focus on edge cases and pure logic. You must prove the test fails before proceeding.
+* **Workflow:** Create failing Vitest files in `/tests/`. Focus on edge cases and pure logic. Test must behave as a contract for class/feature/component. You must prove the test fails before proceeding `npm run test`
 
 ### Mode C: The Implementer (Coding)
 
