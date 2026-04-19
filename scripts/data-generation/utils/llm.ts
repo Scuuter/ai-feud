@@ -42,6 +42,7 @@ interface OpenAIChatChunk {
   choices?: Array<{
     delta?: {
       content?: string;
+      reasoning_content?: string;
     };
     finish_reason?: string | null;
   }>;
@@ -84,12 +85,14 @@ function dumpDebugFile(
   rawResponse: string,
   model: string,
   label: string,
+  subDir?: string
 ): string {
-  ensureDir(DEBUG_DIR);
+  const targetDir = subDir ? path.join(DEBUG_DIR, subDir) : DEBUG_DIR;
+  ensureDir(targetDir);
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
   const safeLabel = label.replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 40);
   const filename = timestamp + '_' + safeLabel + '.txt';
-  const filepath = path.join(DEBUG_DIR, filename);
+  const filepath = path.join(targetDir, filename);
 
   const separator = '='.repeat(40);
   const content = [
@@ -114,7 +117,9 @@ export async function callLMStudio<T = unknown>(
   model: string,
   temperature: number = 0.7,
   maxTokens: number = 1000,
-  debugLabel: string = 'unknown'
+  debugLabel: string = 'unknown',
+  jsonSchema?: Record<string, unknown>,
+  debugSubDir?: string
 ): Promise<{ data: T; stats: GenerationStats }> {
   const startTime = Date.now();
 
@@ -129,6 +134,7 @@ export async function callLMStudio<T = unknown>(
       temperature,
       max_tokens: maxTokens,
       stream: true,
+      ...(jsonSchema && { response_format: { type: 'json_schema', json_schema: jsonSchema } })
     }),
   });
 
@@ -144,8 +150,13 @@ export async function callLMStudio<T = unknown>(
     for await (const chunk of parseSSEStream(response)) {
       if (chunk.choices && chunk.choices.length > 0) {
         const delta = chunk.choices[0].delta;
-        if (delta && delta.content) {
-          fullContent += delta.content;
+        if (delta) {
+          if (delta.reasoning_content) {
+            fullContent += delta.reasoning_content;
+          }
+          if (delta.content) {
+            fullContent += delta.content;
+          }
         }
       }
       if (chunk.usage) {
@@ -162,9 +173,11 @@ export async function callLMStudio<T = unknown>(
     throw new Error('No content received from stream');
   }
 
-  // Always dump the raw response for debugging
-  const debugPath = dumpDebugFile(prompt, fullContent, model, debugLabel);
-  console.log('[DEBUG] Raw response saved: ' + debugPath);
+  let debugPath = '';
+  if (debugLabel.startsWith('cluster')) {
+    debugPath = dumpDebugFile(prompt, fullContent, model, debugLabel, debugSubDir);
+    console.log('[DEBUG] Raw response saved: ' + debugPath);
+  }
 
   const generation_time = (Date.now() - startTime) / 1000;
   const stats: GenerationStats = {
@@ -178,16 +191,20 @@ export async function callLMStudio<T = unknown>(
   try {
     extractedJson = extractJsonFromLLMOutput(fullContent);
   } catch (err) {
-    console.error('[ERROR] JSON extraction failed. Raw response saved at:');
-    console.error('  -> ' + debugPath);
+    if (debugPath) {
+      console.error('[ERROR] JSON extraction failed. Raw response saved at:');
+      console.error('  -> ' + debugPath);
+    }
     throw err;
   }
 
   try {
     return { data: JSON.parse(extractedJson) as T, stats };
   } catch (err) {
-    console.error('[ERROR] JSON.parse failed. Raw response saved at:');
-    console.error('  -> ' + debugPath);
+    if (debugPath) {
+      console.error('[ERROR] JSON.parse failed. Raw response saved at:');
+      console.error('  -> ' + debugPath);
+    }
     console.error('[ERROR] Extracted JSON preview: ' + extractedJson.slice(0, 300) + '...');
     throw err;
   }
@@ -199,13 +216,15 @@ export async function callLMStudioWithRetry<T = unknown>(
   temperature?: number,
   maxTokens?: number,
   retries: number = 1,
-  debugLabel: string = 'unknown'
+  debugLabel: string = 'unknown',
+  jsonSchema?: Record<string, unknown>,
+  debugSubDir?: string
 ): Promise<{ data: T; stats: GenerationStats }> {
   let lastError: Error | null = null;
 
   for (let i = 0; i < retries; i++) {
     try {
-      return await callLMStudio<T>(prompt, model, temperature, maxTokens, debugLabel);
+      return await callLMStudio<T>(prompt, model, temperature, maxTokens, debugLabel, jsonSchema, debugSubDir);
     } catch (error) {
       lastError = error as Error;
       if (i < retries - 1) {

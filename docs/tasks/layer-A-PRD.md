@@ -10,9 +10,9 @@ Currently, the orchestration is separated into distinct CLI scripts (e.g., `surv
 
 The following parameters dictate the execution flow and limits of the pipeline. These should be defined as constants in the code to allow easy refinement during testing:
 
-* **`CONCURRENCY_LIMIT = 4`**: The maximum number of simultaneous requests sent to the local LM Studio server. (Prevents overloading an M1 Mac with 32GB RAM).
+* **`CONCURRENCY_LIMIT = 8`**: The maximum number of simultaneous requests sent to the local LM Studio server. (Prevents overloading an M1 Mac with 32GB RAM).
 * **`QUOTES_PER_CLUSTER = 2`**: The number of flavor quotes to generate and attach to each main board answer.
-* **`MAX_RETRIES = 3`**: Intended maximum number of retry attempts. *(Note: Currently, scripts pass `undefined` to the retry wrapper, defaulting to 1 attempt. This needs to be wired up correctly).*
+* **`MAX_RETRIES = 3`**: Intended maximum number of retry attempts. *(Note: Scripts like `cluster.ts` now actively pass explicit retry counts like 3 and 1 down to the wrapper).*
 
 ## 3. Hardware & Model Specifications
 
@@ -23,17 +23,17 @@ The following parameters dictate the execution flow and limits of the pipeline. 
 ### Current Models Setup
 
 1. **Survey Model Preset**
-* **Task:** Run 100 isolated, fast requests to generate raw persona answers, followed by targeted requests for flavor quotes.
-* **Model:** `hermes-3-llama-3.1-8b-lorablated`
-* **Context Length:** 2048 (This model only reads a 1-sentence prompt and outputs 1-4 words. Keeping this low allows for high concurrency without crashing).
+* **Task:** Run 100 isolated, fast requests to generate raw persona answers, parallelize the mapping of these answers into clusters (Reduce stage), and generate targeted flavor quotes.
+* **Model:** `MODEL_SMALL_PARALLEL` (`hermes-3-llama-3.1-8b-lorablated`)
+* **Context Length:** 8192 (The Reduce step prompts are ~450 tokens. To run 8 concurrent tasks, the LM Studio global KV cache must be at least 4000+ tokens. 8192 provides safe headroom).
 * **GPU Offload:** Max
 * **KV Cache:** Enable Flash Attention.
 * **Context Overflow:** "Stop at limit".
 * **Structured Output (JSON Mode):** OFF.
 
 2. **Cluster Model Preset**
-* **Task:** Group chaotic strings into logical buckets and identify outliers.
-* **Model:** `google/gemma-4-26b-a4b`
+* **Task:** Group chaotic strings into logical buckets and identify outliers (Map stage concept extraction).
+* **Model:** `MODEL_LARGE_REASONING` (`google/gemma-4-26b-a4b`)
 * **Context Length:** 32000 tokens 
 * **GPU Offload:** Max
 * **KV Cache:** Enable Flash Attention.
@@ -45,7 +45,7 @@ The following parameters dictate the execution flow and limits of the pipeline. 
 ## 4. Pipeline Execution: Current State vs. Planned Architecture
 
 ### Current State (Obsolete / Monolithic)
-Currently, `cluster.ts` handles semantic reasoning, math, and flavor quote generation in a single monolithic run, which causes cognitive overload for the LLM. 
+Currently, `cluster.ts` handles semantic reasoning, map-reduce assignment, and math normalization. (Note: flavor quote generation was successfully stripped out to prevent cognitive overload, and will be handled by `enrichment.ts`). 
 
 1. **`survey.ts`**: Maps over 100 personas and uses `CONCURRENCY_LIMIT` to gather short answers per Topic. Saves to `/output/raw/`.
 2. **`cluster.ts` (Zero-Shot Pass)**: Attempts to group the 100 raw strings into 5-8 clusters in a single massive prompt, resulting in hallucinated IDs and missing synonyms.
@@ -64,8 +64,8 @@ To prevent cognitive overload, decouple concerns, and preserve LLM context, the 
 
 #### Step 2: Clustering (`cluster.ts` - Map-Reduce Semantic Pass)
 **Goal:** Group the 100 raw strings into core concepts using a map-reduce flow.
-1. **Stage 1 (Map - Concept Extraction):** Pass the 100 responses and the *original topic context* to the Clustering LLM to extract 5-8 core, punchy concepts. No ID tracking is done here.
-2. **Stage 2 (Reduce - Assignment):** Map each of the 100 raw answers to one of the identified clusters, or relegate them to the `wildcards` array if they don't fit.
+1. **Stage 1 (Map - Concept Extraction):** Pass the 100 responses and the *original topic context* to the `MODEL_LARGE_REASONING` LLM to extract 5-8 core, punchy concepts. No ID tracking is done here.
+2. **Stage 2 (Reduce - Assignment):** Using chunking (e.g., 10 responses per prompt), parallelize requests to the `MODEL_SMALL_PARALLEL` LLM to map each of the 100 raw answers to one of the identified clusters. Any failures or unparseable JSON falls back to the `wildcards` array.
 3. **Stage 3 (Math Normalization):** Convert raw counts to a perfect 100-point board using the Largest Remainder Method:
    * Calculate base scores: `Math.floor((Raw Count / Total Clustered) * 100)`.
    * Sum base scores and distribute remaining points to clusters with the highest decimal remainders until the total is exactly 100. (Wildcards are saved separately and do not count towards the 100 score).

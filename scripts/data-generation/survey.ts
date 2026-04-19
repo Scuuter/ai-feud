@@ -1,5 +1,5 @@
 import {
-  MODEL_SURVEY,
+  MODEL_SMALL_PARALLEL,
   CONCURRENCY_LIMIT,
   DATA_DIR,
   OUTPUT_RAW_DIR,
@@ -25,7 +25,7 @@ async function runSurvey(
       try {
         const { data: response } = await callLMStudioWithRetry<LLMResponse>(
           prompt,
-          MODEL_SURVEY,
+          MODEL_SMALL_PARALLEL,
           0.8,
           100,
           undefined,

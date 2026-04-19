@@ -7,9 +7,9 @@
 *Build offline scripts to generate the initial 50 curated topics and their answers using a local LLM.*
 - [x] **Configure Environment:** Setup `.env.local` with the local LM Studio server URL.
 - [x] **Implement `survey.ts`:** Write a Node.js script in `/scripts/data-generation/` to take a list of `Topic`s and a `Demographic`, pinging the LLM to output 100 unique `Persona` responses.
-- [x] **Implement `cluster.ts`:** Write a multi-stage map-reduce script to extract 5-8 core concepts using the topic context, map the 100 responses to clusters or wildcards, and normalize scores to sum to 100.
+- [x] **Implement `cluster.ts`:** Write a multi-stage map-reduce script to extract 5-8 core concepts using the topic context, map all responses to clusters or wildcards, and normalize scores to sum to 100.
 - [ ] **Implement `enrichment.ts`:** Write an additional script to pass generated clusters through a fast LLM to generate 3-5 valid game-show synonyms per answer, and generate a flavor quote for each cluster and wildcard by picking a unique persona.
-- [] **Format Output:** Ensure the final pipeline outputs valid JSON adhering exactly to the `SurveyResultDocument` interface (`topic`, `demographicName`, `clusters`, `wildcards`).
+- [ ] **Format Output:** Ensure the final pipeline outputs valid JSON adhering exactly to the `SurveyResultDocument` interface (`topic`, `demographicName`, `clusters`, `wildcards`).
 - [ ] **Data Generation:** Run the pipeline to generate **50 MVP questions** for initial testing and gameplay validation.
 
 ### **Epic 2. Core Game Logic (Layer B - Pure TypeScript)**

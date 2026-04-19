@@ -40,6 +40,7 @@ export interface AnswerCluster {
 }
 
 export interface WildCard {
+  personaId: string;
   synonyms: string[];
   flavorQuote: FlavorQuote;
 }

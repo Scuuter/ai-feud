@@ -1,8 +1,11 @@
 import crypto from "node:crypto";
+import fs from "node:fs";
+import path from "node:path";
 import {
-  MODEL_CLUSTER,
-  MODEL_SURVEY,
-  QUOTES_PER_CLUSTER,
+  MODEL_LARGE_REASONING,
+  MODEL_SMALL_PARALLEL,
+  CONCURRENCY_LIMIT,
+  REDUCE_CHUNK_SIZE,
   DATA_DIR,
   OUTPUT_DIR,
   OUTPUT_RAW_DIR,
@@ -11,177 +14,297 @@ import {
   Topic,
   RawSurveyData,
   SurveyResultDocument,
-  FlavorQuote,
   AnswerCluster,
   WildCard,
-  ClusterResult,
-  QuoteResponse,
 } from "./types.js";
 import { loadJson, ensureDir, writeJson } from "./utils/fs.js";
 import { callLMStudioWithRetry } from "./utils/llm.js";
 import { normalizeScoresTo100 } from "./lib/normalization.js";
 import { renderProgressBar } from "./utils/progress.js";
 
-async function clusterResponses(
-  rawData: RawSurveyData,
-): Promise<ClusterResult> {
-  const answersList = JSON.stringify(
-    rawData.rawResponses.map((r) => ({ id: r.personaId, text: r.text })),
-    null,
-    2
-  );
+function getNextVersionPath(basePath: string): string {
+  if (!fs.existsSync(basePath)) return basePath;
+  const ext = path.extname(basePath);
+  const base = basePath.slice(0, -ext.length);
+  let v = 2;
+  while (fs.existsSync(`${base}-v${v}${ext}`)) {
+    v++;
+  }
+  return `${base}-v${v}${ext}`;
+}
 
-  const prompt = `You are a semantic clustering algorithm. Group the following ${rawData.rawResponses.length} answers into 5-8 clusters.
+function getNextDebugRunDir(topicId: string): string {
+  // DEBUG_DIR is scripts/output/debug
+  const debugBase = path.join(process.cwd(), "scripts/output/debug");
+  ensureDir(debugBase);
+  let run = 1;
+  while (fs.existsSync(path.join(debugBase, `${topicId}-run-${run}`))) {
+    run++;
+  }
+  const runDir = `${topicId}-run-${run}`;
+  ensureDir(path.join(debugBase, runDir));
+  return runDir;
+}
 
-Analyze the semantic overlap of the answers. Decide which ones fit into broad categories and which ones are too unique and belong in wildcards. Output ONLY valid JSON.
+const extractConceptsSchema = {
+  name: "extract_concepts",
+  schema: {
+    type: "object",
+    properties: {
+      concepts: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            id: { type: "string" },
+            uiText: { type: "string" },
+            aiPromptName: { type: "string" }
+          },
+          required: ["id", "uiText", "aiPromptName"]
+        },
+        minItems: 5,
+        maxItems: 8
+      }
+    },
+    required: ["concepts"]
+  }
+};
 
-Rules:
-1. Each cluster must have >= 3 answers
-2. Create a canonical "text" for each cluster
-3. Answers with < 3 similar responses go to "wildcardPersonaIds"
+const assignClustersChunkSchema = {
+  name: "assign_clusters_chunk",
+  schema: {
+    type: "object",
+    properties: {
+      assignments: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            personaId: { type: "string" },
+            assignedCategory: { type: "string" }
+          },
+          required: ["personaId", "assignedCategory"]
+        }
+      }
+    },
+    required: ["assignments"]
+  }
+};
 
-Input answers (JSON array of objects with id and text):
+export interface ExtractedConcept {
+  id: string;
+  uiText: string;
+  aiPromptName: string;
+}
+
+interface ExtractConceptsResult {
+  concepts: ExtractedConcept[];
+}
+
+interface AssignClustersChunkResult {
+  assignments: Array<{
+    personaId: string;
+    assignedCategory: string;
+  }>;
+}
+
+interface AssignClustersResult {
+  clusters: Array<{
+    concept: ExtractedConcept;
+    personaIds: string[];
+  }>;
+  wildcardPersonaIds: string[];
+}
+
+async function extractConcepts(rawData: RawSurveyData, topicText: string, debugSubDir?: string): Promise<ExtractedConcept[]> {
+  const answersList = rawData.rawResponses.map(r => r.text).join('\n');
+
+  const prompt = `You are a semantic analyst for a "Family Feud" style game show. 
+TOPIC: "${topicText}"
+
+RAW ANSWERS:
 ${answersList}
 
-Output JSON:
-{
-  "clusters": [
-    {
-      "text": "canonical answer",
-      "personaIds": ["id1", "id2"]
-    }
-  ],
-  "wildcardPersonaIds": ["id3", "id4"]
-}`;
+TASK: Analyze the ${rawData.rawResponses.length} answers and extract 5 to 8 core concepts that represent the most frequent semantic themes.
+GOAL: Maximize coverage so that most raw answers fit into one of these concepts. Ensure concepts do not overlap.
 
-  const topicLabel = rawData.rawResponses[0]?.personaId?.split('-')[0] || 'unknown';
-  const { data: result } = await callLMStudioWithRetry<ClusterResult>(
+For each concept, provide:
+1. "id": A strict, lowercase-kebab-case identifier (e.g., "locked-doors").
+2. "uiText": A punchy, flavorful name for the game board (e.g., "Checking the Locks!").
+3. "aiPromptName": A broad description of the semantic bucket to help another AI map synonymous answers (e.g., "Verifying that doors, windows, or gates are locked and secure").
+
+Output ONLY valid JSON according to the schema.`;
+
+  const debugLabel = 'cluster_map_' + (debugSubDir || 'unknown');
+  const { data: result } = await callLMStudioWithRetry<ExtractConceptsResult>(
     prompt,
-    MODEL_CLUSTER,
-    0.3,
-    20000,
-    undefined,
-    'cluster_' + topicLabel,
+    MODEL_LARGE_REASONING,
+    0.7,
+    16000,
+    1,
+    debugLabel,
+    extractConceptsSchema,
+    debugSubDir
   );
-  return result;
+
+  return result.concepts;
 }
 
-async function generateQuote(
-  personaName: string,
-  toneOfVoice: string,
-  answer: string,
-): Promise<FlavorQuote> {
-  const prompt = `You are ${personaName}. Your tone of voice: ${toneOfVoice}. You answered "${answer}". Give a 1-sentence quote explaining why. Output JSON: \`{ "quote": "..." }\`.`;
+async function assignClusters(rawData: RawSurveyData, concepts: ExtractedConcept[], topicText: string, debugSubDir?: string): Promise<AssignClustersResult> {
+  const reducedConcepts = [
+    ...concepts.map(c => ({
+      id: c.id,
+      description: c.aiPromptName
+    })),
+    {
+      id: "wildcard",
+      description: "Use this ONLY if the answer is completely nonsensical, unrelated, or a literal outlier that fits zero other categories."
+    }
+  ];
+  const conceptsList = JSON.stringify(reducedConcepts, null, 2);
+  const responses = rawData.rawResponses;
+  const assignmentsResult: AssignClustersChunkResult["assignments"] = [];
 
-  try {
-    const { data: result } = await callLMStudioWithRetry<QuoteResponse>(
-      prompt,
-      MODEL_SURVEY,
-      0.8,
-      1000,
-      undefined,
-      'quote_' + personaName.replace(/\s+/g, '-'),
-    );
-    return {
-      personaName,
-      text: result.quote,
-    };
-  } catch (error) {
-    console.error(`Error generating quote for answer "${answer}":`, error);
-    return {
-      personaName,
-      text: `Someone answered: "${answer}"`,
-    };
+  const debugLabel = 'cluster_reduce_' + (debugSubDir || 'unknown');
+
+  for (let i = 0; i < responses.length; i += CONCURRENCY_LIMIT * REDUCE_CHUNK_SIZE) {
+    const batch = responses.slice(i, i + CONCURRENCY_LIMIT * REDUCE_CHUNK_SIZE);
+    process.stdout.write(`\r   Assigning Clusters: ${renderProgressBar(Math.min(i + CONCURRENCY_LIMIT * REDUCE_CHUNK_SIZE, responses.length), responses.length)}`);
+
+    const chunkPromises = [];
+    for (let j = 0; j < batch.length; j += REDUCE_CHUNK_SIZE) {
+      const chunk = batch.slice(j, j + REDUCE_CHUNK_SIZE);
+      const answersList = JSON.stringify(
+        chunk.map((r) => ({ id: r.personaId, text: r.text })),
+        null,
+        2
+      );
+
+      const prompt = `You are a deterministic data mapping engine.
+TOPIC: "${topicText}"
+
+TASK: Map each of the ${chunk.length} personaIds to the MOST SPECIFIC category "id" from the list below.
+
+CATEGORIES:
+${conceptsList}
+
+STRICT RULES:
+1. You MUST choose an exact "id" from the Categories array for assignedCategory.
+2. Every personaId from the input must appear in the output exactly once.
+3. DO NOT modify, shorten, or make up new ids.
+4. Process the "Raw Answers" list sequentially.
+5. No reasoning, no chatter. Output ONLY valid JSON according to the schema.
+
+ANSWERS TO MAP:
+${answersList}`;
+
+      chunkPromises.push(
+        callLMStudioWithRetry<AssignClustersChunkResult>(
+          prompt,
+          MODEL_SMALL_PARALLEL,
+          0,
+          2000,
+          undefined,
+          debugLabel,
+          assignClustersChunkSchema,
+          debugSubDir
+        ).then(res => res.data).catch(err => {
+          // Fallback logic for unparseable chunk
+          return {
+            assignments: chunk.map(r => ({
+              personaId: r.personaId,
+              assignedCategory: "wildcard",
+              isWildcard: true
+            }))
+          };
+        })
+      );
+    }
+
+    const chunkResults = await Promise.all(chunkPromises);
+    for (const res of chunkResults) {
+      assignmentsResult.push(...res.assignments);
+    }
   }
-}
 
-async function generateQuotesForCluster(
-  personaIds: string[],
-  rawData: RawSurveyData,
-): Promise<FlavorQuote[]> {
-  const quotes: FlavorQuote[] = [];
-  const sampleSize = Math.min(QUOTES_PER_CLUSTER, personaIds.length);
+  console.log(); // New line after progress bar
 
-  for (let i = 0; i < sampleSize; i++) {
-    const personaId = personaIds[i];
-    const matchingResponse = rawData.rawResponses.find(
-      (r) => r.personaId === personaId,
-    );
-    if (!matchingResponse) continue;
+  // Aggregate chunk results into the final AssignClustersResult
+  const finalResult: AssignClustersResult = {
+    clusters: concepts.map(c => ({ concept: c, personaIds: [] })),
+    wildcardPersonaIds: []
+  };
 
-    const personaName = matchingResponse.personaName;
-    const toneOfVoice = matchingResponse.toneOfVoice;
-    quotes.push(await generateQuote(personaName, toneOfVoice, matchingResponse.text));
-    process.stdout.write(`\r   -> Quotes generated: ${renderProgressBar(i + 1, sampleSize)}`);
+  const validConceptIds = new Set(concepts.map(c => c.id));
+
+  for (const assignment of assignmentsResult) {
+    if (assignment.assignedCategory === "wildcard" || !validConceptIds.has(assignment.assignedCategory)) {
+      finalResult.wildcardPersonaIds.push(assignment.personaId);
+    } else {
+      const cluster = finalResult.clusters.find(c => c.concept.id === assignment.assignedCategory);
+      if (cluster) {
+        cluster.personaIds.push(assignment.personaId);
+      } else {
+        // Fallback for hallucinated category
+        finalResult.wildcardPersonaIds.push(assignment.personaId);
+      }
+    }
   }
-  console.log();
 
-  return quotes;
+  return finalResult;
 }
 
 async function processTopic(
   topicId: string,
   topicText: string,
+  providedConcepts?: ExtractedConcept[]
 ): Promise<SurveyResultDocument> {
+  const debugSubDir = getNextDebugRunDir(topicId);
   const rawPath = `${OUTPUT_RAW_DIR}/${topicId}.json`;
 
   const rawData = await loadJson<RawSurveyData>(rawPath);
-  console.log(
-    `Processing ${topicId} with ${rawData.rawResponses.length} responses`,
-  );
+  console.log(`Processing ${topicId} with ${rawData.rawResponses.length} responses`);
 
-  console.log(
-    `1. Semantic Clustering: [Running Gemma 4...] (This takes ~15-30 seconds)`,
-  );
-  const clusterResult = await clusterResponses(rawData);
-  console.log(
-    `   -> Found ${clusterResult.clusters.length} clusters and ${clusterResult.wildcardPersonaIds.length} wildcards`,
-  );
+  let concepts: ExtractedConcept[];
+  if (providedConcepts) {
+    concepts = providedConcepts;
+    console.log(`Using provided concepts:`, concepts);
+  } else {
+    console.log(`1. Stage 1 (Map): Extracting Core Concepts...`);
+    concepts = await extractConcepts(rawData, topicText, debugSubDir);
+    console.log(`   -> Extracted ${concepts.length} concepts:`, concepts);
+  }
 
+  console.log(`2. Stage 2 (Reduce): Assigning IDs to Concepts... (This takes ~15-30s)`);
+  const clusterResult = await assignClusters(rawData, concepts, topicText, debugSubDir);
+  console.log(`   -> Mapped into ${clusterResult.clusters.length} clusters and ${clusterResult.wildcardPersonaIds.length} wildcards`);
+
+  console.log(`3. Stage 3 (Math): Normalizing scores to 100...`);
   const rawCounts = clusterResult.clusters.map((c) => c.personaIds.length);
   const normalizedScores = normalizeScoresTo100(rawCounts);
 
-  console.log(`2. Generating Flavor Quotes for Clusters...`);
   const clusters: AnswerCluster[] = [];
   for (let i = 0; i < clusterResult.clusters.length; i++) {
     const cluster = clusterResult.clusters[i];
-    const quotes = await generateQuotesForCluster(cluster.personaIds, rawData);
-
     clusters.push({
-      text: cluster.text,
+      text: cluster.concept.uiText,
       score: normalizedScores[i],
-      synonyms: [], // TODO: Implement separate synonym generation pass
-      flavorQuotes: quotes,
+      synonyms: [],
+      flavorQuotes: [], // To be populated by enrichment.ts
     });
   }
 
   clusters.sort((a, b) => b.score - a.score);
 
-  console.log(`3. Generating Flavor Quotes for Wildcards...`);
   const wildcards: WildCard[] = [];
-
   for (let i = 0; i < clusterResult.wildcardPersonaIds.length; i++) {
     const personaId = clusterResult.wildcardPersonaIds[i];
-    const matchingResponse = rawData.rawResponses.find(
-      (r) => r.personaId === personaId,
-    );
-    if (!matchingResponse) continue;
-
-    const personaName = matchingResponse.personaName;
-    const toneOfVoice = matchingResponse.toneOfVoice;
-    const flavorQuote = await generateQuote(
-      personaName,
-      toneOfVoice,
-      matchingResponse.text,
-    );
-
     wildcards.push({
-      synonyms: [], // TODO: Implement separate synonym generation pass
-      flavorQuote,
+      personaId,
+      synonyms: [],
+      flavorQuote: { personaName: 'Unknown', text: 'To be enriched' }, // To be populated by enrichment.ts
     });
-    process.stdout.write(`\r   -> Wildcards processed: ${renderProgressBar(i + 1, clusterResult.wildcardPersonaIds.length)}`);
   }
-  console.log();
 
   return {
     id: crypto.randomUUID(),
@@ -198,18 +321,40 @@ async function main() {
     ? parseInt(args[args.indexOf("--limit") + 1], 10)
     : undefined;
 
+  const topicArg = args.indexOf("--topic");
+  const specificTopicId = topicArg !== -1 ? args[topicArg + 1] : undefined;
+
+  const conceptsArg = args.indexOf("--concepts");
+  const providedConcepts = conceptsArg !== -1 
+    ? JSON.parse(args[conceptsArg + 1])
+    : undefined;
+
   const topics = await loadJson<Topic[]>(`${DATA_DIR}/topics-v1.json`);
   ensureDir(OUTPUT_DIR);
 
-  const topicsToProcess = limit ? topics.slice(0, limit) : topics;
+  let topicsToProcess = topics;
+  if (specificTopicId) {
+    topicsToProcess = topics.filter(t => t.id === specificTopicId);
+    if (topicsToProcess.length === 0) {
+      console.error(`Error: Topic ID "${specificTopicId}" not found in topics-v1.json`);
+      process.exit(1);
+    }
+  } else if (limit) {
+    topicsToProcess = topics.slice(0, limit);
+  }
+
   console.log(`Processing ${topicsToProcess.length} topics...`);
 
   for (const topic of topicsToProcess) {
     console.log(`\n=== Processing topic: ${topic.id} ===`);
 
     try {
-      const result = await processTopic(topic.id, topic["text-ui"]);
-      const outputPath = `${OUTPUT_DIR}/${topic.id}.json`;
+      const concepts = Array.isArray(providedConcepts) 
+        ? providedConcepts 
+        : (providedConcepts?.concepts || undefined);
+
+      const result = await processTopic(topic.id, topic["text-ui"], concepts);
+      const outputPath = getNextVersionPath(`${OUTPUT_DIR}/${topic.id}.json`);
       writeJson(outputPath, result);
       console.log(`Saved to ${outputPath}`);
     } catch (error) {
