@@ -2,16 +2,19 @@
 
 ## 1. Prime Directives & Context
 
-Before writing code, proposing architecture, or making assumptions, you **MUST** read the root documentation located in the `/docs/` directory:
+**DO NOT** read all documentation files simultaneously as it bloats the context window. Follow this hierarchy:
 
-* `docs/design-document.md` - Project overview and core mechanics.
-* `docs/roadmap-checklist.md` - Implementation plan for phases 1 and 2 (prioritize over general overview)
-* `docs/glossary.md` - Domain terminology (Topic, Persona, Strike).
-* `docs/schema.md` - EXACT MongoDB NoSQL interfaces. **Never invent dummy data.**
-* `docs/tech-stack.md` - Strict framework rules and anti-patterns.
+1. **Task-Specific Docs:** If the user provides a specific task file (e.g., `docs/tasks/[feature].md`), you **MUST read that first**.
+2. **On-Demand Context:** Only read the following root files if you genuinely lack the specific context required for your current task:
+   * `docs/design-document.md` - Project overview and core mechanics.
+   * `docs/roadmap-checklist.md` - Implementation plan for phases 1 and 2.
+   * `docs/glossary.md` - Domain terminology.
+   * `docs/schema.md` - EXACT MongoDB NoSQL interfaces. **Never invent dummy data.**
+   * `docs/tech-stack.md` - Strict framework rules and anti-patterns.
 
 ## 2. Navigation & Context Retrieval
 
+**NEVER guess file paths.** Before calling read or edit tools on a file, you MUST verify its exact path.
 When you need to understand the project structure or find a file, **DO NOT** run an unfiltered `ls` or `tree` command.
 **ALWAYS run this exact command to map the repository:**
 `tree -I "node_modules|.git|.next|public|coverage"`
@@ -48,13 +51,13 @@ When prompted by the user, adopt the corresponding mode and strictly follow its 
 
 * **Goal:** Write tests before implementation.
 
-* **Workflow:** Create failing Vitest files in `/tests/`. Focus on edge cases and pure logic. Test must behave as a contract for class/feature/component. You must prove the test fails before proceeding `npm run test`
+* **Workflow:** Create failing Vitest files in `/tests/`. Focus on edge cases and pure logic. Test must behave as a contract for class/feature/component. **You must prove the test fails via the terminal** before proceeding to write implementation code.
 
 ### Mode C: The Implementer (Coding)
 
 * **Goal:** Pass the tests and build the feature.
 
-* **Workflow:** Write modular code strictly following `docs/tech-stack.md`. Run tests frequently. If a test fails, read the terminal output and fix the implementation.
+* **Workflow:** Write modular code strictly following `docs/tech-stack.md`. Do not overwrite entire files for small changes; rely on precise text replacement. Always read the current state of the file before editing. Run tests frequently. If a test fails, read the terminal output and fix the implementation.
 
 ## 5. Strict Anti-Patterns
 
@@ -63,3 +66,13 @@ When prompted by the user, adopt the corresponding mode and strictly follow its 
 * **NO Relational Joins:** MongoDB data is denormalized. Adhere to `docs/schema.md`.
 
 * **NO "Any" Types:** Use strict TS. Use `unknown` and narrow if necessary.
+
+## 6. Command Palette (Standard Skills)
+
+Use these standard commands to interact with the project:
+* **Test All:** `npm run test`
+* **Test Game Logic:** `npm run test -- src/lib/game-logic`
+* **Test Data Pipeline:** `npm run test -- tests/lib/data-pipeline`
+* **Generate MVP Data:** `npx tsx scripts/data-generation/survey.ts && npx tsx scripts/data-generation/cluster.ts`
+* **Linting:** `npm run lint`
+* **Dev Server:** `npm run dev`

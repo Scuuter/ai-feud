@@ -68,8 +68,9 @@ A web-based party/trivia game blending the mechanics of *Family Feud* with the u
 location: scripts/data-generation
 *These are Node.js scripts run locally to populate the MVP database.*
 
-1. **The Surveyor (survey.ts):** Takes a list of topics and a demographic, asking the LLM to output an array of 100 unique responses in a single API call.  
-2. **The Cluster Engine (cluster.ts):** Takes the 100 raw strings and requests the LLM to group them into Top 5-8 concepts with counts and valid synonyms. Output is saved as a single JSON document per question.
+1. **The Surveyor (survey.ts):** Takes a list of topics and a demographic, asking the LLM to output an array of 100 short, punchy responses in a single API call.  
+2. **The Cluster Engine (cluster.ts):** A multi-stage map-reduce script that extracts 5-8 core concepts using the original topic context, maps the 100 responses to these clusters or wildcards, and normalizes the cluster scores to sum to 100.
+3. **The Enrichment Engine (enrichment.ts):** A final script that passes over the normalized clusters to generate 3-5 game-show synonyms per answer, and selects a unique persona per cluster/wildcard to generate a rich flavor quote. Output is saved as a single JSON document per question.
 
 ### **Layer B: The Backend API (Game Server)**
 location: src/lib/game-logic

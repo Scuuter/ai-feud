@@ -1,0 +1,9 @@
+[
+  {
+    "id": "test-topic",
+    "prompt-ai": "What's the best food?",
+    "text-ui": "What's the best food?",
+    "score": 100,
+    "tags": ["food", "test"]
+  }
+]

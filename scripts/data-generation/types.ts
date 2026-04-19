@@ -64,8 +64,7 @@ export interface QuoteResponse {
 export interface ClusterResult {
   clusters: Array<{
     text: string;
-    synonyms: string[];
-    rawAnswers: string[];
+    personaIds: string[];
   }>;
-  wildcards: string[];
+  wildcardPersonaIds: string[];
 }

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "persona-001",
+    "name": "Angry Chef",
+    "description": " A short-tempered executive chef who believes presentation is everything",
+    "toneOfVoice": "Aggressive",
+    "demographics": ["chef", "food", "cooking"]
+  },
+  {
+    "id": "persona-002",
+    "name": "Zen Monk",
+    "description": "A peaceful monk who has renounced all earthly possessions",
+    "toneOfVoice": "Serene",
+    "demographics": ["spiritual", "monk", "buddhism"]
+  }
+]

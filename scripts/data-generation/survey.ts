@@ -7,6 +7,7 @@ import {
 import { Topic, Persona, LLMResponse, RawResponse } from "./types.js";
 import { loadJson, ensureDir, writeJson } from "./utils/fs.js";
 import { callLMStudioWithRetry } from "./utils/llm.js";
+import { renderProgressBar } from "./utils/progress.js";
 
 async function runSurvey(
   topic: Topic,
@@ -16,19 +17,19 @@ async function runSurvey(
 
   for (let i = 0; i < personas.length; i += CONCURRENCY_LIMIT) {
     const batch = personas.slice(i, i + CONCURRENCY_LIMIT);
-    console.log(
-      `Processing batch ${Math.floor(i / CONCURRENCY_LIMIT) + 1}/${Math.ceil(personas.length / CONCURRENCY_LIMIT)}...`,
-    );
+    process.stdout.write(`\rSurveying Personas: ${renderProgressBar(Math.min(i + CONCURRENCY_LIMIT, personas.length), personas.length)}`);
 
     const promises = batch.map(async (persona) => {
       const prompt = `You are ${persona.description}. Answer the topic: ${topic["prompt-ai"]}. Respond in 1-4 words. Output JSON: \`{ "answer": "..." }\`.`;
 
       try {
-        const response = await callLMStudioWithRetry<LLMResponse>(
+        const { data: response } = await callLMStudioWithRetry<LLMResponse>(
           prompt,
           MODEL_SURVEY,
           0.8,
           100,
+          undefined,
+          'survey_' + persona.id,
         );
         return {
           personaId: persona.id,
@@ -51,6 +52,7 @@ async function runSurvey(
     results.push(...batchResults);
   }
 
+  console.log(); // Add newline after progress bar completes
   return results;
 }
 
