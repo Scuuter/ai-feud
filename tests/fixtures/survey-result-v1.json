@@ -1,0 +1,43 @@
+{
+  "id": "enthusiastic-window-jump",
+  "topicText": "Why would someone enthusiastically jump out a window?",
+  "demographicName": "demo-v1",
+  "clusters": [
+    {
+      "text": "Life or Death!",
+      "score": 32,
+      "personaIds": ["toddler-sugar-rush", "strict-drill-sergeant"],
+      "synonyms": ["life or death", "escape", "survival"],
+      "flavorQuotes": []
+    },
+    {
+      "text": "No Way!",
+      "score": 23,
+      "personaIds": ["enthusiastic-boy-scout"],
+      "synonyms": ["no way", "impossible", "never"],
+      "flavorQuotes": []
+    },
+    {
+      "text": "Just for Fun!",
+      "score": 19,
+      "personaIds": ["office-middle-manager"],
+      "synonyms": ["for fun", "boredom", "yolo"],
+      "flavorQuotes": []
+    }
+  ],
+  "wildcards": [
+    {
+      "personaId": "anxious-house-cat",
+      "rawAnswer": "because the vacuum cleaner turned on",
+      "synonyms": ["vacuum", "hoover"],
+      "flavorQuote": { "personaName": "Anxious House Cat", "text": "THE VACUUM IS ON. EVERYONE PANIC." }
+    },
+    {
+      "personaId": "bored-teenager",
+      "rawAnswer": "honestly? no reason, just vibing",
+      "synonyms": [],
+      "flavorQuote": { "personaName": "Bored Teenager", "text": "Whatever." }
+    }
+  ],
+  "tags": ["weird", "international"]
+}

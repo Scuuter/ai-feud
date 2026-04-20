@@ -13,16 +13,17 @@
 - [ ] **Format Output:** Ensure the final pipeline outputs valid JSON adhering exactly to the `SurveyResult` interface (`topic`, `demographicName`, `clusters`, `wildcards`).
 - [ ] **Data Generation:** Run the pipeline to generate **50 MVP questions** for initial testing and gameplay validation.
 
-### **Epic 2. Core Game Logic (Layer B - Pure TypeScript)**
+### **Epic 2. Core Game Logic (Layer B - Pure TypeScript)** ✅
 *100% independent of React, Next.js, and the DOM. Use TDD via Vitest.*
-- [ ] **Setup TDD Environment:** Create initial failing Vitest files in `/tests/lib/game-logic/`.
-- [ ] **Implement `GameState.ts`:**
-  - [ ] Define state structures based on `schema.md` (`Player`, `Guess`, `Strike`, `Round`).
-  - [ ] Write logic to manage round state, track accumulated points, handle the 3-strike penalty, and determine win/loss conditions.
-- [ ] **Implement `Matcher.ts`:**
-  - [ ] Step 1: Exact and lowercase string matching against the `AnswerCluster` text and `Synonym` arrays.
-  - [ ] Step 2: Implement fuzzy matching utilizing the `fast-levenshtein` npm package for robust typo tolerance.
-  - [ ] *Note: Semantic LLM validation is explicitly deferred to Phase 2.*
+- [x] **Setup TDD Environment:** Created failing Vitest files in `/tests/lib/game-logic/` (64 tests, proven failing before implementation).
+- [x] **Implement `GameState.ts`:**
+  - [x] Define state structures in `src/lib/game-logic/types.ts` based on `schema.md` (`Player`, `Guess`, `Strike`, `Round`, `SurveyResult`, `MatchResult`).
+  - [x] Write pure immutable functions: `createRound`, `applyCorrectGuess`, `applyStrike`, `checkWinCondition`, `checkLossCondition`, `isRoundComplete`, `getScore`.
+- [x] **Implement `Matcher.ts`:**
+  - [x] Step 1: Exact and lowercase string matching against `AnswerCluster.text`, `AnswerCluster.synonyms`, `WildCard.rawAnswer`, and `WildCard.synonyms`.
+  - [x] Step 2: Fuzzy matching via `fast-levenshtein` — per-word strategy (default, generous for AI-generated multi-word answers) and whole-string (selectable via `MatcherConfig.fuzzyStrategy`). Configurable threshold (default: 2). Short-word guard for words < 4 chars.
+  - [x] WildCard matching supported: `MatchResult.isWildCard` differentiates cluster hits (award points) from wildcard hits (flavor quote only, 0 points).
+  - [x] *Note: Semantic LLM validation is explicitly deferred to Phase 2.*
 
 ### **Epic 3. The Frontend Core UI (Layer C)**
 *Build the Next.js App Router client with Tailwind and Framer Motion. Push `"use client"` as far down the tree as possible.*
