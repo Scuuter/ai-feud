@@ -25,57 +25,15 @@ import { normalizeScoresTo100 } from "./lib/normalization.js";
 import { aggregateAssignments, type AggregateAssignmentsResult } from "./lib/aggregation.js";
 import { renderProgressBar } from "./utils/progress.js";
 import { parseCliArgs } from "./utils/cli.js";
+import {
+  buildExtractCategoriesPrompt,
+  buildAssignChunkPrompt,
+  extractCategoriesSchema,
+  assignClustersChunkSchema,
+} from "./lib/prompts/cluster-prompts.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DEBUG_BASE = path.join(__dirname, "../../output/debug");
-
-
-
-const extractCategoriesSchema = {
-  name: "extract_categories",
-  schema: {
-    type: "object",
-    properties: {
-      categories: {
-        type: "array",
-        items: {
-          type: "object",
-          properties: {
-            id: { type: "string" },
-            uiText: { type: "string" },
-            aiPromptName: { type: "string" }
-          },
-          required: ["id", "uiText", "aiPromptName"]
-        },
-        minItems: 5,
-        maxItems: 8
-      }
-    },
-    required: ["categories"]
-  }
-};
-
-const assignClustersChunkSchema = {
-  name: "assign_clusters_chunk",
-  schema: {
-    type: "object",
-    properties: {
-      assignments: {
-        type: "array",
-        items: {
-          type: "object",
-          properties: {
-            personaId: { type: "string" },
-            assignedCategory: { type: "string" }
-          },
-          required: ["personaId", "assignedCategory"]
-        }
-      }
-    },
-    required: ["assignments"]
-  }
-};
-
 
 
 interface ExtractCategoriesResult {
@@ -92,23 +50,13 @@ interface AssignClustersChunkResult {
 
 
 async function extractCategories(rawData: RawSurveyData, topicText: string, debugSubDir?: string): Promise<AnswerCategory[]> {
-  const answersList = rawData.rawResponses.map(r => r.text).join('\n');
+  const answers = rawData.rawResponses.map(r => r.text);
 
-  const prompt = `You are a semantic analyst for a "Family Feud" style game show. 
-TOPIC: "${topicText}"
-
-RAW ANSWERS:
-${answersList}
-
-TASK: Analyze the ${rawData.rawResponses.length} answers and extract 5 to 8 core categories that represent the most frequent semantic themes.
-GOAL: Maximize coverage so that most raw answers fit into one of these categories. Ensure categories do not overlap.
-
-For each category, provide:
-1. "id": A strict, lowercase-kebab-case identifier (e.g., "locked-doors").
-2. "uiText": A punchy, flavorful name for the game board (e.g., "Checking the Locks!").
-3. "aiPromptName": A broad description of the semantic bucket to help another AI map synonymous answers (e.g., "Verifying that doors, windows, or gates are locked and secure").
-
-Output ONLY valid JSON according to the schema.`;
+  const prompt = buildExtractCategoriesPrompt({
+    topicText,
+    answers,
+    answerCount: answers.length,
+  });
 
   const debugLabel = 'cluster_map_' + (debugSubDir || 'unknown');
   const { data: result } = await callLMStudioWithRetry<ExtractCategoriesResult>(
@@ -149,29 +97,16 @@ async function assignClusters(rawData: RawSurveyData, categories: AnswerCategory
     const chunkPromises = [];
     for (let j = 0; j < batch.length; j += REDUCE_CHUNK_SIZE) {
       const chunk = batch.slice(j, j + REDUCE_CHUNK_SIZE);
-      const answersList = JSON.stringify(
-        chunk.map((r) => ({ id: r.personaId, text: r.text })),
-        null,
-        2
-      );
-
-      const prompt = `You are a deterministic data mapping engine.
-TOPIC: "${topicText}"
-
-TASK: Map each of the ${chunk.length} personaIds to the MOST SPECIFIC category "id" from the list below.
-
-CATEGORIES:
-${categoriesList}
-
-STRICT RULES:
-1. You MUST choose an exact "id" from the Categories array for assignedCategory.
-2. Every personaId from the input must appear in the output exactly once.
-3. DO NOT modify, shorten, or make up new ids.
-4. Process the "Raw Answers" list sequentially.
-5. No reasoning, no chatter. Output ONLY valid JSON according to the schema.
-
-ANSWERS TO MAP:
-${answersList}`;
+      const prompt = buildAssignChunkPrompt({
+        topicText,
+        categoriesList,
+        chunkCount: chunk.length,
+        answersList: JSON.stringify(
+          chunk.map((r) => ({ id: r.personaId, text: r.text })),
+          null,
+          2
+        ),
+      });
 
       chunkPromises.push(
         callLMStudioWithRetry<AssignClustersChunkResult>(
@@ -253,10 +188,15 @@ async function processTopic(
   clusters.sort((a, b) => b.score - a.score);
 
   const wildcards: WildCard[] = [];
+  // Build a fast lookup map from personaId -> rawAnswer
+  const rawAnswerByPersonaId = new Map<string, string>(
+    rawData.rawResponses.map(r => [r.personaId, r.text])
+  );
   for (let i = 0; i < clusterResult.wildcardPersonaIds.length; i++) {
     const personaId = clusterResult.wildcardPersonaIds[i];
     wildcards.push({
       personaId,
+      rawAnswer: rawAnswerByPersonaId.get(personaId) ?? '',
       synonyms: [],
       flavorQuote: { personaName: 'Unknown', text: 'To be enriched' }, // To be populated by enrichment.ts
     });

@@ -43,7 +43,9 @@ export interface AnswerCluster {
 
 export interface WildCard {
   personaId: string;
-  synonyms: string[];
+  /** The persona's original raw survey answer; populated by cluster.ts */
+  rawAnswer: string;
+  synonyms: string[];      // reserved for future use, kept empty
   flavorQuote: FlavorQuote;
 }
 
@@ -54,6 +56,8 @@ export interface SurveyResult {
   clusters: AnswerCluster[];
   wildcards: WildCard[];
   tags?: string[];
+  /** ISO 8601 timestamp set by enrichment.ts. Absence means not yet enriched. */
+  enrichedAt?: string;
 }
 
 

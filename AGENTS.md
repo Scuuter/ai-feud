@@ -59,6 +59,17 @@ When prompted by the user, adopt the corresponding mode and strictly follow its 
 
 * **Workflow:** Write modular code strictly following `docs/tech-stack.md`. Do not overwrite entire files for small changes; rely on precise text replacement. Always read the current state of the file before editing. Run tests frequently. If a test fails, read the terminal output and fix the implementation.
 
+### Mode D: The Prompt Engineer (Optimisation)
+
+* **Goal:** Improve data pipeline prompt quality without touching orchestration logic.
+
+* **Workflow:**
+  1. Read `docs/tech-stack.md` §4 (Offline Scripts / Prompt Library) to understand the architecture.
+  2. Identify the target prompt in `scripts/data-generation/lib/prompts/`. Each prompt stage has its own file; schemas live alongside builders in the same module.
+  3. Edit **only** the builder function body in the relevant `*-prompts.ts` file. Do not touch schemas or orchestrators.
+  4. Validate the change interactively using `prompt-tester.ts` (see Command Palette below).
+  5. Run `npm run test -- run tests/lib/data-pipeline/prompts.test.ts` to confirm shape tests still pass.
+
 ## 5. Strict Anti-Patterns
 
 * **NO Hallucinated Libraries:** Strictly adhere to the Allowed Libraries list found in `docs/tech-stack.md`. Do not invent or import unapproved packages (e.g., No Redux, no MUI, no Prisma, no Supabase).
@@ -73,6 +84,22 @@ Use these standard commands to interact with the project:
 * **Test All:** `npm run test -- run`
 * **Test Game Logic:** `npm run test -- run src/lib/game-logic`
 * **Test Data Pipeline:** `npm run test -- run tests/lib/data-pipeline`
-* **Generate MVP Data:** `npx tsx scripts/data-generation/survey.ts && npx tsx scripts/data-generation/cluster.ts`
 * **Linting:** `npm run lint`
 * **Dev Server:** `npm run dev`
+
+data generation pipeline: DON'T RUN AUTONOMOUSLY, ONLY FOR USER MANUAL USAGE
+* **Generate MVP Data:** `npx tsx scripts/data-generation/survey.ts && npx tsx scripts/data-generation/cluster.ts`
+* **Enrich Data:** `npx tsx scripts/data-generation/enrichment.ts`
+
+### Prompt Tester (Mode D only — requires LM Studio running locally)
+
+```bash
+# List all registered prompts with descriptions and model hints
+npx tsx scripts/data-generation/prompt-tester.ts --list
+
+# Run a prompt with its default fixture and print the LLM response
+npx tsx scripts/data-generation/prompt-tester.ts --prompt <key>
+
+# Override the fixture with custom JSON for targeted edge-case testing
+npx tsx scripts/data-generation/prompt-tester.ts --prompt <key> --fixture '{"field":"value"}'
+```

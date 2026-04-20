@@ -72,12 +72,17 @@ To prevent cognitive overload, decouple concerns, and preserve LLM context, the 
    * **Each `AnswerCluster` in the saved document must include `personaIds: string[]`** — the list of persona IDs the Reduce stage assigned to that concept. This field is required by `enrichment.ts`.
 
 #### Step 3: Enrichment (`enrichment.ts` - Synonyms & Flavor Pass)
-**Goal:** Generate game-show synonyms and fetch targeted quotes using the fast Survey model.
-1. **Synonym Generation:** Pass the normalized clusters through the LLM to generate 3-5 valid game-show synonyms per answer.
-2. **Targeted Quote Generation:**
-   * Iterate through the finalized `clusters`. **Read `personaIds` directly from each cluster document** (populated by `cluster.ts`). Pick `QUOTES_PER_CLUSTER` random persona IDs from that field — do not re-read the raw survey file.
-   * Iterate through all `wildcards`.
-   * Send isolated API calls back to the Surveyor model for each selected persona to generate a flavor quote.
+**Goal:** Generate game-show synonyms and fetch targeted in-character quotes using the fast Survey model.
+
+- **Synonym Generation (clusters only):** For each `AnswerCluster`, call the LLM to generate 3–5 game-show synonyms. Wildcards do **not** get LLM-generated synonyms; their `synonyms` array is reserved for future use.
+- **Cluster Quote Generation:** For each cluster, pick `QUOTES_PER_CLUSTER` random persona IDs from `cluster.personaIds`, look them up in the raw survey file to get `personaName`, `toneOfVoice`, and `rawAnswer`. Pass all three to the LLM to generate an in-character `FlavorQuote`.
+- **Wildcard Quote Generation:** For each wildcard, use `wildcard.personaId` to look up the persona in the raw survey file. Pass `personaName`, `toneOfVoice`, and `rawAnswer` to the LLM to generate a `FlavorQuote`. All wildcards are processed; the call is not capped.
+- **Assembly:** Merge enriched clusters and wildcards into the final `SurveyResult`, set `enrichedAt: new Date().toISOString()`, and save via `getNextVersionPath`.
+
+> `WildCard.rawAnswer` is populated by `cluster.ts` in memory (from `RawSurveyData.rawResponses`) at the time wildcards are constructed, not by `enrichment.ts`.
+
+> **Prompt Library:** All prompt builder functions and their LM Studio JSON schemas live in `lib/prompts/`. The scripts import from there; no prompt strings are defined inline. Use `prompt-tester.ts` to test individual prompts against a live LM Studio instance before running a full pipeline script.
+
 3. **Save:** Output the final compiled `SurveyResult`.
 
 ---

@@ -10,6 +10,7 @@ import { loadJson, ensureDir, writeJson } from "./utils/fs.js";
 import { callLMStudioWithRetry } from "./utils/llm.js";
 import { renderProgressBar } from "./utils/progress.js";
 import { parseCliArgs } from "./utils/cli.js";
+import { buildSurveyPrompt } from "./lib/prompts/survey-prompts.js";
 
 async function runSurvey(
   topic: Topic,
@@ -22,7 +23,10 @@ async function runSurvey(
     process.stdout.write(`\rSurveying Personas: ${renderProgressBar(Math.min(i + CONCURRENCY_LIMIT, personas.length), personas.length)}`);
 
     const promises = batch.map(async (persona) => {
-      const prompt = `You are ${persona.description}. Answer the topic: ${topic.aiPrompt}. Respond in 1-4 words. Output JSON: \`{ "answer": "..." }\`.`;
+      const prompt = buildSurveyPrompt({
+        personaDescription: persona.description,
+        topicAiPrompt: topic.aiPrompt,
+      });
 
       try {
         const { data: response } = await callLMStudioWithRetry<{ answer: string }>(

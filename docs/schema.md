@@ -29,13 +29,17 @@ export interface SurveyResult {
     
   /** Optional tags for categorization */  
   tags?: string[];  
+  /** ISO 8601 timestamp set by enrichment.ts. Absence means the topic has not been enriched yet. */
+  enrichedAt?: string;
 }
 
 export interface WildCard {
   /** The identity of the AI that gave this response (used for enrichment) */
   personaId: string;
+  /** The persona's original raw survey answer, populated by cluster.ts */
+  rawAnswer: string;
   /** Valid variations and typos for Exact/Fuzzy matching */  
-  synonyms: string[];  
+  synonyms: string[];     // reserved for future enrichment; kept empty for now
   /** Curated quotes from specific personas to show in the UI for flavor */  
   flavorQuote: FlavorQuote;  
 }

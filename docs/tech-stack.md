@@ -67,6 +67,22 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - They are allowed to use standard Node APIs (`fs`, `path`) to write JSON files locally.
 - Point all LLM fetch requests in these scripts to the local LM Studio server (address in `.env.local`).
 
+**Prompt Library (`/scripts/data-generation/lib/prompts/`):**
+- All prompt builder functions and their LM Studio JSON schemas are defined here as **pure functions** — no I/O, no config imports.
+- Each pipeline stage has its own module. Orchestrator scripts (`survey.ts`, `cluster.ts`, `enrichment.ts`) import from here; no prompt strings are defined inline.
+- `prompt-registry.ts` owns the typed `PROMPT_REGISTRY` and re-exports all modules as a single import surface.
+
+| File | Owns |
+|---|---|
+| `survey-prompts.ts` | `buildSurveyPrompt` |
+| `cluster-prompts.ts` | `buildExtractCategoriesPrompt`, `buildAssignChunkPrompt` + schemas |
+| `synonyms-prompts.ts` | `buildSynonymPrompt` + schema |
+| `quotes-prompts.ts` | `buildClusterQuotePrompt`, `buildWildcardQuotePrompt` + schemas |
+| `prompt-registry.ts` | `PROMPT_REGISTRY`, `PromptDescriptor` + re-exports all of the above |
+
+**Prompt Optimisation Workflow:**
+To iterate on a prompt, edit **only** the builder function body in the relevant file, then use `prompt-tester.ts` to test it against a live LM Studio instance (see `AGENTS.md` §6 for exact commands). Run `npm run test -- run tests/lib/data-pipeline/prompts.test.ts` to confirm shape tests still pass. Do **not** modify schemas or orchestrators as part of a prompt-quality change.
+
 ---
 
 ## 5. Technology Choices & Allowed Libraries

@@ -8,7 +8,8 @@
 - [x] **Configure Environment:** Setup `.env.local` with the local LM Studio server URL.
 - [x] **Implement `survey.ts`:** Write a Node.js script in `/scripts/data-generation/` to take a list of `Topic`s and a `Demographic`, pinging the LLM to output 100 unique `Persona` responses.
 - [x] **Implement `cluster.ts`:** Write a multi-stage map-reduce script to extract 5-8 core concepts using the topic context, map all responses to clusters or wildcards, and normalize scores to sum to 100.
-- [ ] **Implement `enrichment.ts`:** Write an additional script to pass generated clusters through a fast LLM to generate 3-5 valid game-show synonyms per answer, and generate a flavor quote for each cluster and wildcard by picking a unique persona.
+- [ ] **Implement `enrichment.ts`:** Enrich clustered `SurveyResult` files in three parallel sub-steps: (A) generate 3–5 game-show synonyms for each cluster; (B) generate `QUOTES_PER_CLUSTER` in-character flavor quotes per cluster using personas already assigned to it; (C) generate one flavor quote per wildcard using its `rawAnswer`. Sets `enrichedAt` on the output. Wildcards' `synonyms` array is kept empty for future use.
+- [ ] **Implement Prompt Library + `prompt-tester.ts`:** Extract all inline prompt strings from `survey.ts` and `cluster.ts` into `lib/prompts/`. Add `synonyms-prompts.ts` and `quotes-prompts.ts` for enrichment. Implement `prompt-tester.ts` CLI for semi-manual prompt tuning against a live LM Studio instance.
 - [ ] **Format Output:** Ensure the final pipeline outputs valid JSON adhering exactly to the `SurveyResult` interface (`topic`, `demographicName`, `clusters`, `wildcards`).
 - [ ] **Data Generation:** Run the pipeline to generate **50 MVP questions** for initial testing and gameplay validation.
 
