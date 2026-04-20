@@ -21,6 +21,14 @@ export interface RawResponse {
   text: string;
 }
 
+/** A persona resolved from rawData for use in quote/synonym generation. */
+export interface SelectedPersona {
+  personaId: string;
+  personaName: string;
+  toneOfVoice: string;
+  rawAnswer: string;
+}
+
 export interface RawSurveyData {
   topicId: string;
   demographicName: string;

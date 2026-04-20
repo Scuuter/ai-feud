@@ -1,64 +1,55 @@
-import fs from "node:fs";
 import {
   MODEL_SMALL_PARALLEL,
   CONCURRENCY_LIMIT,
   DATA_DIR,
   OUTPUT_RAW_DIR,
+  DEMOGRAPHIC_NAME,
 } from "./config.js";
 import { Topic, Persona, RawResponse } from "./types.js";
-import { loadJson, ensureDir, writeJson } from "./utils/fs.js";
+import { loadJson, ensureDir, writeJson, fileExists } from "./utils/fs.js";
 import { callLMStudioWithRetry } from "./utils/llm.js";
 import { renderProgressBar } from "./utils/progress.js";
+import { runWithConcurrency } from './utils/concurrency.js';
 import { parseCliArgs } from "./utils/cli.js";
 import { buildSurveyPrompt } from "./lib/prompts/survey-prompts.js";
 
-async function runSurvey(
-  topic: Topic,
-  personas: Persona[],
-): Promise<Array<RawResponse>> {
-  const results: Array<RawResponse> = [];
-
-  for (let i = 0; i < personas.length; i += CONCURRENCY_LIMIT) {
-    const batch = personas.slice(i, i + CONCURRENCY_LIMIT);
-    process.stdout.write(`\rSurveying Personas: ${renderProgressBar(Math.min(i + CONCURRENCY_LIMIT, personas.length), personas.length)}`);
-
-    const promises = batch.map(async (persona) => {
-      const prompt = buildSurveyPrompt({
-        personaDescription: persona.description,
-        topicAiPrompt: topic.aiPrompt,
-      });
-
-      try {
-        const { data: response } = await callLMStudioWithRetry<{ answer: string }>(
-          prompt,
-          MODEL_SMALL_PARALLEL,
-          0.8,
-          100,
-          undefined,
-          'survey_' + persona.id,
-        );
-        return {
-          personaId: persona.id,
-          personaName: persona.name,
-          toneOfVoice: persona.toneOfVoice,
-          text: response.answer,
-        };
-      } catch (error) {
-        console.error(`Error for persona ${persona.id}:`, error);
-        return {
-          personaId: persona.id,
-          personaName: persona.name,
-          toneOfVoice: persona.toneOfVoice,
-          text: "ERROR",
-        };
-      }
+async function runSurvey(topic: Topic, personas: Persona[]): Promise<RawResponse[]> {
+  const tasks = personas.map((persona) => async (): Promise<RawResponse> => {
+    const prompt = buildSurveyPrompt({
+      personaDescription: persona.description,
+      topicAiPrompt: topic.aiPrompt,
     });
+    try {
+      const { data: response } = await callLMStudioWithRetry<{ answer: string }>(
+        prompt,
+        MODEL_SMALL_PARALLEL,
+        0.8,
+        100,
+        undefined,
+        'survey_' + persona.id,
+      );
+      return {
+        personaId: persona.id,
+        personaName: persona.name,
+        toneOfVoice: persona.toneOfVoice,
+        text: response.answer,
+      };
+    } catch (error) {
+      console.error(`Error for persona ${persona.id}:`, error);
+      return {
+        personaId: persona.id,
+        personaName: persona.name,
+        toneOfVoice: persona.toneOfVoice,
+        text: 'ERROR',
+      };
+    }
+  });
 
-    const batchResults = await Promise.all(promises);
-    results.push(...batchResults);
-  }
+  const results = await runWithConcurrency(tasks, CONCURRENCY_LIMIT, (done, total) => {
+    process.stdout.write(`\rSurveying Personas: ${renderProgressBar(done, total)}`);
+  });
 
-  console.log(); // Add newline after progress bar completes
+  console.log(); // newline after progress bar
   return results;
 }
 
@@ -79,7 +70,7 @@ async function main() {
     }
   } else if (runMissing) {
     topicsToProcess = topics.filter(topic => {
-      const rawExists = fs.existsSync(`${OUTPUT_RAW_DIR}/${topic.id}.json`);
+      const rawExists = fileExists(`${OUTPUT_RAW_DIR}/${topic.id}.json`);
       return !rawExists;
     });
     console.log(`Found ${topicsToProcess.length} topics missing raw data.`);
@@ -98,7 +89,7 @@ async function main() {
 
     const output = {
       topicId: topic.id,
-      demographicName: "demo-v1",
+      demographicName: DEMOGRAPHIC_NAME,
       rawResponses,
     };
 

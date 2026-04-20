@@ -2,6 +2,8 @@
  * Quote prompt builders — pure functions, no side effects, no I/O.
  * Used by enrichment.ts (Sub-steps B + C: Cluster + Wildcard Quote Generation).
  */
+import type { SelectedPersona } from '../../types.js';
+export type { SelectedPersona }; // re-export so existing callers don't break
 
 // ─── Schemas ─────────────────────────────────────────────────────────────────
 
@@ -47,13 +49,6 @@ export const wildcardQuoteJobSchema = {
 
 // ─── Input interfaces ─────────────────────────────────────────────────────────
 
-export interface SelectedPersona {
-  personaId: string;
-  personaName: string;
-  toneOfVoice: string;
-  rawAnswer: string;   // the original text from RawSurveyData
-}
-
 export interface ClusterQuoteJobInput {
   clusterText: string;
   topicText: string;
@@ -95,6 +90,7 @@ The quote must feel like a natural reaction to giving the answer above — it sh
 
 Rules:
 - Stay strictly in-character (match the tone field).
+- Mention their answer directly.
 - Keep it punchy and fun for a game show audience.
 - Use the persona's name as the personaName in your output.
 - Output ONLY valid JSON according to the schema.`;
@@ -104,17 +100,18 @@ Rules:
  * Builds the prompt for generating a single in-character flavor quote for a wildcard.
  */
 export function buildWildcardQuotePrompt(input: WildcardQuoteJobInput): string {
-  return `You are a game show scriptwriter. Generate a short in-character flavor quote for a wildcard answer.
+  return `You are a game show scriptwriter. Generate a short in-character flavor quote for a given persona.
 
 TOPIC: "${input.topicText}"
 PERSONA: "${input.personaName}" (tone: "${input.toneOfVoice}")
 THEIR ANSWER: "${input.rawAnswer}"
 
 TASK: Write a short (max 15 words) in-character quote that sounds like this persona said it. 
-It should feel like a natural reaction to giving a unique, off-the-wall answer on a game show.
+It should feel like a natural explanation of their answer on a game show.
 
 Rules:
 - Stay strictly in-character (match the tone field).
+- Mention their answer directly.
 - Keep it punchy and fun.
 - Use "${input.personaName}" as the personaName in your output.
 - Output ONLY valid JSON according to the schema.`;

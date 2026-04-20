@@ -31,3 +31,12 @@ export const MAX_RETRIES = parseInt(process.env.MAX_RETRIES ?? "3", 10);
 export const DATA_DIR = path.join(__dirname, "../../data");
 export const OUTPUT_DIR = path.join(__dirname, "../output");
 export const OUTPUT_RAW_DIR = path.join(OUTPUT_DIR, "raw");
+
+/** Absolute path to the debug dump directory, shared by llm.ts and cluster.ts */
+export const DEBUG_OUTPUT_DIR = path.join(__dirname, "../output/debug");
+
+/** How many flavor quotes to generate per AnswerCluster */
+export const QUOTES_PER_CLUSTER = parseInt(process.env.QUOTES_PER_CLUSTER ?? "2", 10);
+
+/** Demographic identifier written into RawSurveyData by survey.ts */
+export const DEMOGRAPHIC_NAME = process.env.DEMOGRAPHIC_NAME ?? "demo-v1";

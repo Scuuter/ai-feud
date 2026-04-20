@@ -1,12 +1,7 @@
-import { LM_STUDIO_URL, MAX_RETRIES } from '../config.js';
+import { LM_STUDIO_URL, MAX_RETRIES, DEBUG_OUTPUT_DIR } from '../config.js';
 import { ensureDir } from './fs.js';
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const __filename_llm = fileURLToPath(import.meta.url);
-const __dirname_llm = path.dirname(__filename_llm);
-const DEBUG_DIR = path.join(__dirname_llm, '../../output/debug');
 
 export interface GenerationStats {
   tokens_per_second: number;
@@ -87,7 +82,7 @@ function dumpDebugFile(
   label: string,
   subDir?: string
 ): string {
-  const targetDir = subDir ? path.join(DEBUG_DIR, subDir) : DEBUG_DIR;
+  const targetDir = subDir ? path.join(DEBUG_OUTPUT_DIR, subDir) : DEBUG_OUTPUT_DIR;
   ensureDir(targetDir);
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
   const safeLabel = label.replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 40);

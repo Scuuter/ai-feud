@@ -1,7 +1,3 @@
-import crypto from "node:crypto";
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 import {
   MODEL_LARGE_REASONING,
   MODEL_SMALL_PARALLEL,
@@ -10,6 +6,7 @@ import {
   DATA_DIR,
   OUTPUT_DIR,
   OUTPUT_RAW_DIR,
+  DEBUG_OUTPUT_DIR,
 } from "./config.js";
 import {
   Topic,
@@ -19,7 +16,7 @@ import {
   WildCard,
   AnswerCategory,
 } from "./types.js";
-import { loadJson, ensureDir, writeJson, getNextVersionPath, getNextDebugRunDir } from "./utils/fs.js";
+import { loadJson, ensureDir, writeJson, getNextVersionPath, getNextDebugRunDir, fileExists } from "./utils/fs.js";
 import { callLMStudioWithRetry } from "./utils/llm.js";
 import { normalizeScoresTo100 } from "./lib/normalization.js";
 import { aggregateAssignments, type AggregateAssignmentsResult } from "./lib/aggregation.js";
@@ -32,8 +29,7 @@ import {
   assignClustersChunkSchema,
 } from "./lib/prompts/cluster-prompts.js";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DEBUG_BASE = path.join(__dirname, "../../output/debug");
+import { runWithConcurrency } from './utils/concurrency.js';
 
 
 interface ExtractCategoriesResult {
@@ -90,53 +86,54 @@ async function assignClusters(rawData: RawSurveyData, categories: AnswerCategory
 
   const debugLabel = 'cluster_reduce_' + (debugSubDir || 'unknown');
 
-  for (let i = 0; i < responses.length; i += CONCURRENCY_LIMIT * REDUCE_CHUNK_SIZE) {
-    const batch = responses.slice(i, i + CONCURRENCY_LIMIT * REDUCE_CHUNK_SIZE);
-    process.stdout.write(`\r   Assigning Clusters: ${renderProgressBar(Math.min(i + CONCURRENCY_LIMIT * REDUCE_CHUNK_SIZE, responses.length), responses.length)}`);
-
-    const chunkPromises = [];
-    for (let j = 0; j < batch.length; j += REDUCE_CHUNK_SIZE) {
-      const chunk = batch.slice(j, j + REDUCE_CHUNK_SIZE);
-      const prompt = buildAssignChunkPrompt({
-        topicText,
-        categoriesList,
-        chunkCount: chunk.length,
-        answersList: JSON.stringify(
-          chunk.map((r) => ({ id: r.personaId, text: r.text })),
-          null,
-          2
-        ),
-      });
-
-      chunkPromises.push(
-        callLMStudioWithRetry<AssignClustersChunkResult>(
-          prompt,
-          MODEL_SMALL_PARALLEL,
-          0,
-          2000,
-          1,           // explicit: 1 attempt is intentional for Reduce speed
-          debugLabel,
-          assignClustersChunkSchema,
-          debugSubDir
-        ).then(res => res.data).catch(() => {
-          // Fallback: assign all responses in this chunk to wildcard
-          return {
-            assignments: chunk.map(r => ({
-              personaId: r.personaId,
-              assignedCategory: "wildcard",
-            }))
-          };
-        })
-      );
-    }
-
-    const chunkResults = await Promise.all(chunkPromises);
-    for (const res of chunkResults) {
-      assignmentsResult.push(...res.assignments);
-    }
+  // Build all chunk task thunks upfront
+  const chunks: typeof responses[number][][] = [];
+  for (let j = 0; j < responses.length; j += REDUCE_CHUNK_SIZE) {
+    chunks.push(responses.slice(j, j + REDUCE_CHUNK_SIZE));
   }
 
-  console.log(); // New line after progress bar
+  const chunkTasks = chunks.map((chunk) => async (): Promise<AssignClustersChunkResult> => {
+    const prompt = buildAssignChunkPrompt({
+      topicText,
+      categoriesList,
+      chunkCount: chunk.length,
+      answersList: JSON.stringify(
+        chunk.map((r) => ({ id: r.personaId, text: r.text })),
+        null,
+        2,
+      ),
+    });
+    return callLMStudioWithRetry<AssignClustersChunkResult>(
+      prompt,
+      MODEL_SMALL_PARALLEL,
+      0,
+      2000,
+      1,
+      debugLabel,
+      assignClustersChunkSchema,
+      debugSubDir,
+    )
+      .then((res) => res.data)
+      .catch((): AssignClustersChunkResult => ({
+        assignments: chunk.map((r) => ({
+          personaId: r.personaId,
+          assignedCategory: 'wildcard',
+        })),
+      }));
+  });
+
+  const chunkResults = await runWithConcurrency(chunkTasks, CONCURRENCY_LIMIT, (done, total) => {
+    // Scale progress back to response count for a meaningful bar
+    process.stdout.write(
+      `\r   Assigning Clusters: ${renderProgressBar(done * REDUCE_CHUNK_SIZE, responses.length)}`
+    );
+  });
+
+  console.log(); // newline after progress bar
+
+  for (const res of chunkResults) {
+    assignmentsResult.push(...res.assignments);
+  }
 
   // Aggregate chunk results into per-category persona buckets (pure function)
   const finalResult = aggregateAssignments(assignmentsResult, categories);
@@ -149,7 +146,7 @@ async function processTopic(
   topicText: string,
   providedCategories?: AnswerCategory[]
 ): Promise<SurveyResult> {
-  const debugSubDir = getNextDebugRunDir(topicId, DEBUG_BASE);
+  const debugSubDir = getNextDebugRunDir(topicId, DEBUG_OUTPUT_DIR);
   const rawPath = `${OUTPUT_RAW_DIR}/${topicId}.json`;
 
   const rawData = await loadJson<RawSurveyData>(rawPath);
@@ -203,7 +200,7 @@ async function processTopic(
   }
 
   return {
-    id: crypto.randomUUID(),
+    id: topicId,
     topicText: topicText,
     demographicName: rawData.demographicName,
     clusters,
@@ -228,8 +225,8 @@ async function main() {
     }
   } else if (runMissing) {
     topicsToProcess = topics.filter(topic => {
-      const rawExists = fs.existsSync(`${OUTPUT_RAW_DIR}/${topic.id}.json`);
-      const outputExists = fs.existsSync(`${OUTPUT_DIR}/${topic.id}.json`);
+      const rawExists = fileExists(`${OUTPUT_RAW_DIR}/${topic.id}.json`);
+      const outputExists = fileExists(`${OUTPUT_DIR}/${topic.id}.json`);
       return rawExists && !outputExists;
     });
     console.log(`Found ${topicsToProcess.length} topics with raw data but no clusterized output.`);

@@ -14,13 +14,13 @@
 *   npx tsx scripts/data-generation/enrichment.ts --missing
 *   npx tsx scripts/data-generation/enrichment.ts --limit 5
 */
-import fs from 'node:fs';
 import {
   MODEL_SMALL_PARALLEL,
   CONCURRENCY_LIMIT,
   OUTPUT_DIR,
   OUTPUT_RAW_DIR,
   DATA_DIR,
+  QUOTES_PER_CLUSTER,
 } from './config.js';
 import type {
   SurveyResult,
@@ -29,7 +29,7 @@ import type {
   RawSurveyData,
   Topic,
 } from './types.js';
-import { loadJson, writeJson, getNextVersionPath } from './utils/fs.js';
+import { loadJson, writeJson, getNextVersionPath, loadJsonSync, fileExists } from './utils/fs.js';
 import { callLMStudioWithRetry } from './utils/llm.js';
 import { parseCliArgs } from './utils/cli.js';
 import {
@@ -50,10 +50,7 @@ import {
   clusterQuoteJobSchema,
   wildcardQuoteJobSchema,
 } from './lib/prompts/quotes-prompts.js';
-
-// ─── Constants ────────────────────────────────────────────────────────────────
-
-const QUOTES_PER_CLUSTER = 2;
+import { runWithConcurrency } from './utils/concurrency.js';
 
 // ─── Sub-step A: Cluster Synonym Generation ───────────────────────────────────
 
@@ -146,28 +143,6 @@ async function enrichWildcardQuote(
   }
 }
 
-// ─── Pool utility ────────────────────────────────────────────────────────────
-
-/** Runs async tasks with max concurrency */
-async function runWithConcurrency<T>(
-  tasks: (() => Promise<T>)[],
-  concurrency: number
-): Promise<T[]> {
-  const results: T[] = new Array(tasks.length);
-  let index = 0;
-
-  async function worker() {
-    while (index < tasks.length) {
-      const i = index++;
-      results[i] = await tasks[i]();
-    }
-  }
-
-  const workers = Array.from({ length: Math.min(concurrency, tasks.length) }, () => worker());
-  await Promise.all(workers);
-  return results;
-}
-
 // ─── processTopic ─────────────────────────────────────────────────────────────
 
 async function processTopic(
@@ -175,7 +150,7 @@ async function processTopic(
 ): Promise<void> {
   // Load the latest clustered file
   const latestPath = `${OUTPUT_DIR}/${topicId}.json`;
-  if (!fs.existsSync(latestPath)) {
+  if (!fileExists(latestPath)) {
     console.warn(`   [SKIP] No clustered output found for topic "${topicId}". Run cluster.ts first.`);
     return;
   }
@@ -184,7 +159,7 @@ async function processTopic(
 
   // Load matching raw survey data for persona lookup
   const rawPath = `${OUTPUT_RAW_DIR}/${topicId}.json`;
-  if (!fs.existsSync(rawPath)) {
+  if (!fileExists(rawPath)) {
     console.warn(`   [SKIP] No raw survey data found for topic "${topicId}".`);
     return;
   }
@@ -251,14 +226,12 @@ async function main() {
     }
   } else if (runMissing) {
     topicsToProcess = topics.filter(topic => {
-      const outputExists = fs.existsSync(`${OUTPUT_DIR}/${topic.id}.json`);
+      const outputExists = fileExists(`${OUTPUT_DIR}/${topic.id}.json`);
       if (!outputExists) return false;
 
       // Check if the latest clustered file lacks enrichedAt
       try {
-        const data = JSON.parse(
-          fs.readFileSync(`${OUTPUT_DIR}/${topic.id}.json`, 'utf-8')
-        ) as Partial<SurveyResult>;
+        const data = loadJsonSync<Partial<SurveyResult>>(`${OUTPUT_DIR}/${topic.id}.json`);
         return !data.enrichedAt;
       } catch {
         return false;

@@ -6,8 +6,19 @@ export async function loadJson<T>(filepath: string): Promise<T> {
   return JSON.parse(content);
 }
 
+/** Synchronous variant of loadJson — use only when an async context is unavailable (e.g. inside Array.filter). */
+export function loadJsonSync<T>(filepath: string): T {
+  const content = fs.readFileSync(filepath, 'utf-8');
+  return JSON.parse(content) as T;
+}
+
 export function writeJson(filepath: string, data: unknown): void {
   fs.writeFileSync(filepath, JSON.stringify(data, null, 2));
+}
+
+/** Returns true if the file or directory at the given path exists. */
+export function fileExists(filepath: string): boolean {
+  return fs.existsSync(filepath);
 }
 
 export function ensureDir(dirpath: string): void {

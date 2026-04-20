@@ -11,7 +11,7 @@ import type {
   FlavorQuote,
   RawSurveyData,
 } from '../types.js';
-import type { SelectedPersona } from './prompts/quotes-prompts.js';
+import type { SelectedPersona } from '../types.js';
 
 // ─── selectPersonasForCluster ────────────────────────────────────────────────
 
