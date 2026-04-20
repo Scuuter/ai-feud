@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import path from 'node:path';
 import { loadJson } from '../../../scripts/data-generation/utils/fs.js';
-import type { Persona, Topic, RawSurveyData, RawResponse, FlavorQuote, AnswerCluster, WildCard, SurveyResultDocument, LLMResponse, QuoteResponse, ClusterResult } from '../../../scripts/data-generation/types.js';
+import type { Persona, Topic, RawSurveyData, RawResponse, FlavorQuote, AnswerCluster, WildCard, SurveyResult } from '../../../scripts/data-generation/types.js';
 
 const FIXTURES_DIR = path.join(process.cwd(), 'tests', 'fixtures');
 
@@ -25,8 +25,8 @@ describe('Contract: Topic', () => {
     expect(topics).toHaveLength(1);
     expect(topics[0]).toMatchObject({
       id: 'test-topic',
-      'prompt-ai': "What's the best food?",
-      'text-ui': "What's the best food?",
+      aiPrompt: "What's the best food?",
+      uiText: "What's the best food?",
       score: 100,
       tags: expect.arrayContaining(['food']),
     });

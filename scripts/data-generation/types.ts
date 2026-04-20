@@ -8,8 +8,8 @@ export interface Persona {
 
 export interface Topic {
   id: string;
-  "prompt-ai": string;
-  "text-ui": string;
+  aiPrompt: string;
+  uiText: string;
   score: number;
   tags: string[];
 }
@@ -35,6 +35,8 @@ export interface FlavorQuote {
 export interface AnswerCluster {
   text: string;
   score: number;
+  /** Persona IDs assigned to this cluster by the Reduce stage; used by enrichment.ts to generate targeted flavor quotes */
+  personaIds: string[];
   synonyms: string[];
   flavorQuotes: FlavorQuote[];
 }
@@ -45,7 +47,7 @@ export interface WildCard {
   flavorQuote: FlavorQuote;
 }
 
-export interface SurveyResultDocument {
+export interface SurveyResult {
   id: string;
   topicText: string;
   demographicName: string;
@@ -54,18 +56,10 @@ export interface SurveyResultDocument {
   tags?: string[];
 }
 
-export interface LLMResponse {
-  answer: string;
-}
 
-export interface QuoteResponse {
-  quote: string;
-}
 
-export interface ClusterResult {
-  clusters: Array<{
-    text: string;
-    personaIds: string[];
-  }>;
-  wildcardPersonaIds: string[];
+export interface AnswerCategory {
+  id: string;
+  uiText: string;
+  aiPromptName: string;
 }

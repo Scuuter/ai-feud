@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   MODEL_LARGE_REASONING,
   MODEL_SMALL_PARALLEL,
@@ -13,45 +14,29 @@ import {
 import {
   Topic,
   RawSurveyData,
-  SurveyResultDocument,
+  SurveyResult,
   AnswerCluster,
   WildCard,
+  AnswerCategory,
 } from "./types.js";
-import { loadJson, ensureDir, writeJson } from "./utils/fs.js";
+import { loadJson, ensureDir, writeJson, getNextVersionPath, getNextDebugRunDir } from "./utils/fs.js";
 import { callLMStudioWithRetry } from "./utils/llm.js";
 import { normalizeScoresTo100 } from "./lib/normalization.js";
+import { aggregateAssignments, type AggregateAssignmentsResult } from "./lib/aggregation.js";
 import { renderProgressBar } from "./utils/progress.js";
+import { parseCliArgs } from "./utils/cli.js";
 
-function getNextVersionPath(basePath: string): string {
-  if (!fs.existsSync(basePath)) return basePath;
-  const ext = path.extname(basePath);
-  const base = basePath.slice(0, -ext.length);
-  let v = 2;
-  while (fs.existsSync(`${base}-v${v}${ext}`)) {
-    v++;
-  }
-  return `${base}-v${v}${ext}`;
-}
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const DEBUG_BASE = path.join(__dirname, "../../output/debug");
 
-function getNextDebugRunDir(topicId: string): string {
-  // DEBUG_DIR is scripts/output/debug
-  const debugBase = path.join(process.cwd(), "scripts/output/debug");
-  ensureDir(debugBase);
-  let run = 1;
-  while (fs.existsSync(path.join(debugBase, `${topicId}-run-${run}`))) {
-    run++;
-  }
-  const runDir = `${topicId}-run-${run}`;
-  ensureDir(path.join(debugBase, runDir));
-  return runDir;
-}
 
-const extractConceptsSchema = {
-  name: "extract_concepts",
+
+const extractCategoriesSchema = {
+  name: "extract_categories",
   schema: {
     type: "object",
     properties: {
-      concepts: {
+      categories: {
         type: "array",
         items: {
           type: "object",
@@ -66,7 +51,7 @@ const extractConceptsSchema = {
         maxItems: 8
       }
     },
-    required: ["concepts"]
+    required: ["categories"]
   }
 };
 
@@ -91,14 +76,10 @@ const assignClustersChunkSchema = {
   }
 };
 
-export interface ExtractedConcept {
-  id: string;
-  uiText: string;
-  aiPromptName: string;
-}
 
-interface ExtractConceptsResult {
-  concepts: ExtractedConcept[];
+
+interface ExtractCategoriesResult {
+  categories: AnswerCategory[];
 }
 
 interface AssignClustersChunkResult {
@@ -108,15 +89,9 @@ interface AssignClustersChunkResult {
   }>;
 }
 
-interface AssignClustersResult {
-  clusters: Array<{
-    concept: ExtractedConcept;
-    personaIds: string[];
-  }>;
-  wildcardPersonaIds: string[];
-}
 
-async function extractConcepts(rawData: RawSurveyData, topicText: string, debugSubDir?: string): Promise<ExtractedConcept[]> {
+
+async function extractCategories(rawData: RawSurveyData, topicText: string, debugSubDir?: string): Promise<AnswerCategory[]> {
   const answersList = rawData.rawResponses.map(r => r.text).join('\n');
 
   const prompt = `You are a semantic analyst for a "Family Feud" style game show. 
@@ -125,10 +100,10 @@ TOPIC: "${topicText}"
 RAW ANSWERS:
 ${answersList}
 
-TASK: Analyze the ${rawData.rawResponses.length} answers and extract 5 to 8 core concepts that represent the most frequent semantic themes.
-GOAL: Maximize coverage so that most raw answers fit into one of these concepts. Ensure concepts do not overlap.
+TASK: Analyze the ${rawData.rawResponses.length} answers and extract 5 to 8 core categories that represent the most frequent semantic themes.
+GOAL: Maximize coverage so that most raw answers fit into one of these categories. Ensure categories do not overlap.
 
-For each concept, provide:
+For each category, provide:
 1. "id": A strict, lowercase-kebab-case identifier (e.g., "locked-doors").
 2. "uiText": A punchy, flavorful name for the game board (e.g., "Checking the Locks!").
 3. "aiPromptName": A broad description of the semantic bucket to help another AI map synonymous answers (e.g., "Verifying that doors, windows, or gates are locked and secure").
@@ -136,23 +111,23 @@ For each concept, provide:
 Output ONLY valid JSON according to the schema.`;
 
   const debugLabel = 'cluster_map_' + (debugSubDir || 'unknown');
-  const { data: result } = await callLMStudioWithRetry<ExtractConceptsResult>(
+  const { data: result } = await callLMStudioWithRetry<ExtractCategoriesResult>(
     prompt,
     MODEL_LARGE_REASONING,
     0.7,
     16000,
     1,
     debugLabel,
-    extractConceptsSchema,
+    extractCategoriesSchema,
     debugSubDir
   );
 
-  return result.concepts;
+  return result.categories;
 }
 
-async function assignClusters(rawData: RawSurveyData, concepts: ExtractedConcept[], topicText: string, debugSubDir?: string): Promise<AssignClustersResult> {
-  const reducedConcepts = [
-    ...concepts.map(c => ({
+async function assignClusters(rawData: RawSurveyData, categories: AnswerCategory[], topicText: string, debugSubDir?: string): Promise<AggregateAssignmentsResult> {
+  const reducedCategories = [
+    ...categories.map(c => ({
       id: c.id,
       description: c.aiPromptName
     })),
@@ -161,7 +136,7 @@ async function assignClusters(rawData: RawSurveyData, concepts: ExtractedConcept
       description: "Use this ONLY if the answer is completely nonsensical, unrelated, or a literal outlier that fits zero other categories."
     }
   ];
-  const conceptsList = JSON.stringify(reducedConcepts, null, 2);
+  const categoriesList = JSON.stringify(reducedCategories, null, 2);
   const responses = rawData.rawResponses;
   const assignmentsResult: AssignClustersChunkResult["assignments"] = [];
 
@@ -186,7 +161,7 @@ TOPIC: "${topicText}"
 TASK: Map each of the ${chunk.length} personaIds to the MOST SPECIFIC category "id" from the list below.
 
 CATEGORIES:
-${conceptsList}
+${categoriesList}
 
 STRICT RULES:
 1. You MUST choose an exact "id" from the Categories array for assignedCategory.
@@ -204,17 +179,16 @@ ${answersList}`;
           MODEL_SMALL_PARALLEL,
           0,
           2000,
-          undefined,
+          1,           // explicit: 1 attempt is intentional for Reduce speed
           debugLabel,
           assignClustersChunkSchema,
           debugSubDir
-        ).then(res => res.data).catch(err => {
-          // Fallback logic for unparseable chunk
+        ).then(res => res.data).catch(() => {
+          // Fallback: assign all responses in this chunk to wildcard
           return {
             assignments: chunk.map(r => ({
               personaId: r.personaId,
               assignedCategory: "wildcard",
-              isWildcard: true
             }))
           };
         })
@@ -229,27 +203,8 @@ ${answersList}`;
 
   console.log(); // New line after progress bar
 
-  // Aggregate chunk results into the final AssignClustersResult
-  const finalResult: AssignClustersResult = {
-    clusters: concepts.map(c => ({ concept: c, personaIds: [] })),
-    wildcardPersonaIds: []
-  };
-
-  const validConceptIds = new Set(concepts.map(c => c.id));
-
-  for (const assignment of assignmentsResult) {
-    if (assignment.assignedCategory === "wildcard" || !validConceptIds.has(assignment.assignedCategory)) {
-      finalResult.wildcardPersonaIds.push(assignment.personaId);
-    } else {
-      const cluster = finalResult.clusters.find(c => c.concept.id === assignment.assignedCategory);
-      if (cluster) {
-        cluster.personaIds.push(assignment.personaId);
-      } else {
-        // Fallback for hallucinated category
-        finalResult.wildcardPersonaIds.push(assignment.personaId);
-      }
-    }
-  }
+  // Aggregate chunk results into per-category persona buckets (pure function)
+  const finalResult = aggregateAssignments(assignmentsResult, categories);
 
   return finalResult;
 }
@@ -257,26 +212,26 @@ ${answersList}`;
 async function processTopic(
   topicId: string,
   topicText: string,
-  providedConcepts?: ExtractedConcept[]
-): Promise<SurveyResultDocument> {
-  const debugSubDir = getNextDebugRunDir(topicId);
+  providedCategories?: AnswerCategory[]
+): Promise<SurveyResult> {
+  const debugSubDir = getNextDebugRunDir(topicId, DEBUG_BASE);
   const rawPath = `${OUTPUT_RAW_DIR}/${topicId}.json`;
 
   const rawData = await loadJson<RawSurveyData>(rawPath);
   console.log(`Processing ${topicId} with ${rawData.rawResponses.length} responses`);
 
-  let concepts: ExtractedConcept[];
-  if (providedConcepts) {
-    concepts = providedConcepts;
-    console.log(`Using provided concepts:`, concepts);
+  let categories: AnswerCategory[];
+  if (providedCategories) {
+    categories = providedCategories;
+    console.log(`Using provided categories:`, categories);
   } else {
-    console.log(`1. Stage 1 (Map): Extracting Core Concepts...`);
-    concepts = await extractConcepts(rawData, topicText, debugSubDir);
-    console.log(`   -> Extracted ${concepts.length} concepts:`, concepts);
+    console.log(`1. Stage 1 (Map): Extracting Core Categories...`);
+    categories = await extractCategories(rawData, topicText, debugSubDir);
+    console.log(`   -> Extracted ${categories.length} categories:`, categories);
   }
 
-  console.log(`2. Stage 2 (Reduce): Assigning IDs to Concepts... (This takes ~15-30s)`);
-  const clusterResult = await assignClusters(rawData, concepts, topicText, debugSubDir);
+  console.log(`2. Stage 2 (Reduce): Assigning IDs to Categories... (This takes ~15-30s)`);
+  const clusterResult = await assignClusters(rawData, categories, topicText, debugSubDir);
   console.log(`   -> Mapped into ${clusterResult.clusters.length} clusters and ${clusterResult.wildcardPersonaIds.length} wildcards`);
 
   console.log(`3. Stage 3 (Math): Normalizing scores to 100...`);
@@ -287,8 +242,9 @@ async function processTopic(
   for (let i = 0; i < clusterResult.clusters.length; i++) {
     const cluster = clusterResult.clusters[i];
     clusters.push({
-      text: cluster.concept.uiText,
+      text: cluster.category.uiText,
       score: normalizedScores[i],
+      personaIds: cluster.personaIds,  // preserved for enrichment.ts
       synonyms: [],
       flavorQuotes: [], // To be populated by enrichment.ts
     });
@@ -316,18 +272,9 @@ async function processTopic(
 }
 
 async function main() {
-  const args = process.argv.slice(2);
-  const limit = args.includes("--limit")
-    ? parseInt(args[args.indexOf("--limit") + 1], 10)
-    : undefined;
+  const { limit, topicId: specificTopicId, runMissing, rawCategories } = parseCliArgs(process.argv.slice(2));
 
-  const topicArg = args.indexOf("--topic");
-  const specificTopicId = topicArg !== -1 ? args[topicArg + 1] : undefined;
-
-  const conceptsArg = args.indexOf("--concepts");
-  const providedConcepts = conceptsArg !== -1 
-    ? JSON.parse(args[conceptsArg + 1])
-    : undefined;
+  const parsedCategories = rawCategories ? JSON.parse(rawCategories) : undefined;
 
   const topics = await loadJson<Topic[]>(`${DATA_DIR}/topics-v1.json`);
   ensureDir(OUTPUT_DIR);
@@ -339,8 +286,17 @@ async function main() {
       console.error(`Error: Topic ID "${specificTopicId}" not found in topics-v1.json`);
       process.exit(1);
     }
-  } else if (limit) {
-    topicsToProcess = topics.slice(0, limit);
+  } else if (runMissing) {
+    topicsToProcess = topics.filter(topic => {
+      const rawExists = fs.existsSync(`${OUTPUT_RAW_DIR}/${topic.id}.json`);
+      const outputExists = fs.existsSync(`${OUTPUT_DIR}/${topic.id}.json`);
+      return rawExists && !outputExists;
+    });
+    console.log(`Found ${topicsToProcess.length} topics with raw data but no clusterized output.`);
+  }
+
+  if (limit) {
+    topicsToProcess = topicsToProcess.slice(0, limit);
   }
 
   console.log(`Processing ${topicsToProcess.length} topics...`);
@@ -349,11 +305,11 @@ async function main() {
     console.log(`\n=== Processing topic: ${topic.id} ===`);
 
     try {
-      const concepts = Array.isArray(providedConcepts) 
-        ? providedConcepts 
-        : (providedConcepts?.concepts || undefined);
+      const categories = Array.isArray(parsedCategories)
+        ? parsedCategories
+        : (parsedCategories?.categories || undefined);
 
-      const result = await processTopic(topic.id, topic["text-ui"], concepts);
+      const result = await processTopic(topic.id, topic.uiText, categories);
       const outputPath = getNextVersionPath(`${OUTPUT_DIR}/${topic.id}.json`);
       writeJson(outputPath, result);
       console.log(`Saved to ${outputPath}`);

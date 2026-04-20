@@ -64,20 +64,21 @@ To prevent cognitive overload, decouple concerns, and preserve LLM context, the 
 
 #### Step 2: Clustering (`cluster.ts` - Map-Reduce Semantic Pass)
 **Goal:** Group the 100 raw strings into core concepts using a map-reduce flow.
-1. **Stage 1 (Map - Concept Extraction):** Pass the 100 responses and the *original topic context* to the `MODEL_LARGE_REASONING` LLM to extract 5-8 core, punchy concepts. No ID tracking is done here.
-2. **Stage 2 (Reduce - Assignment):** Using chunking (e.g., 10 responses per prompt), parallelize requests to the `MODEL_SMALL_PARALLEL` LLM to map each of the 100 raw answers to one of the identified clusters. Any failures or unparseable JSON falls back to the `wildcards` array.
+1. **Stage 1 (Map - Category Extraction):** Pass the 100 responses and the *original topic context* to the `MODEL_LARGE_REASONING` LLM to extract 5-8 core, punchy categories. No ID tracking is done here.
+2. **Stage 2 (Reduce - Assignment):** Using chunking (e.g., 10 responses per prompt), parallelize requests to the `MODEL_SMALL_PARALLEL` LLM to map each of the 100 raw answers to one of the identified categories. Any failures or unparseable JSON falls back to the `wildcards` array.
 3. **Stage 3 (Math Normalization):** Convert raw counts to a perfect 100-point board using the Largest Remainder Method:
    * Calculate base scores: `Math.floor((Raw Count / Total Clustered) * 100)`.
    * Sum base scores and distribute remaining points to clusters with the highest decimal remainders until the total is exactly 100. (Wildcards are saved separately and do not count towards the 100 score).
+   * **Each `AnswerCluster` in the saved document must include `personaIds: string[]`** — the list of persona IDs the Reduce stage assigned to that concept. This field is required by `enrichment.ts`.
 
 #### Step 3: Enrichment (`enrichment.ts` - Synonyms & Flavor Pass)
 **Goal:** Generate game-show synonyms and fetch targeted quotes using the fast Survey model.
 1. **Synonym Generation:** Pass the normalized clusters through the LLM to generate 3-5 valid game-show synonyms per answer.
 2. **Targeted Quote Generation:**
-   * Iterate through the finalized `clusters`. Pick `QUOTES_PER_CLUSTER` random personas from that cluster's assigned raw answers.
+   * Iterate through the finalized `clusters`. **Read `personaIds` directly from each cluster document** (populated by `cluster.ts`). Pick `QUOTES_PER_CLUSTER` random persona IDs from that field — do not re-read the raw survey file.
    * Iterate through all `wildcards`.
    * Send isolated API calls back to the Surveyor model for each selected persona to generate a flavor quote.
-3. **Save:** Output the final compiled `SurveyResultDocument`.
+3. **Save:** Output the final compiled `SurveyResult`.
 
 ---
 
@@ -85,12 +86,18 @@ To prevent cognitive overload, decouple concerns, and preserve LLM context, the 
 
 For the Implementer/TDD agents, adhere to the following logic boundaries:
 
-1. **`survey.ts` & `cluster.ts`**:
+1. **`survey.ts`, `cluster.ts` & `enrichment.ts`**:
    * Implement as separate executable scripts (e.g., `npx tsx scripts/data-generation/survey.ts`).
+   * **All pipeline scripts share CLI flags via `utils/cli.ts`** — the single shared entrypoint for `--limit`, `--topic`, `--missing`, and `--categories` parsing. Import `parseCliArgs` from there; do not duplicate arg parsing inline.
+     * `--limit N` and `--topic ID` are supported by all three scripts.
+     * `--missing` is supported by `cluster.ts` and `enrichment.ts`.
+     * `--categories JSON` is cluster-specific.
    * Use native `fetch` API to communicate with `http://127.0.0.1:1234/v1/chat/completions`.
    * **Crucial:** Use Server-Sent Events (SSE) streaming (`stream: true`) to maintain visibility into model execution and avoid silent timeouts on long generations.
    * Implement robust retry logic (up to `MAX_RETRIES`) for JSON parsing failures or network drops.
-   
+
 2. **Unit Testing (`/tests/lib/data-pipeline/`)**:
    * Write tests for the **Largest Remainder Normalization** function *before* implementation. Pass mock arrays like `[33, 33, 34]` vs `[10, 10, 80]` out of `N=75` to prove the math always scales to exactly 100 points.
-   * Write tests mapping the hybridized LLM outputs (cluster data + newly generated quotes) into standard `SurveyResultDocument` structures.
+   * Write tests mapping the hybridized LLM outputs (cluster data + newly generated quotes) into standard `SurveyResult` structures.
+   * Write tests for `aggregateAssignments` (in `lib/aggregation.ts`) covering valid, wildcard, hallucinated, and empty assignment cases.
+   * Write tests for `parseCliArgs` (in `utils/cli.ts`) covering all flags and edge cases.

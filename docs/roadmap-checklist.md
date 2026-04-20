@@ -9,7 +9,7 @@
 - [x] **Implement `survey.ts`:** Write a Node.js script in `/scripts/data-generation/` to take a list of `Topic`s and a `Demographic`, pinging the LLM to output 100 unique `Persona` responses.
 - [x] **Implement `cluster.ts`:** Write a multi-stage map-reduce script to extract 5-8 core concepts using the topic context, map all responses to clusters or wildcards, and normalize scores to sum to 100.
 - [ ] **Implement `enrichment.ts`:** Write an additional script to pass generated clusters through a fast LLM to generate 3-5 valid game-show synonyms per answer, and generate a flavor quote for each cluster and wildcard by picking a unique persona.
-- [ ] **Format Output:** Ensure the final pipeline outputs valid JSON adhering exactly to the `SurveyResultDocument` interface (`topic`, `demographicName`, `clusters`, `wildcards`).
+- [ ] **Format Output:** Ensure the final pipeline outputs valid JSON adhering exactly to the `SurveyResult` interface (`topic`, `demographicName`, `clusters`, `wildcards`).
 - [ ] **Data Generation:** Run the pipeline to generate **50 MVP questions** for initial testing and gameplay validation.
 
 ### **Epic 2. Core Game Logic (Layer B - Pure TypeScript)**
@@ -35,7 +35,7 @@
 ### **Epic 4. Backend & Database Integration**
 - [ ] **Setup MongoDB Atlas:** Initialize the NoSQL document store.
 - [ ] **Database Seeding:** Create an admin script to push our 50 locally generated `survey_results` (Layer A) into the MongoDB collection.
-- [ ] **API Route - Fetch Data:** Create an Edge function at `/src/app/api/survey/route.ts` to fetch a random `SurveyResultDocument` from MongoDB to initialize the game.
+- [ ] **API Route - Fetch Data:** Create an Edge function at `/src/app/api/survey/route.ts` to fetch a random `SurveyResult` from MongoDB to initialize the game.
 
 ---
 
@@ -57,5 +57,5 @@
 
 ### **Epic 7. Data Automation & CI/CD**
 - [ ] **GitHub Actions Setup:** Create a workflow (`.github/workflows/data-sync.yml`) that triggers on merges to the `main` branch.
-- [ ] **Data Validation Step:** Run Vitest over the generated Layer A JSON outputs to ensure they strictly match our `SurveyResultDocument` interface.
+- [ ] **Data Validation Step:** Run Vitest over the generated Layer A JSON outputs to ensure they strictly match our `SurveyResult` interface.
 - [ ] **MongoDB Seeding Script:** Write a secure script that reads the validated JSON files in `/scripts/data-generation/output` and upserts them into our MongoDB Atlas production cluster using `MONGODB_URI` secrets.

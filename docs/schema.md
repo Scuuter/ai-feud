@@ -11,7 +11,7 @@ This document defines the single source of truth for the MongoDB NoSQL database 
 This is the primary document fetched by the game client to run a Round. It is lightweight and only contains what the frontend needs to render the board, validate guesses, and show flavor text.
 
 ```typescript
-export interface SurveyResultDocument {  
+export interface SurveyResult {  
   /** Unique identifier (MongoDB ObjectId string) */  
   id: string;   
     
@@ -32,6 +32,8 @@ export interface SurveyResultDocument {
 }
 
 export interface WildCard {
+  /** The identity of the AI that gave this response (used for enrichment) */
+  personaId: string;
   /** Valid variations and typos for Exact/Fuzzy matching */  
   synonyms: string[];  
   /** Curated quotes from specific personas to show in the UI for flavor */  
@@ -43,6 +45,8 @@ export interface AnswerCluster {
   text: string;  
   /** The frequency (number of AI personas out of 100 that gave this answer) */  
   score: number;  
+  /** Persona IDs assigned to this cluster by the Reduce stage; used by enrichment.ts to generate targeted flavor quotes */
+  personaIds: string[];
   /** Valid variations and typos for Exact/Fuzzy matching */  
   synonyms: string[];  
   /** Curated quotes from specific personas to show in the UI for flavor */  
@@ -63,7 +67,7 @@ export interface FlavorQuote {
 
 ```typescript
 export interface RawPipelineDocument {  
-  surveyResultId: string; // References the SurveyResultDocument  
+  surveyResultId: string; // References the SurveyResult  
   topicId: string;  
   demographicName: string;  
   /** All 100 raw unedited responses from the LLM generation step */  
@@ -99,7 +103,7 @@ export interface Strike {
 
 export interface Round {  
   /** The active survey data fetched from MongoDB */  
-  activeSurvey: SurveyResultDocument;  
+  activeSurvey: SurveyResult;  
   /** Array of clusters the player has successfully guessed */  
   revealedClusters: AnswerCluster[];  
   /** Discrete penalty objects recorded when guesses fail validation */  
