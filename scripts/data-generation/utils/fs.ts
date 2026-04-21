@@ -28,6 +28,17 @@ export function ensureDir(dirpath: string): void {
 }
 
 /**
+ * Builds a canonical output filename: `<topicId>-<demographic>-<version>.json`
+ *
+ * @param topicId    - e.g. "best-pizza-topping"
+ * @param demographic - e.g. "game-of-thrones" or "demo-v1"
+ * @param version    - e.g. "v1"
+ */
+export function buildOutputFilename(topicId: string, demographic: string, version: string): string {
+  return `${topicId}-${demographic}-${version}.json`;
+}
+
+/**
  * Returns a versioned file path (e.g. foo-v2.json, foo-v3.json) to avoid
  * overwriting an existing file. If basePath does not yet exist, returns basePath as-is.
  */

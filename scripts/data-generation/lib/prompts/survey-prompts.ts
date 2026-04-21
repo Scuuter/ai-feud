@@ -6,6 +6,8 @@
 export interface SurveyAnswerInput {
   personaDescription: string;
   topicAiPrompt: string;
+  /** Optional demographic context, e.g. "game-of-thrones". Included in the prompt when provided. */
+  demographicContext?: string;
 }
 
 /**
@@ -13,7 +15,10 @@ export interface SurveyAnswerInput {
  * Pure: no imports from config.ts or any I/O module.
  */
 export function buildSurveyPrompt(input: SurveyAnswerInput): string {
-  return `You are ${input.personaDescription}.
+  const demographicLine = input.demographicContext
+    ? `\nCONTEXT: You are a character from the "${input.demographicContext}" universe.\n`
+    : '';
+  return `You are ${input.personaDescription}.${demographicLine}
 
 TOPIC: "${input.topicAiPrompt}"
 

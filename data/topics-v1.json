@@ -1,255 +1,423 @@
 [
   {
+    "id": "wake-up-wrong-place",
+    "aiPrompt": "Name the worst possible place to wake up in.",
+    "uiText": "What is the absolute worst place to wake up in?",
+    "score": 10,
+    "tags": [
+      "location",
+      "mundane",
+      "international",
+      "family-friendly"
+    ]
+  },
+  {
     "id": "suspicious-activity-3am",
     "aiPrompt": "What is a perfectly normal activity that looks incredibly suspicious at 3 AM?",
     "uiText": "What normal activity looks incredibly suspicious at 3:00 AM?",
     "score": 10,
-    "tags": ["mundane", "international", "weird"]
+    "tags": [
+      "mundane",
+      "international",
+      "weird"
+    ]
   },
   {
     "id": "dragon-weird-hoard",
     "aiPrompt": "Name something mundane a dragon might hoard instead of gold.",
     "uiText": "What perfectly mundane item is a confused dragon hoarding instead of gold?",
     "score": 10,
-    "tags": ["fantasy", "weird", "international", "family-friendly", "mundane"]
+    "tags": [
+      "fantasy",
+      "weird",
+      "international",
+      "family-friendly",
+      "mundane"
+    ]
   },
   {
     "id": "portal-hell-location",
-    "aiPrompt": "Name the most inconvenient location to accidentally open a portal to the underworld.",
+    "aiPrompt": "Name the most inconvenient location to accidentally open a portal to hell.",
     "uiText": "Where is the absolute most inconvenient place to accidentally open a portal to hell?",
     "score": 10,
-    "tags": ["fantasy", "location", "weird", "international"]
+    "tags": [
+      "fantasy",
+      "location",
+      "weird",
+      "international"
+    ]
   },
   {
     "id": "weapon-wizard",
     "aiPrompt": "Name a weapon a wizard would use if they lost their wand",
     "uiText": "A wizard just lost their wand. What is their backup weapon?",
     "score": 9,
-    "tags": ["fantasy", "family-friendly", "international", "weird"]
+    "tags": [
+      "fantasy",
+      "family-friendly",
+      "international",
+      "weird"
+    ]
   },
   {
     "id": "pretend-sophisticated",
     "aiPrompt": "Name something people pretend to like to seem sophisticated",
     "uiText": "What do people pretend to enjoy just to look sophisticated?",
     "score": 9,
-    "tags": ["mundane", "cultural-specific"]
+    "tags": [
+      "mundane",
+      "cultural-specific"
+    ]
   },
   {
     "id": "elevator-animal-trap",
     "aiPrompt": "Name an animal you would not want to be trapped in an elevator with",
     "uiText": "Stuck in an elevator! What's the worst animal to be trapped with?",
     "score": 9,
-    "tags": ["weird", "family-friendly", "international", "animal", "location"]
+    "tags": [
+      "weird",
+      "family-friendly",
+      "international",
+      "animal",
+      "location"
+    ]
   },
   {
     "id": "neighbor-knock-2am",
     "aiPrompt": "Name a reason your neighbor might knock on your door at 2 AM",
     "uiText": "It's 2:00 AM. Your neighbor is frantically knocking. Why?",
     "score": 9,
-    "tags": ["mundane", "international", "weird"]
+    "tags": [
+      "mundane",
+      "international",
+      "weird"
+    ]
   },
   {
     "id": "drop-public-toilet",
     "aiPrompt": "What is the absolute worst thing to accidentally drop in a public toilet?",
     "uiText": "What is the absolute worst thing to drop in a public toilet?",
     "score": 9,
-    "tags": ["mundane", "weird", "international", "location"]
+    "tags": [
+      "mundane",
+      "weird",
+      "international",
+      "location"
+    ]
   },
   {
     "id": "rudest-talking-animal",
     "aiPrompt": "If animals could talk, which species would definitely be the rudest?",
     "uiText": "If animals could talk, which one would be the absolute rudest?",
     "score": 9,
-    "tags": ["weird", "family-friendly", "international", "animal"]
+    "tags": [
+      "weird",
+      "family-friendly",
+      "international",
+      "animal"
+    ]
   },
   {
     "id": "running-business-suit",
     "aiPrompt": "Give me a reason why someone might be running at full speed in a business suit.",
     "uiText": "Someone is sprinting down the street in a full suit. Why?",
     "score": 9,
-    "tags": ["mundane", "weird", "international"]
+    "tags": [
+      "mundane",
+      "weird",
+      "international"
+    ]
   },
   {
     "id": "ghost-first-haunt",
     "aiPrompt": "If you were a ghost, where is the first place you would haunt just for fun?",
     "uiText": "You just became a ghost. Where are you haunting first?",
     "score": 9,
-    "tags": ["fantasy", "family-friendly", "international", "location"]
+    "tags": [
+      "fantasy",
+      "family-friendly",
+      "international",
+      "location"
+    ]
   },
   {
     "id": "romantic-dark-alley",
     "aiPrompt": "Tell me a phrase that sounds romantic until it's whispered in a dark alley.",
     "uiText": "What phrase sounds romantic, until whispered in a dark alley?",
     "score": 9,
-    "tags": ["weird", "international", "location"]
+    "tags": [
+      "weird",
+      "international",
+      "location"
+    ]
   },
   {
     "id": "velvet-box-not-ring",
     "aiPrompt": "Besides a ring, what might someone pull out of a small velvet box?",
     "uiText": "Besides a ring, what could someone pull from a tiny velvet box?",
     "score": 9,
-    "tags": ["mundane", "international", "weird"]
+    "tags": [
+      "mundane",
+      "international",
+      "weird"
+    ]
   },
   {
     "id": "pet-book-title",
     "aiPrompt": "If your pet wrote a book about you, what would the title be?",
     "uiText": "Your pet just wrote a book about you. What's the title?",
     "score": 9,
-    "tags": ["weird", "family-friendly", "international", "animal"]
+    "tags": [
+      "weird",
+      "family-friendly",
+      "international",
+      "animal"
+    ]
   },
   {
     "id": "worst-toothpaste-flavor",
     "aiPrompt": "Fill in the blank: The worst flavor for a toothpaste would be _______.",
     "uiText": "Fill in the blank: The absolute worst toothpaste flavor is _______.",
     "score": 9,
-    "tags": ["weird", "family-friendly", "international"]
+    "tags": [
+      "weird",
+      "family-friendly",
+      "international"
+    ]
   },
   {
     "id": "unacceptable-elevator-stop",
     "aiPrompt": "Give me a completely unacceptable reason to hit the emergency stop button on an elevator.",
     "uiText": "What is a completely unacceptable reason to stop an elevator?",
     "score": 9,
-    "tags": ["weird", "international", "location"]
+    "tags": [
+      "weird",
+      "international",
+      "location"
+    ]
   },
   {
     "id": "annoying-superpower",
     "aiPrompt": "Tell me a superpower that would actually be incredibly annoying in real life.",
     "uiText": "What superpower would actually be incredibly annoying?",
     "score": 9,
-    "tags": ["fantasy", "family-friendly", "international"]
+    "tags": [
+      "fantasy",
+      "family-friendly",
+      "international"
+    ]
   },
   {
     "id": "witch-backup-animal",
     "aiPrompt": "Name an animal a witch would use as a familiar if she ran out of black cats.",
     "uiText": "A witch just ran out of black cats. What animal is her backup familiar?",
     "score": 9,
-    "tags": ["fantasy", "animal", "weird", "international", "family-friendly"]
+    "tags": [
+      "fantasy",
+      "animal",
+      "weird",
+      "international",
+      "family-friendly"
+    ]
   },
   {
     "id": "cursed-garage-sale",
     "aiPrompt": "Name an everyday item that would be terrible if it was secretly cursed by a wizard.",
     "uiText": "You bought a cursed item at a garage sale. What everyday item is now ruining your life?",
     "score": 9,
-    "tags": ["fantasy", "weird", "international", "mundane"]
+    "tags": [
+      "fantasy",
+      "weird",
+      "international",
+      "mundane"
+    ]
   },
   {
     "id": "inappropriate-undress",
     "aiPrompt": "Name a place where it's inappropriate to take your clothes off",
     "uiText": "Where is the absolute worst place to take your clothes off?",
     "score": 8,
-    "tags": ["mundane", "international", "weird", "location"]
+    "tags": [
+      "mundane",
+      "international",
+      "weird",
+      "location"
+    ]
   },
   {
     "id": "sweating-small-room",
     "aiPrompt": "Name a reason you might be sweating heavily in a small room",
     "uiText": "You're sweating heavily in a tiny room. Why?",
     "score": 8,
-    "tags": ["mundane", "international", "weird", "location"]
+    "tags": [
+      "mundane",
+      "international",
+      "weird",
+      "location"
+    ]
   },
   {
     "id": "alien-invasion-hiding",
     "aiPrompt": "Name a place you would hide if an alien invaded your house",
     "uiText": "Aliens just broke into your house! Where do you hide?",
     "score": 8,
-    "tags": ["fantasy", "family-friendly", "international", "location"]
+    "tags": [
+      "fantasy",
+      "family-friendly",
+      "international",
+      "location"
+    ]
   },
   {
     "id": "sounds-dangerous-safe",
     "aiPrompt": "Name a normal household item that sounds dangerous but isn't",
     "uiText": "What household item sounds deadly, but is actually harmless?",
     "score": 8,
-    "tags": ["mundane", "family-friendly", "international"]
+    "tags": [
+      "mundane",
+      "family-friendly",
+      "international"
+    ]
   },
   {
     "id": "job-expected-lie",
     "aiPrompt": "Name a job where you are expected to lie to people",
     "uiText": "In what profession is lying basically in the job description?",
     "score": 8,
-    "tags": ["mundane", "international"]
+    "tags": [
+      "mundane",
+      "international"
+    ]
   },
   {
     "id": "dont-trust-many",
     "aiPrompt": "Fill in the blank: Don't trust a person who has too many _______.",
     "uiText": "Fill in the blank: Don't trust someone who has too many _______.",
     "score": 8,
-    "tags": ["mundane", "international"]
+    "tags": [
+      "mundane",
+      "international"
+    ]
   },
   {
     "id": "comfortable-accidental-sleep",
     "aiPrompt": "Besides a bed, where is the most comfortable place to accidentally fall asleep?",
     "uiText": "Besides a bed, where is the best place to accidentally fall asleep?",
     "score": 8,
-    "tags": ["mundane", "family-friendly", "international", "location"]
+    "tags": [
+      "mundane",
+      "family-friendly",
+      "international",
+      "location"
+    ]
   },
   {
     "id": "mirror-nobody-watching",
     "aiPrompt": "What is something you do in front of a mirror when you think nobody is watching?",
     "uiText": "What do you do in the mirror when you're home alone?",
     "score": 8,
-    "tags": ["mundane", "international"]
+    "tags": [
+      "mundane",
+      "international"
+    ]
   },
   {
     "id": "regret-thrift-store",
     "aiPrompt": "Tell me something you would instantly regret buying at a thrift store.",
     "uiText": "What is the worst possible thing to buy at a thrift store?",
     "score": 8,
-    "tags": ["mundane", "cultural-specific", "location"]
+    "tags": [
+      "mundane",
+      "cultural-specific",
+      "location"
+    ]
   },
   {
     "id": "excuse-terrible-party",
     "aiPrompt": "What is a polite excuse to leave a terrible party early?",
     "uiText": "What's your go-to polite excuse to escape a terrible party?",
     "score": 8,
-    "tags": ["mundane", "international", "location"]
+    "tags": [
+      "mundane",
+      "international",
+      "location"
+    ]
   },
   {
     "id": "hide-million-bathroom",
     "aiPrompt": "If you had to hide a million dollars in your bathroom, where would it go?",
     "uiText": "You have to hide $1,000,000 in your bathroom. Where?",
     "score": 8,
-    "tags": ["mundane", "international", "location"]
+    "tags": [
+      "mundane",
+      "international",
+      "location"
+    ]
   },
   {
     "id": "enthusiastic-window-jump",
     "aiPrompt": "Give me a reason someone might enthusiastically jump out of a window.",
     "uiText": "Why would someone enthusiastically jump out a window?",
     "score": 8,
-    "tags": ["weird", "international"]
+    "tags": [
+      "weird",
+      "international"
+    ]
   },
   {
     "id": "friend-help-hide",
     "aiPrompt": "Fill in the blank: A true friend will help you hide a _______.",
     "uiText": "Fill in the blank: A true friend will help you hide a _______.",
     "score": 8,
-    "tags": ["mundane", "weird", "international"]
+    "tags": [
+      "mundane",
+      "weird",
+      "international"
+    ]
   },
   {
     "id": "hate-find-shoe",
     "aiPrompt": "What is something you would hate to find inside your shoe?",
     "uiText": "What is the absolute worst thing to find in your shoe?",
     "score": 8,
-    "tags": ["mundane", "family-friendly", "international"]
+    "tags": [
+      "mundane",
+      "family-friendly",
+      "international"
+    ]
   },
   {
     "id": "look-ridiculous-anyway",
     "aiPrompt": "What is something people do that makes them look ridiculous, but they do it anyway?",
     "uiText": "What makes everyone look ridiculous, but we all do it anyway?",
     "score": 8,
-    "tags": ["mundane", "international"]
+    "tags": [
+      "mundane",
+      "international"
+    ]
   },
   {
     "id": "frantically-check-pockets",
     "aiPrompt": "Besides a phone, what is something you frantically check your pockets for?",
     "uiText": "Besides your phone, what do you frantically check your pockets for?",
     "score": 8,
-    "tags": ["mundane", "international"]
+    "tags": [
+      "mundane",
+      "international"
+    ]
   },
   {
     "id": "vampire-castle-location",
     "aiPrompt": "Name the worst possible location to build a vampire's castle.",
     "uiText": "What is the absolute worst location to build a vampire's castle?",
     "score": 8,
-    "tags": ["fantasy", "location", "weird", "international", "family-friendly"]
+    "tags": [
+      "fantasy",
+      "location",
+      "weird",
+      "international",
+      "family-friendly"
+    ]
   },
   {
     "id": "hide-pet-unicorn",
@@ -269,209 +437,321 @@
     "aiPrompt": "Name an insect or small animal a tiny, two-inch-tall knight would ride into battle.",
     "uiText": "A brave, two-inch-tall knight needs a steed. What animal does he ride into battle?",
     "score": 8,
-    "tags": ["fantasy", "animal", "family-friendly", "international"]
+    "tags": [
+      "fantasy",
+      "animal",
+      "family-friendly",
+      "international"
+    ]
   },
   {
     "id": "always-comes-back",
     "aiPrompt": "Name something you try to get rid of that always comes back",
     "uiText": "What's something you try to get rid of, but it always comes back?",
     "score": 7,
-    "tags": ["mundane", "family-friendly", "international"]
+    "tags": [
+      "mundane",
+      "family-friendly",
+      "international"
+    ]
   },
   {
     "id": "everyday-squeeze",
     "aiPrompt": "Name something everyday people squeeze",
     "uiText": "What is something people squeeze every single day?",
     "score": 7,
-    "tags": ["mundane", "family-friendly", "international"]
+    "tags": [
+      "mundane",
+      "family-friendly",
+      "international"
+    ]
   },
   {
     "id": "loud-noise-finishes",
     "aiPrompt": "Name something that makes a loud noise when it finally finishes",
     "uiText": "What makes a loud noise right when it finishes?",
     "score": 7,
-    "tags": ["mundane", "international"]
+    "tags": [
+      "mundane",
+      "international"
+    ]
   },
   {
     "id": "scream-roller-coaster",
     "aiPrompt": "Tell me something a person might scream while riding a roller coaster.",
     "uiText": "What do people always scream on a roller coaster?",
     "score": 7,
-    "tags": ["mundane", "family-friendly", "international", "location"]
+    "tags": [
+      "mundane",
+      "family-friendly",
+      "international",
+      "location"
+    ]
   },
   {
     "id": "animal-eat-starving",
     "aiPrompt": "Tell me an animal that accurately describes how you eat when you are starving.",
     "uiText": "What animal describes how you eat when you're starving?",
     "score": 7,
-    "tags": ["mundane", "family-friendly", "international", "animal"]
+    "tags": [
+      "mundane",
+      "family-friendly",
+      "international",
+      "animal"
+    ]
   },
   {
     "id": "clothing-screams-tourist",
     "aiPrompt": "Tell me a piece of clothing that immediately screams 'tourist.'",
     "uiText": "What piece of clothing immediately screams 'tourist'?",
     "score": 7,
-    "tags": ["mundane", "cultural-specific"]
+    "tags": [
+      "mundane",
+      "cultural-specific"
+    ]
   },
   {
     "id": "relieved-take-off",
     "aiPrompt": "What is something you are relieved to finally take off at the end of the day?",
     "uiText": "What is the best thing to finally take off at the end of the day?",
     "score": 7,
-    "tags": ["mundane", "international"]
+    "tags": [
+      "mundane",
+      "international"
+    ]
   },
   {
     "id": "lie-to-dentist",
     "aiPrompt": "What is something you constantly lie to your dentist about?",
     "uiText": "What do you constantly lie to your dentist about?",
     "score": 7,
-    "tags": ["mundane", "cultural-specific"]
+    "tags": [
+      "mundane",
+      "cultural-specific"
+    ]
   },
   {
     "id": "ghost-blushing-reason",
     "aiPrompt": "Name a reason a ghost might be blushing.",
     "uiText": "You just saw a ghost and it's blushing heavily. Why?",
     "score": 7,
-    "tags": ["fantasy", "weird", "international"]
+    "tags": [
+      "fantasy",
+      "weird",
+      "international"
+    ]
   },
   {
     "id": "werewolf-vacation-location",
     "aiPrompt": "Name a location a werewolf would absolutely hate going on vacation.",
     "uiText": "Where is the absolute worst place to send a werewolf on vacation?",
     "score": 7,
-    "tags": ["fantasy", "location", "family-friendly", "international"]
+    "tags": [
+      "fantasy",
+      "location",
+      "family-friendly",
+      "international"
+    ]
   },
   {
     "id": "man-show-off",
     "aiPrompt": "Name something a man has that he loves to show off to other men",
     "uiText": "What does a man love showing off to other men?",
     "score": 6,
-    "tags": ["mundane", "international"]
+    "tags": [
+      "mundane",
+      "international"
+    ]
   },
   {
     "id": "do-in-dark",
     "aiPrompt": "Name something you usually do in the dark",
     "uiText": "What's an activity usually reserved for the dark?",
     "score": 6,
-    "tags": ["mundane", "naughty", "international"]
+    "tags": [
+      "mundane",
+      "naughty",
+      "international"
+    ]
   },
   {
     "id": "shake-before-using",
     "aiPrompt": "Name something you must shake vigorously before using",
     "uiText": "What absolutely must be shaken before you use it?",
     "score": 6,
-    "tags": ["mundane", "international"]
+    "tags": [
+      "mundane",
+      "international"
+    ]
   },
   {
     "id": "partner-never-touch",
     "aiPrompt": "Fill in the blank: I would never let my partner touch my _______.",
     "uiText": "Fill in the blank: I would never let my partner touch my _______.",
     "score": 6,
-    "tags": ["mundane", "naughty"]
+    "tags": [
+      "mundane",
+      "naughty"
+    ]
   },
   {
     "id": "animal-knows-magic",
     "aiPrompt": "Name an animal that looks like it secretly knows how to do magic.",
     "uiText": "What normal animal looks like it secretly knows how to cast spells?",
     "score": 6,
-    "tags": ["fantasy", "animal", "family-friendly", "international"]
+    "tags": [
+      "fantasy",
+      "animal",
+      "family-friendly",
+      "international"
+    ]
   },
   {
     "id": "doctor-finger-in",
     "aiPrompt": "Name something a doctor might put a finger in",
     "uiText": "What is something a doctor might put a finger in?",
     "score": 5,
-    "tags": ["mundane", "naughty", "international"]
+    "tags": [
+      "mundane",
+      "naughty",
+      "international"
+    ]
   },
   {
     "id": "harder-colder",
     "aiPrompt": "Name something that gets harder the colder it gets",
     "uiText": "What gets harder as it gets colder?",
     "score": 5,
-    "tags": ["mundane", "naughty", "international"]
+    "tags": [
+      "mundane",
+      "naughty",
+      "international"
+    ]
   },
   {
     "id": "teenager-bathroom",
     "aiPrompt": "Name something you might catch a teenager doing in the bathroom",
     "uiText": "You walk in on a teenager in the bathroom. What are they doing?",
     "score": 5,
-    "tags": ["mundane", "naughty", "cultural-specific", "location"]
+    "tags": [
+      "mundane",
+      "naughty",
+      "cultural-specific",
+      "location"
+    ]
   },
   {
     "id": "professional-sees-naked",
     "aiPrompt": "Name a professional who frequently sees you completely naked",
     "uiText": "Which professional frequently sees you totally naked?",
     "score": 5,
-    "tags": ["mundane", "naughty", "international"]
+    "tags": [
+      "mundane",
+      "naughty",
+      "international"
+    ]
   },
   {
     "id": "big-lips-advantage",
     "aiPrompt": "Having big lips is an advantage when you're doing what",
     "uiText": "When is having big lips a huge advantage?",
     "score": 4,
-    "tags": ["mundane", "naughty"]
+    "tags": [
+      "mundane",
+      "naughty"
+    ]
   },
   {
     "id": "mouth-not-swallow",
     "aiPrompt": "Name something you put in your mouth but don't swallow",
     "uiText": "What goes in your mouth, but never gets swallowed?",
     "score": 4,
-    "tags": ["mundane", "naughty", "international"]
+    "tags": [
+      "mundane",
+      "naughty",
+      "international"
+    ]
   },
   {
     "id": "blow-on-it",
     "aiPrompt": "Name something you blow on",
     "uiText": "What is something you frequently blow on?",
     "score": 4,
-    "tags": ["mundane", "naughty", "international"]
+    "tags": [
+      "mundane",
+      "naughty",
+      "international"
+    ]
   },
   {
     "id": "have-to-mount",
     "aiPrompt": "Name something you have to mount",
     "uiText": "What is something you literally have to mount?",
     "score": 4,
-    "tags": ["mundane", "naughty", "international"]
+    "tags": [
+      "mundane",
+      "naughty",
+      "international"
+    ]
   },
   {
     "id": "sticky-residue",
     "aiPrompt": "Name something that leaves a strange, sticky residue",
     "uiText": "What leaves behind a really strange, sticky residue?",
     "score": 4,
-    "tags": ["mundane", "naughty"]
+    "tags": [
+      "mundane",
+      "naughty"
+    ]
   },
   {
     "id": "heavy-breathing-activity",
     "aiPrompt": "Name a physical activity that requires a lot of heavy breathing",
     "uiText": "What physical activity guarantees a lot of heavy breathing?",
     "score": 4,
-    "tags": ["mundane", "naughty"]
+    "tags": [
+      "mundane",
+      "naughty"
+    ]
   },
   {
     "id": "rub-make-shiny",
     "aiPrompt": "Name something you rub rapidly to make it shiny",
     "uiText": "What do you rub rapidly just to make it shiny?",
     "score": 4,
-    "tags": ["mundane", "naughty"]
+    "tags": [
+      "mundane",
+      "naughty"
+    ]
   },
   {
     "id": "pump-vigorously",
     "aiPrompt": "Name something you have to pump vigorously",
     "uiText": "What is something you must pump vigorously?",
     "score": 3,
-    "tags": ["mundane", "naughty"]
+    "tags": [
+      "mundane",
+      "naughty"
+    ]
   },
   {
     "id": "lick-to-work",
     "aiPrompt": "Name something you lick to make it work properly",
     "uiText": "What do you have to lick to make it work?",
     "score": 3,
-    "tags": ["mundane", "naughty"]
+    "tags": [
+      "mundane",
+      "naughty"
+    ]
   },
   {
     "id": "messy-wet-worth-it",
     "aiPrompt": "Name something that is messy, wet, and totally worth it",
     "uiText": "What is incredibly messy, super wet, but totally worth it?",
     "score": 3,
-    "tags": ["mundane", "naughty"]
+    "tags": [
+      "mundane",
+      "naughty"
+    ]
   }
 ]

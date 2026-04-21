@@ -40,3 +40,6 @@ export const QUOTES_PER_CLUSTER = parseInt(process.env.QUOTES_PER_CLUSTER ?? "2"
 
 /** Demographic identifier written into RawSurveyData by survey.ts */
 export const DEMOGRAPHIC_NAME = process.env.DEMOGRAPHIC_NAME ?? "demo-v1";
+
+/** Data version tag appended to output filenames, e.g. "v1" */
+export const DATA_VERSION = process.env.DATA_VERSION ?? "v1";

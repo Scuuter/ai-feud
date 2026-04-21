@@ -4,11 +4,13 @@ export interface CliArgs {
   runMissing: boolean;
   /** cluster-specific: raw JSON string of pre-defined categories; undefined for survey/enrichment */
   rawCategories?: string;
+  /** Filter personas by this demographic tag and use it as the output demographic name */
+  demographic?: string;
 }
 
 /**
  * Parses process.argv-style argument arrays into a typed CliArgs object.
- * Supported flags: --limit N, --topic ID, --missing, --categories JSON
+ * Supported flags: --limit N, --topic ID, --missing, --categories JSON, --demographic TAG
  */
 export function parseCliArgs(argv: string[]): CliArgs {
   const limitIndex = argv.indexOf('--limit');
@@ -24,5 +26,9 @@ export function parseCliArgs(argv: string[]): CliArgs {
   const rawCategories =
     categoriesIndex !== -1 ? argv[categoriesIndex + 1] : undefined;
 
-  return { limit, topicId, runMissing, rawCategories };
+  const demographicIndex = argv.indexOf('--demographic');
+  const demographic =
+    demographicIndex !== -1 ? argv[demographicIndex + 1] : undefined;
+
+  return { limit, topicId, runMissing, rawCategories, demographic };
 }

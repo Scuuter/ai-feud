@@ -4,20 +4,22 @@ import {
   DATA_DIR,
   OUTPUT_RAW_DIR,
   DEMOGRAPHIC_NAME,
+  DATA_VERSION,
 } from "./config.js";
 import { Topic, Persona, RawResponse } from "./types.js";
-import { loadJson, ensureDir, writeJson, fileExists } from "./utils/fs.js";
+import { loadJson, ensureDir, writeJson, fileExists, buildOutputFilename } from "./utils/fs.js";
 import { callLMStudioWithRetry } from "./utils/llm.js";
 import { renderProgressBar } from "./utils/progress.js";
 import { runWithConcurrency } from './utils/concurrency.js';
 import { parseCliArgs } from "./utils/cli.js";
 import { buildSurveyPrompt } from "./lib/prompts/survey-prompts.js";
 
-async function runSurvey(topic: Topic, personas: Persona[]): Promise<RawResponse[]> {
+async function runSurvey(topic: Topic, personas: Persona[], demographicContext?: string): Promise<RawResponse[]> {
   const tasks = personas.map((persona) => async (): Promise<RawResponse> => {
     const prompt = buildSurveyPrompt({
       personaDescription: persona.description,
       topicAiPrompt: topic.aiPrompt,
+      demographicContext,
     });
     try {
       const { data: response } = await callLMStudioWithRetry<{ answer: string }>(
@@ -54,10 +56,29 @@ async function runSurvey(topic: Topic, personas: Persona[]): Promise<RawResponse
 }
 
 async function main() {
-  const { limit, topicId, runMissing } = parseCliArgs(process.argv.slice(2));
+  const { limit, topicId, runMissing, demographic } = parseCliArgs(process.argv.slice(2));
 
   const topics = await loadJson<Topic[]>(`${DATA_DIR}/topics-v1.json`);
-  const personas = await loadJson<Persona[]>(`${DATA_DIR}/personas-v1.json`);
+
+  // Resolve personas file and demographic name
+  const personasFile = demographic
+    ? `${DATA_DIR}/personas-${demographic}.json`
+    : `${DATA_DIR}/personas-v1.json`;
+  const demographicName = demographic ?? DEMOGRAPHIC_NAME;
+
+  const allPersonas = await loadJson<Persona[]>(personasFile);
+
+  // Filter by demographic tag when specified
+  const personas = demographic
+    ? allPersonas.filter(p => p.demographics.includes(demographic))
+    : allPersonas;
+
+  if (demographic && personas.length === 0) {
+    console.error(`Error: No personas found with demographic tag "${demographic}" in ${personasFile}`);
+    process.exit(1);
+  }
+
+  console.log(`Using ${personas.length} personas for demographic "${demographicName}"`);
 
   ensureDir(OUTPUT_RAW_DIR);
 
@@ -70,8 +91,8 @@ async function main() {
     }
   } else if (runMissing) {
     topicsToProcess = topics.filter(topic => {
-      const rawExists = fileExists(`${OUTPUT_RAW_DIR}/${topic.id}.json`);
-      return !rawExists;
+      const filename = buildOutputFilename(topic.id, demographicName, DATA_VERSION);
+      return !fileExists(`${OUTPUT_RAW_DIR}/${filename}`);
     });
     console.log(`Found ${topicsToProcess.length} topics missing raw data.`);
   }
@@ -85,15 +106,16 @@ async function main() {
   for (const topic of topicsToProcess) {
     console.log(`\n=== Processing topic: ${topic.id} ===`);
 
-    const rawResponses = await runSurvey(topic, personas);
+    const rawResponses = await runSurvey(topic, personas, demographic);
 
     const output = {
       topicId: topic.id,
-      demographicName: DEMOGRAPHIC_NAME,
+      demographicName,
       rawResponses,
     };
 
-    const outputPath = `${OUTPUT_RAW_DIR}/${topic.id}.json`;
+    const filename = buildOutputFilename(topic.id, demographicName, DATA_VERSION);
+    const outputPath = `${OUTPUT_RAW_DIR}/${filename}`;
     await writeJson(outputPath, output);
     console.log(`Saved to ${outputPath}`);
   }

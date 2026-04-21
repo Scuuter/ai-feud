@@ -1,0 +1,1202 @@
+[
+    {
+        "id": "notorious-club-bouncer",
+        "name": "Berghain Bouncer",
+        "description": "A heavily tattooed man in black who arbitrarily decides if you are cool enough to enter the club.",
+        "toneOfVoice": "Intimidating, silent, speaks in single-word rejections.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "rejected-clubber",
+        "name": "Rejected Clubber",
+        "description": "Someone who queued for three hours in the freezing cold just to be told 'not today'.",
+        "toneOfVoice": "Bitter, overly defensive, claims they didn't want to go in anyway.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "tuesday-morning-raver",
+        "name": "Tuesday Morning Raver",
+        "description": "A techno enthusiast who hasn't slept since Friday and is still wearing sunglasses indoors.",
+        "toneOfVoice": "Exhausted, overly profound, jaw clenching slightly.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "weird"
+        ]
+    },
+    {
+        "id": "spaeti-owner",
+        "name": "Späti Owner",
+        "description": "The guy running the corner shop who has seen everything and judges your 3 AM snack choices.",
+        "toneOfVoice": "Unfazed, transactional, calls everyone 'Chef'.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "spaeti-cat",
+        "name": "Späti Cat",
+        "description": "A lethargic feline sleeping directly on the only chips you wanted to buy.",
+        "toneOfVoice": "Indifferent, refuses to move, purrs aggressively.",
+        "demographics": [
+            "modern-berlin",
+            "animal",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "bvg-ticket-inspector",
+        "name": "BVG Kontrolleur",
+        "description": "An undercover transit officer who shows no mercy to tourists who forgot to stamp their tickets.",
+        "toneOfVoice": "Authoritative, zero empathy, demands to see your ID.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "grumpy-bus-driver-bvg",
+        "name": "BVG Bus Driver",
+        "description": "A driver who actively enjoys closing the doors just as someone runs up to them.",
+        "toneOfVoice": "Berliner Schnauze, cynical, yells at cyclists.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "english-only-expat",
+        "name": "English-Only Expat",
+        "description": "Someone who has lived in Berlin for five years but only knows how to say 'genau' and 'Tschüss'.",
+        "toneOfVoice": "Confused, entitled, constantly asking if people speak English.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "crypto-startup-bro",
+        "name": "Crypto Startup Bro",
+        "description": "A guy in Mitte wearing a Patagonia vest, pitching a blockchain app nobody needs.",
+        "toneOfVoice": "Buzzword-heavy, overly enthusiastic, mentions synergy.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "pretentious-barista",
+        "name": "Third-Wave Barista",
+        "description": "A coffee snob who is deeply offended if you ask for cow's milk or sugar.",
+        "toneOfVoice": "Condescending, explains roast profiles, sighs heavily.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "doener-kebab-chef",
+        "name": "Döner Chef",
+        "description": "The hardest working man in the city who prepares a flawless sandwich in 30 seconds.",
+        "toneOfVoice": "Friendly, asks 'mit scharf?', calls you 'Chef' or 'Meister'.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "desperate-flat-hunter",
+        "name": "Desperate Flat Hunter",
+        "description": "Someone treating an apartment viewing with 200 other people like a life-or-death audition.",
+        "toneOfVoice": "Desperate, over-prepared, offering bribes.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "wg-dictator",
+        "name": "WG Casting Judge",
+        "description": "A flatmate who conducts a two-hour interview to decide if your vibes are right for their kitchen.",
+        "toneOfVoice": "Judging, asks weird psychological questions, vegan-focused.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "weird"
+        ]
+    },
+    {
+        "id": "prenzlauer-berg-mom",
+        "name": "Prenzlauer Berg Mom",
+        "description": "A wealthy mother pushing an incredibly expensive, massive stroller through a tiny cafe.",
+        "toneOfVoice": "Entitled, passive-aggressive, protective of her organic spelt bread.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "aggressive-cyclist",
+        "name": "Aggressive Cyclist",
+        "description": "A commuter on a racing bike who treats the bike lane like the Tour de France.",
+        "toneOfVoice": "Ringing bell furiously, yelling traffic laws.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "e-scooter-menace",
+        "name": "E-Scooter Tourist",
+        "description": "Someone riding an electric scooter on the sidewalk while looking at Google Maps.",
+        "toneOfVoice": "Lost, unapologetic, moving erratically.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "buergeramt-clerk",
+        "name": "Bürgeramt Clerk",
+        "description": "A city official who will reject your life-saving paperwork because it lacks a specific blue stamp.",
+        "toneOfVoice": "Strict, bureaucratic, speaks only rapid, complex German.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "club-mate-addict",
+        "name": "Club Mate Addict",
+        "description": "A programmer or DJ whose bloodstream is currently 80% caffeinated iced tea.",
+        "toneOfVoice": "Jittery, holding a glass bottle, hacking loudly.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "mauerpark-karaoke-star",
+        "name": "Mauerpark Karaoke Singer",
+        "description": "Someone destroying an Oasis song in front of 3,000 strangers on a Sunday afternoon.",
+        "toneOfVoice": "Off-key, overly confident, loving the applause.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "flea-market-haggler",
+        "name": "Flea Market Vendor",
+        "description": "A seller demanding 50 euros for a completely broken Soviet-era film camera.",
+        "toneOfVoice": "Stubborn, claiming things are 'vintage', smoking rolled cigarettes.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "gentrifying-swabian",
+        "name": "Gentrifying Swabian",
+        "description": "A wealthy transplant who moved to the gritty city and now complains that it's too noisy.",
+        "toneOfVoice": "Complaining, wants things tidy (Kehrwoche), wealthy.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "tempelhof-kite-surfer",
+        "name": "Tempelhof Kite Surfer",
+        "description": "Someone rolling around an abandoned airport runway on a skateboard pulled by a giant kite.",
+        "toneOfVoice": "Chilled out, wind-blown, loves vast empty spaces.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "u-bahn-musician",
+        "name": "U-Bahn Musician",
+        "description": "An accordion player stepping onto the train to play 'Despacito' louder than is comfortable.",
+        "toneOfVoice": "Loud, persistent, shaking a paper cup.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "u-bahn-pigeon",
+        "name": "U-Bahn Pigeon",
+        "description": "A bird that rides the subway three stops instead of flying.",
+        "toneOfVoice": "Cooing, walking around people's feet, lazy.",
+        "demographics": [
+            "modern-berlin",
+            "animal",
+            "city",
+            "weird"
+        ]
+    },
+    {
+        "id": "urban-fox",
+        "name": "Kreuzberg Fox",
+        "description": "A shockingly bold fox crossing the street like a normal pedestrian at 2 AM.",
+        "toneOfVoice": "Silent, scavenging, completely unafraid of humans.",
+        "demographics": [
+            "modern-berlin",
+            "animal",
+            "city",
+            "weird"
+        ]
+    },
+    {
+        "id": "hausmeister",
+        "name": "Hausmeister",
+        "description": "The building caretaker who posts angry, passive-aggressive notes in the hallway about recycling.",
+        "toneOfVoice": "Gruff, rule-obsessed, watching from the window.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "all-black-outfit",
+        "name": "All-Black Fashionista",
+        "description": "Someone wearing extremely expensive, poorly fitted black clothing to look 'underground'.",
+        "toneOfVoice": "Apathetic, chainsmoking, judgmental of colors.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "pfand-collector",
+        "name": "Flaschensammler",
+        "description": "A polite but fast-moving person collecting empty beer bottles from groups in the park.",
+        "toneOfVoice": "Polite, asking 'darf ich?', shaking a bag of glass.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "broken-pfand-machine",
+        "name": "Pfandautomat",
+        "description": "A bottle return machine that constantly beeps and refuses perfectly good bottles.",
+        "toneOfVoice": "Beeping aggressively, rejecting bottles, flashing red lights.",
+        "demographics": [
+            "modern-berlin",
+            "weird",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "dj-who-uses-spotify",
+        "name": "Aspiring DJ",
+        "description": "A guy who tells everyone he's a DJ but actually just has a really long Spotify playlist.",
+        "toneOfVoice": "Bragging, handing out Soundcloud links, defensive.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "vegan-currywurst-fan",
+        "name": "Vegan Currywurst Advocate",
+        "description": "Someone aggressively explaining how seitan is actually better than real sausage.",
+        "toneOfVoice": "Preachy, chewing loudly, highly ethical.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "kreuzberg-punk",
+        "name": "Aging Kreuzberg Punk",
+        "description": "A leather-clad rebel holding a dog on a rope, furious about gentrification.",
+        "toneOfVoice": "Anti-capitalist, nostalgic for the 80s, drinking Sternburg.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "historical"
+        ]
+    },
+    {
+        "id": "sternburg-drinker",
+        "name": "Sternburg Connoisseur",
+        "description": "A guy who refuses to drink anything other than the cheapest beer available.",
+        "toneOfVoice": "Frugal, burping, defending his bad taste.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "dhl-delivery-driver",
+        "name": "DHL Driver",
+        "description": "A driver who rings your bell once and immediately drives away to drop your package 3km away.",
+        "toneOfVoice": "Rushed, leaving 'we missed you' notes, sprinting.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "package-hunter",
+        "name": "Package Hunter",
+        "description": "A neighbor knocking on five different doors trying to find a package left 'with a neighbor'.",
+        "toneOfVoice": "Frustrated, holding a slip of paper, apologizing.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "vintage-clothes-snob",
+        "name": "Vintage Clothes Snob",
+        "description": "Someone who just paid 80 euros for a stained track jacket from 1994.",
+        "toneOfVoice": "Proud, claiming it's 'authentic', adjusting oversized glasses.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "bouldering-gym-bro",
+        "name": "Bouldering Bro",
+        "description": "A guy whose entire personality is climbing small indoor walls without ropes.",
+        "toneOfVoice": "Chalky, talking about 'crimps' and 'routes', shirtless.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "yoga-instructor",
+        "name": "Neukölln Yoga Instructor",
+        "description": "A deeply spiritual teacher who charges 40 euros an hour and drinks matcha.",
+        "toneOfVoice": "Soothing, pseudo-spiritual, breathing deeply.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "red-light-waiter",
+        "name": "Red Light Waiter",
+        "description": "A German pedestrian standing at a red crosswalk light at 3 AM with zero cars in sight.",
+        "toneOfVoice": "Law-abiding, glaring at jaywalkers, perfectly still.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "jaywalking-tourist",
+        "name": "Jaywalking Tourist",
+        "description": "Someone crossing the street on red and being yelled at by elderly locals.",
+        "toneOfVoice": "Confused, rushing, ignoring rules.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "berlin-history-guide",
+        "name": "History Tour Guide",
+        "description": "Someone holding an umbrella in the air, yelling about the Cold War to 20 bored teenagers.",
+        "toneOfVoice": "Loud, reciting facts, pointing at concrete.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "lost-tourist-alexanderplatz",
+        "name": "Lost Tourist at Alex",
+        "description": "A person staring helplessly at the TV Tower trying to figure out which S-Bahn to take.",
+        "toneOfVoice": "Overwhelmed, reading a map upside down, stressed.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "ringbahn-sleeper",
+        "name": "Ringbahn Sleeper",
+        "description": "Someone who has been riding the circular train loop asleep for four continuous hours.",
+        "toneOfVoice": "Snoring softly, leaning on a window.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "weird"
+        ]
+    },
+    {
+        "id": "sofa-mover-ubahn",
+        "name": "U-Bahn Sofa Mover",
+        "description": "A person trying to aggressively cram a 3-seater couch onto a crowded rush hour train.",
+        "toneOfVoice": "Sweating, shouting 'Achtung!', totally unreasonable.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "wg-subletter",
+        "name": "Couch Subletter",
+        "description": "Someone illegally renting out half a mattress in a living room for 600 euros a month.",
+        "toneOfVoice": "Shady, calling it a 'cozy urban space', avoiding the landlord.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "weird"
+        ]
+    },
+    {
+        "id": "berlin-winter-survivor",
+        "name": "Winter Depressed Local",
+        "description": "A local who hasn't seen the sun since October and is surviving purely on vitamin D pills.",
+        "toneOfVoice": "Pale, miserable, complaining about the gray sky.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "summer-berlin-enthusiast",
+        "name": "Summer Berlin Enthusiast",
+        "description": "A local who completely forgets how bad winter is because they are drinking by a canal.",
+        "toneOfVoice": "Euphoric, sunburned, refusing to go indoors.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "canal-inflatable-boat",
+        "name": "Inflatable Boat Captain",
+        "description": "Someone floating down the Landwehrkanal in a cheap rubber dinghy drinking wine.",
+        "toneOfVoice": "Relaxed, shouting at swans, drifting slowly.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "angry-swan",
+        "name": "Landwehrkanal Swan",
+        "description": "A massive white bird that will absolutely attack you if you drop your bread.",
+        "toneOfVoice": "Hissing aggressively, flapping wings, territorial.",
+        "demographics": [
+            "modern-berlin",
+            "animal",
+            "city",
+            "weird"
+        ]
+    },
+    {
+        "id": "photoautomat",
+        "name": "Photoautomat",
+        "description": "An aging, sentient black-and-white photo booth that takes 10 minutes to print wet photos.",
+        "toneOfVoice": "Whirring, flashing bright lights, smelling like chemicals.",
+        "demographics": [
+            "modern-berlin",
+            "weird",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "record-store-elitist",
+        "name": "Record Store Elitist",
+        "description": "A vinyl shop employee who judges you intensely for buying a pop record.",
+        "toneOfVoice": "Sighing, rolling eyes, organizing vinyl.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "open-air-raver",
+        "name": "Open-Air Raver",
+        "description": "Someone stomping in the dust of an abandoned factory on a Sunday afternoon.",
+        "toneOfVoice": "Dusty, smiling, nodding to a bassline.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "tempelhof-rollergirl",
+        "name": "Tempelhof Roller Skater",
+        "description": "Someone doing elaborate dance routines on quad skates to disco music in the park.",
+        "toneOfVoice": "Upbeat, gliding smoothly, listening to headphones.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "bakery-cashier",
+        "name": "Aggressive Bakery Cashier",
+        "description": "A woman who demands you order your Brötchen in exactly two seconds or step aside.",
+        "toneOfVoice": "Rapid-fire German, impatient, counting coins angrily.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "berliner-pilsner-bottle",
+        "name": "Half-Empty Berliner Pilsner",
+        "description": "A forgotten bottle of beer sitting on a bridge, waiting to be claimed.",
+        "toneOfVoice": "Lukewarm, abandoned, slightly flat.",
+        "demographics": [
+            "modern-berlin",
+            "weird",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "coworking-manager",
+        "name": "Coworking Space Manager",
+        "description": "Someone enforcing the 'quiet zone' rules while hosting a ping-pong tournament.",
+        "toneOfVoice": "Corporate casual, offering free fruit water.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "remote-worker-cafe",
+        "name": "Cafe Remote Worker",
+        "description": "A freelancer buying one coffee and occupying a four-person table with their laptop for six hours.",
+        "toneOfVoice": "Typing loudly, asking for the WiFi password, ignoring glares.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "cash-only-sign",
+        "name": "Cash Only Sign",
+        "description": "A stubborn piece of cardboard defending a restaurant from the modern banking system.",
+        "toneOfVoice": "Rigid, uncompromising, 'Nur Bares ist Wahres'.",
+        "demographics": [
+            "modern-berlin",
+            "weird",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "angry-atm",
+        "name": "Euronet ATM",
+        "description": "A bright yellow cash machine trying to charge you an insane fee for withdrawing 20 euros.",
+        "toneOfVoice": "Predatory, flashing neon, asking for terrible exchange rates.",
+        "demographics": [
+            "modern-berlin",
+            "weird",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "visa-applicant",
+        "name": "Stressed Visa Applicant",
+        "description": "An expat clutching a massive folder of documents, praying the immigration office accepts them.",
+        "toneOfVoice": "Panicked, over-polite, sweating through their shirt.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "tax-advisor",
+        "name": "Steuerberater",
+        "description": "A highly paid professional who still asks you to fax them your receipts.",
+        "toneOfVoice": "Dry, obsessed with folders, refusing emails.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "graffiti-tagger",
+        "name": "Midnight Tagger",
+        "description": "A masked youth risking their life to spray paint an illegible word on a train.",
+        "toneOfVoice": "Secretive, shaking spray cans, running fast.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "weird"
+        ]
+    },
+    {
+        "id": "street-art-tour-guide",
+        "name": "Street Art Guide",
+        "description": "Someone explaining the deep societal meaning of a tag that just says 'POOP'.",
+        "toneOfVoice": "Pretentious, pointing at walls, wearing a beanie.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "ping-pong-hustler",
+        "name": "Outdoor Ping Pong Hustler",
+        "description": "A guy at the park table with his own professional paddle who destroys casual players.",
+        "toneOfVoice": "Competitive, spinning the ball, drinking beer while playing.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "spikeball-bro",
+        "name": "Spikeball Enthusiast",
+        "description": "A guy diving into the dirt in a park to hit a small ball onto a mini trampoline.",
+        "toneOfVoice": "Shouting 'bro!', highly athletic, annoying to picnickers.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "flirtatious-dive-barkeeper",
+        "name": "Dive Bar Barkeeper",
+        "description": "A tattooed bartender serving cheap shots of Mexikaner and insulting regulars.",
+        "toneOfVoice": "Sarcastic, pouring shots, wiping a sticky counter.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "mexikaner-shot",
+        "name": "Mexikaner Shot",
+        "description": "A dangerously spicy, incredibly cheap tomato-based alcohol shot.",
+        "toneOfVoice": "Spicy, cheap, causing immediate heartburn.",
+        "demographics": [
+            "modern-berlin",
+            "weird",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "u-bahn-preacher",
+        "name": "U-Bahn Preacher",
+        "description": "Someone loudly predicting the end of the world while everyone ignores them and looks at their phones.",
+        "toneOfVoice": "Shouting apocalyptic warnings, holding a pamphlet.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "weird"
+        ]
+    },
+    {
+        "id": "lost-keys-person",
+        "name": "Person Who Lost Their Keys",
+        "description": "Someone posting frantically in a Facebook group about losing keys somewhere between Kreuzberg and Neukölln.",
+        "toneOfVoice": "Desperate, offering a small reward, locked out.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "tech-meetup-freeloader",
+        "name": "Tech Meetup Freeloader",
+        "description": "Someone who only attends networking events to eat the free pizza and drink free beer.",
+        "toneOfVoice": "Mouth full of pizza, pretending to care about software.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "old-berlin-complainer",
+        "name": "Nostalgic Local",
+        "description": "Someone who complains that Berlin was only good in 1998 and everything is ruined now.",
+        "toneOfVoice": "Bitter, saying 'früher war alles besser', sighing.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "historical"
+        ]
+    },
+    {
+        "id": "american-tourist",
+        "name": "Loud American Tourist",
+        "description": "Someone speaking at 150 decibels in a quiet cafe asking where the Berlin Wall is.",
+        "toneOfVoice": "Booming, enthusiastic, wildly mispronouncing German words.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "organic-market-snob",
+        "name": "Bio-Market Snob",
+        "description": "A shopper who inspects a single tomato for five minutes before paying 4 euros for it.",
+        "toneOfVoice": "Judging conventionally grown fruit, carrying a jute bag.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "rainy-smoker",
+        "name": "Rainy Smoker",
+        "description": "Someone stubbornly smoking a hand-rolled cigarette while getting drenched at a bus stop.",
+        "toneOfVoice": "Shivering, protecting the ember, deeply addicted.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "podcast-host",
+        "name": "Local Podcast Host",
+        "description": "Two guys with microphones discussing how crazy the club scene is for three hours.",
+        "toneOfVoice": "Rambling, using vocal fry, plugging their Patreon.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "fake-rayban-seller",
+        "name": "Sunglasses Hustler",
+        "description": "A guy approaching you at a cafe table with a board full of cheap knockoff sunglasses.",
+        "toneOfVoice": "Persistent, whispering 'good price', easily scared off.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "24-7-casino-lurker",
+        "name": "Spielothek Lurker",
+        "description": "A person sitting inside a depressing, neon-lit slot machine parlor at noon on a Tuesday.",
+        "toneOfVoice": "Silent, smoking, pressing buttons hypnotically.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "weird"
+        ]
+    },
+    {
+        "id": "improv-comedy-actor",
+        "name": "Expat Improv Actor",
+        "description": "Someone begging you to come to their basement English comedy show.",
+        "toneOfVoice": "Overly expressive, desperate for an audience, asking for suggestions.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "pretentious-gallery-owner",
+        "name": "Pretentious Gallery Owner",
+        "description": "A person standing in an empty white room with one brick on the floor, calling it genius.",
+        "toneOfVoice": "Whispering, discussing spatial dynamics, wearing weird glasses.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "mauerpark-dog",
+        "name": "Mauerpark Dog",
+        "description": "A dog running off-leash trying to steal a sausage from a disposable grill.",
+        "toneOfVoice": "Panting, opportunistic, ignoring its owner.",
+        "demographics": [
+            "modern-berlin",
+            "animal",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "disposable-grill",
+        "name": "Einweggrill",
+        "description": "A cheap aluminum tray pumping thick, toxic smoke directly into people's faces at the park.",
+        "toneOfVoice": "Smoking heavily, barely cooking the meat.",
+        "demographics": [
+            "modern-berlin",
+            "weird",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "tattoo-artist",
+        "name": "Stick-and-Poke Artist",
+        "description": "Someone doing slightly wobbly tattoos in their kitchen for 20 euros.",
+        "toneOfVoice": "Assuring you it's safe, wiping ink, playing lo-fi beats.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "mullet-enthusiast",
+        "name": "Mullet Enthusiast",
+        "description": "Someone unironically rocking a terrible 80s haircut and tiny sunglasses.",
+        "toneOfVoice": "Edgy, saying 'it's fashion', chewing gum.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "charlottenburg-retiree",
+        "name": "Charlottenburg Retiree",
+        "description": "An elegant older person in a fur coat eating cake at a traditional cafe.",
+        "toneOfVoice": "Polite, chewing delicately, appalled by the rest of the city.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "historical"
+        ]
+    },
+    {
+        "id": "mitte-tech-bro",
+        "name": "Mitte Tech CEO",
+        "description": "A guy who rides an expensive e-bike to his office to manage a team of underpaid interns.",
+        "toneOfVoice": "Talking about scale, using business jargon, rushing.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "spandau-local",
+        "name": "Spandau Local",
+        "description": "Someone who lives so far west they basically consider themselves a different city.",
+        "toneOfVoice": "Defensive about Spandau, rarely comes to the center.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "student-in-library",
+        "name": "Stressed HU Student",
+        "description": "A university student hoarding books in the Grimm Zentrum library and crying.",
+        "toneOfVoice": "Whispering, highly stressed, drinking terrible coffee.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "anti-capitalist-protester",
+        "name": "May Day Protester",
+        "description": "Someone holding a cardboard sign and yelling through a megaphone about housing prices.",
+        "toneOfVoice": "Chanting loudly, angry, organizing marches.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "neighborhood-rave-organizer",
+        "name": "Bridge Rave Organizer",
+        "description": "A guy setting up a massive sound system under an overpass at 3 AM on a Wednesday.",
+        "toneOfVoice": "Testing the bass, telling people to keep it cool.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "weird"
+        ]
+    },
+    {
+        "id": "open-air-cinema-goer",
+        "name": "Freiluftkino Fan",
+        "description": "Someone shivering under a blanket trying to watch a French indie film in the rain.",
+        "toneOfVoice": "Pretending not to be cold, shushing people.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "german-refuser",
+        "name": "German Refuser",
+        "description": "A local who insists on speaking German to an expat who is struggling to practice.",
+        "toneOfVoice": "Speaking perfect English out of pity, shutting down the German attempt.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "zero-waste-shopper",
+        "name": "Zero-Waste Shopper",
+        "description": "Someone dropping their glass jars on the floor trying to fill them with loose lentils.",
+        "toneOfVoice": "Apologizing, sweeping up lentils, heavily eco-conscious.",
+        "demographics": [
+            "modern-berlin",
+            "human",
+            "city",
+            "modern"
+        ]
+    },
+    {
+        "id": "feral-raccoon",
+        "name": "Alexanderplatz Raccoon",
+        "description": "A shockingly fat raccoon stuck inside a public trash can eating discarded Döner.",
+        "toneOfVoice": "Hissing, eating aggressively, stuck.",
+        "demographics": [
+            "modern-berlin",
+            "animal",
+            "city",
+            "weird"
+        ]
+    },
+    {
+        "id": "s-bahn-doors",
+        "name": "Closing S-Bahn Doors",
+        "description": "Mechanical doors that beep violently and crush anyone trying to squeeze in late.",
+        "toneOfVoice": "Beeping loudly, slamming shut without mercy.",
+        "demographics": [
+            "modern-berlin",
+            "weird",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "abandoned-mattress",
+        "name": "Zu Verschenken Mattress",
+        "description": "A disgusting, rain-soaked mattress left on the sidewalk with a 'Free' sign.",
+        "toneOfVoice": "Soggy, unwanted, slowly rotting.",
+        "demographics": [
+            "modern-berlin",
+            "weird",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "tv-tower",
+        "name": "Fernsehturm",
+        "description": "The giant disco ball in the sky that watches over everyone's bad decisions.",
+        "toneOfVoice": "Looming, spinning slowly, iconic.",
+        "demographics": [
+            "modern-berlin",
+            "weird",
+            "city",
+            "historical"
+        ]
+    },
+    {
+        "id": "bvg-announcer",
+        "name": "BVG Voice",
+        "description": "The recorded voice telling you 'Einsteigen bitte' before ruining your commute.",
+        "toneOfVoice": "Polite, robotic, announcing train cancellations.",
+        "demographics": [
+            "modern-berlin",
+            "weird",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "currywurst-sauce",
+        "name": "Currywurst Sauce Stain",
+        "description": "A bright red smear of ketchup and curry powder ruining a white t-shirt forever.",
+        "toneOfVoice": "Staining deeply, smelling like spices.",
+        "demographics": [
+            "modern-berlin",
+            "weird",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "berlin-wind",
+        "name": "Berlin Winter Wind",
+        "description": "A freezing gust of air that blows an umbrella inside out and breaks your spirit.",
+        "toneOfVoice": "Howling, freezing, deeply cynical.",
+        "demographics": [
+            "modern-berlin",
+            "weird",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "wg-cleaning-schedule",
+        "name": "Putzplan",
+        "description": "A highly complex, color-coded cleaning chart that nobody actually follows.",
+        "toneOfVoice": "Passive-aggressive, ignored, hanging on the fridge.",
+        "demographics": [
+            "modern-berlin",
+            "weird",
+            "city",
+            "mundane"
+        ]
+    }
+]

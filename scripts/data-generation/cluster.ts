@@ -7,6 +7,8 @@ import {
   OUTPUT_DIR,
   OUTPUT_RAW_DIR,
   DEBUG_OUTPUT_DIR,
+  DEMOGRAPHIC_NAME,
+  DATA_VERSION,
 } from "./config.js";
 import {
   Topic,
@@ -16,7 +18,7 @@ import {
   WildCard,
   AnswerCategory,
 } from "./types.js";
-import { loadJson, ensureDir, writeJson, getNextVersionPath, getNextDebugRunDir, fileExists } from "./utils/fs.js";
+import { loadJson, ensureDir, writeJson, getNextVersionPath, getNextDebugRunDir, fileExists, buildOutputFilename } from "./utils/fs.js";
 import { callLMStudioWithRetry } from "./utils/llm.js";
 import { normalizeScoresTo100 } from "./lib/normalization.js";
 import { aggregateAssignments, type AggregateAssignmentsResult } from "./lib/aggregation.js";
@@ -144,10 +146,13 @@ async function assignClusters(rawData: RawSurveyData, categories: AnswerCategory
 async function processTopic(
   topicId: string,
   topicText: string,
+  demographicName: string,
+  version: string,
   providedCategories?: AnswerCategory[]
 ): Promise<SurveyResult> {
   const debugSubDir = getNextDebugRunDir(topicId, DEBUG_OUTPUT_DIR);
-  const rawPath = `${OUTPUT_RAW_DIR}/${topicId}.json`;
+  const rawFilename = buildOutputFilename(topicId, demographicName, version);
+  const rawPath = `${OUTPUT_RAW_DIR}/${rawFilename}`;
 
   const rawData = await loadJson<RawSurveyData>(rawPath);
   console.log(`Processing ${topicId} with ${rawData.rawResponses.length} responses`);
@@ -209,9 +214,11 @@ async function processTopic(
 }
 
 async function main() {
-  const { limit, topicId: specificTopicId, runMissing, rawCategories } = parseCliArgs(process.argv.slice(2));
+  const { limit, topicId: specificTopicId, runMissing, rawCategories, demographic } = parseCliArgs(process.argv.slice(2));
 
   const parsedCategories = rawCategories ? JSON.parse(rawCategories) : undefined;
+  const demographicName = demographic ?? DEMOGRAPHIC_NAME;
+  const version = DATA_VERSION;
 
   const topics = await loadJson<Topic[]>(`${DATA_DIR}/topics-v1.json`);
   ensureDir(OUTPUT_DIR);
@@ -225,8 +232,10 @@ async function main() {
     }
   } else if (runMissing) {
     topicsToProcess = topics.filter(topic => {
-      const rawExists = fileExists(`${OUTPUT_RAW_DIR}/${topic.id}.json`);
-      const outputExists = fileExists(`${OUTPUT_DIR}/${topic.id}.json`);
+      const rawFilename = buildOutputFilename(topic.id, demographicName, version);
+      const outputFilename = buildOutputFilename(topic.id, demographicName, version);
+      const rawExists = fileExists(`${OUTPUT_RAW_DIR}/${rawFilename}`);
+      const outputExists = fileExists(`${OUTPUT_DIR}/${outputFilename}`);
       return rawExists && !outputExists;
     });
     console.log(`Found ${topicsToProcess.length} topics with raw data but no clusterized output.`);
@@ -246,8 +255,9 @@ async function main() {
         ? parsedCategories
         : (parsedCategories?.categories || undefined);
 
-      const result = await processTopic(topic.id, topic.uiText, categories);
-      const outputPath = getNextVersionPath(`${OUTPUT_DIR}/${topic.id}.json`);
+      const result = await processTopic(topic.id, topic.uiText, demographicName, version, categories);
+      const outputFilename = buildOutputFilename(topic.id, demographicName, version);
+      const outputPath = `${OUTPUT_DIR}/${outputFilename}`;
       writeJson(outputPath, result);
       console.log(`Saved to ${outputPath}`);
     } catch (error) {

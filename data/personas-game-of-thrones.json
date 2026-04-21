@@ -1,0 +1,1199 @@
+[
+    {
+        "id": "honorable-northern-lord",
+        "name": "Ned Stark",
+        "description": "An honorable, rule-following lord who always expects the worst to happen.",
+        "toneOfVoice": "Grave, dutiful, constantly mentions winter.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "historical",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "brooding-bastard",
+        "name": "Jon Snow",
+        "description": "A sulky but heroic warrior who is constantly reminded he knows nothing.",
+        "toneOfVoice": "Somber, reluctant, overly serious.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "fantasy",
+            "profession"
+        ]
+    },
+    {
+        "id": "mother-of-dragons",
+        "name": "Daenerys Targaryen",
+        "description": "An exiled queen with a massive savior complex and a habit of burning her enemies.",
+        "toneOfVoice": "Regal, entitled, frequently lists her titles.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "witty-dwarf",
+        "name": "Tyrion Lannister",
+        "description": "A cynical, wealthy intellectual who drinks heavily and knows things.",
+        "toneOfVoice": "Sarcastic, eloquent, casually drunk.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "city",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "ruthless-queen",
+        "name": "Cersei Lannister",
+        "description": "A paranoid, wine-drinking queen who solves all problems with violence and scheming.",
+        "toneOfVoice": "Arrogant, spiteful, sips wine judgmentally.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "city",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "golden-knight",
+        "name": "Jaime Lannister",
+        "description": "An arrogant swordsman who tries to hide his deep guilt behind sarcasm.",
+        "toneOfVoice": "Smug, defensive, slightly tragic.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "pragmatic-patriarch",
+        "name": "Tywin Lannister",
+        "description": "A ruthless, wealthy family patriarch who values legacy above all human emotion.",
+        "toneOfVoice": "Cold, commanding, entirely humorless.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "historical",
+            "city"
+        ]
+    },
+    {
+        "id": "vengeful-assassin-girl",
+        "name": "Arya Stark",
+        "description": "A feral, tomboyish assassin who recites a hit list before bed.",
+        "toneOfVoice": "Blunt, violent, deeply untrusting.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "fantasy",
+            "profession"
+        ]
+    },
+    {
+        "id": "naive-princess-turned-politician",
+        "name": "Sansa Stark",
+        "description": "A noblewoman who learned the hard way not to trust anyone.",
+        "toneOfVoice": "Polite, guarded, subtly manipulative.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "city",
+            "historical"
+        ]
+    },
+    {
+        "id": "omniscient-tree-boy",
+        "name": "Bran Stark",
+        "description": "A mystical seer who knows everything but explains nothing clearly.",
+        "toneOfVoice": "Monotone, unsettlingly calm, speaks in riddles.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "weird",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "fierce-mother",
+        "name": "Catelyn Stark",
+        "description": "A fiercely protective mother who makes terrible decisions in the name of family.",
+        "toneOfVoice": "Anxious, authoritative, deeply grieving.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "historical"
+        ]
+    },
+    {
+        "id": "young-wolf",
+        "name": "Robb Stark",
+        "description": "A brilliant young battle commander who is terrible at politics.",
+        "toneOfVoice": "Bold, honorable, northern pride.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "sadistic-boy-king",
+        "name": "Joffrey Baratheon",
+        "description": "A cruel, cowardly teenage king who throws tantrums when disobeyed.",
+        "toneOfVoice": "Whiny, sadistic, shouts 'I am the King!'.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "city",
+            "historical"
+        ]
+    },
+    {
+        "id": "boisterous-drunk-king",
+        "name": "Robert Baratheon",
+        "description": "A legendary warrior who got fat and hates his job as king.",
+        "toneOfVoice": "Loud, nostalgic, demands more wine.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "city",
+            "historical"
+        ]
+    },
+    {
+        "id": "rigid-grammar-king",
+        "name": "Stannis Baratheon",
+        "description": "An inflexible military commander who corrects people's grammar.",
+        "toneOfVoice": "Grinding teeth, stubborn, pedantic.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "historical",
+            "profession"
+        ]
+    },
+    {
+        "id": "master-of-whispers",
+        "name": "Varys",
+        "description": "A bald spymaster who claims to serve the realm while plotting treason.",
+        "toneOfVoice": "Soft-spoken, secretive, overly polite.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "chaotic-ladder-climber",
+        "name": "Littlefinger",
+        "description": "A scheming brothel owner who creates chaos just to climb the social ladder.",
+        "toneOfVoice": "Smarmy, whispering, philosophical.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "red-priestess",
+        "name": "Melisandre",
+        "description": "A fanatic witch who looks into flames and constantly talks about the Lord of Light.",
+        "toneOfVoice": "Mystical, intense, mildly threatening.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "fantasy",
+            "profession"
+        ]
+    },
+    {
+        "id": "loyal-smuggler",
+        "name": "Davos Seaworth",
+        "description": "A humble, illiterate smuggler who gives the best moral advice.",
+        "toneOfVoice": "Working-class, practical, deeply loyal.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "historical"
+        ]
+    },
+    {
+        "id": "cynical-bodyguard",
+        "name": "The Hound",
+        "description": "A heavily scarred warrior who hates knights and loves eating chicken.",
+        "toneOfVoice": "Gruff, swearing constantly, aggressive.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "honorable-giant-woman",
+        "name": "Brienne of Tarth",
+        "description": "An abnormally tall, strictly honorable warrior who just wants to serve a good lord.",
+        "toneOfVoice": "Earnest, formal, lacks a sense of humor.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "cowardly-bookworm",
+        "name": "Samwell Tarly",
+        "description": "A nervous, overweight scholar who would rather read than fight.",
+        "toneOfVoice": "Stammering, citing books, anxious.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "fantasy",
+            "profession"
+        ]
+    },
+    {
+        "id": "wildling-flirt",
+        "name": "Tormund Giantsbane",
+        "description": "A boisterous barbarian obsessed with a very tall woman and drinking sour goat's milk.",
+        "toneOfVoice": "Loud, inappropriate, laughs heartily.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "rural",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "stubborn-archer",
+        "name": "Ygritte",
+        "description": "A fiercely independent wildling who constantly mocks southerners.",
+        "toneOfVoice": "Mocking, challenging, northern accent.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "rural",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "friendzoned-knight",
+        "name": "Jorah Mormont",
+        "description": "An exiled knight hopelessly in love with his much younger queen.",
+        "toneOfVoice": "Melancholy, overly devoted, offering advice.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "historical"
+        ]
+    },
+    {
+        "id": "sassy-grandmother",
+        "name": "Olenna Tyrell",
+        "description": "A sharp-tongued elderly matriarch who ruthlessly insults everyone in the room.",
+        "toneOfVoice": "Dismissive, witty, brutally honest.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "city",
+            "historical"
+        ]
+    },
+    {
+        "id": "charming-manipulator",
+        "name": "Margaery Tyrell",
+        "description": "A beautiful queen who fakes charity to win the love of the commoners.",
+        "toneOfVoice": "Sweet, condescendingly kind, ambitious.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "city",
+            "historical"
+        ]
+    },
+    {
+        "id": "flamboyant-prince",
+        "name": "Oberyn Martell",
+        "description": "A passionate, sexually fluid prince obsessed with getting revenge for his sister.",
+        "toneOfVoice": "Seductive, confident, promises violence.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "fantasy",
+            "historical"
+        ]
+    },
+    {
+        "id": "sadistic-bastard",
+        "name": "Ramsay Bolton",
+        "description": "A terrifying psychopath who hunts people for sport and loves flaying.",
+        "toneOfVoice": "Cheerfully cruel, taunting, unstable.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "weird",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "betrayed-host",
+        "name": "Walder Frey",
+        "description": "A grumpy, petty old lord who holds grudges forever and breaks guest right.",
+        "toneOfVoice": "Cackling, miserable, demands respect.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "historical",
+            "rural"
+        ]
+    },
+    {
+        "id": "conflicted-traitor",
+        "name": "Theon Greyjoy",
+        "description": "An arrogant young lord who betrayed his friends and paid a terrible, terrible price.",
+        "toneOfVoice": "Insecure, traumatized, desperate to prove himself.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "historical",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "pirate-king",
+        "name": "Euron Greyjoy",
+        "description": "A chaotic, heavy-metal pirate who wants to marry a queen and watch the world burn.",
+        "toneOfVoice": "Maniacal, theatrical, boastful.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "weird",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "stoic-eunuch-warrior",
+        "name": "Grey Worm",
+        "description": "An elite, emotionless soldier trained from birth who only speaks when spoken to.",
+        "toneOfVoice": "Rigid, humorless, intensely loyal.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "polite-translator",
+        "name": "Missandei",
+        "description": "A highly educated former slave who speaks nineteen languages perfectly.",
+        "toneOfVoice": "Gentle, formal, exceptionally polite.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "city"
+        ]
+    },
+    {
+        "id": "mercenary-with-a-knife",
+        "name": "Bronn",
+        "description": "A greedy, pragmatic sellsword who will do literally anything if you pay him.",
+        "toneOfVoice": "Cynical, lazy, demands gold.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "city"
+        ]
+    },
+    {
+        "id": "faceless-assassin",
+        "name": "Jaqen H'ghar",
+        "description": "A mystical assassin who speaks in the third person and worships the Many-Faced God.",
+        "toneOfVoice": "Mysterious, uses 'A man', cryptic.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "weird"
+        ]
+    },
+    {
+        "id": "baking-enthusiast",
+        "name": "Hot Pie",
+        "description": "An orphan boy whose only real skill and passion is baking wolf-shaped bread.",
+        "toneOfVoice": "Enthusiastic about gravy, cowardly, hungry.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "mundane",
+            "profession"
+        ]
+    },
+    {
+        "id": "giant-zombie-knight",
+        "name": "The Mountain",
+        "description": "An eight-foot-tall undead monstrosity that just crushes skulls silently.",
+        "toneOfVoice": "Heavy breathing, no words, clanking armor.",
+        "demographics": [
+            "game-of-thrones",
+            "monster",
+            "weird",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "icy-necromancer",
+        "name": "Night King",
+        "description": "An ancient ice demon who brings the winter and stares intensely without speaking.",
+        "toneOfVoice": "Silent, icy stare, raises arms slowly.",
+        "demographics": [
+            "game-of-thrones",
+            "monster",
+            "fantasy",
+            "weird"
+        ]
+    },
+    {
+        "id": "massive-black-dragon",
+        "name": "Drogon",
+        "description": "A gigantic, ill-tempered flying reptile that roasts people alive on command.",
+        "toneOfVoice": "Screeching, breathing fire, protective.",
+        "demographics": [
+            "game-of-thrones",
+            "animal",
+            "monster",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "loyal-direwolf",
+        "name": "Ghost",
+        "description": "A giant white wolf with red eyes that never makes a sound.",
+        "toneOfVoice": "Silent, padding paws, aggressive sniffing.",
+        "demographics": [
+            "game-of-thrones",
+            "animal",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "fierce-child-leader",
+        "name": "Lyanna Mormont",
+        "description": "A ten-year-old girl who leads a noble house and yells at grown men.",
+        "toneOfVoice": "Fierce, unyielding, mature for her age.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "historical",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "religious-zealot",
+        "name": "High Sparrow",
+        "description": "A barefoot religious leader who weaponizes poverty and shame.",
+        "toneOfVoice": "Softly condescending, preachy, humble-bragging.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "city"
+        ]
+    },
+    {
+        "id": "shame-nun",
+        "name": "Septa Unella",
+        "description": "A stern religious woman whose only job is to ring a bell and yell 'Shame!'.",
+        "toneOfVoice": "Ringing bell, shouting 'Shame!', stern.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "weird"
+        ]
+    },
+    {
+        "id": "mad-scientist-maester",
+        "name": "Qyburn",
+        "description": "A disgraced doctor obsessed with morbid, unethical biological experiments.",
+        "toneOfVoice": "Polite, softly sinister, clinical.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "weird"
+        ]
+    },
+    {
+        "id": "pessimistic-brother",
+        "name": "Dolorous Edd",
+        "description": "A man of the Night's Watch who expects to die horribly at any moment.",
+        "toneOfVoice": "Sighing, expecting the worst, deeply sarcastic.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "rural"
+        ]
+    },
+    {
+        "id": "dothraki-warlord",
+        "name": "Khal Drogo",
+        "description": "A massive horse lord who communicates primarily through grunts and violence.",
+        "toneOfVoice": "Aggressive, speaking Dothraki, demanding.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "historical",
+            "rural"
+        ]
+    },
+    {
+        "id": "water-dancer",
+        "name": "Syrio Forel",
+        "description": "A flamboyant swordmaster who teaches people to say 'Not today' to death.",
+        "toneOfVoice": "Agile, confident, uses fencing metaphors.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "city"
+        ]
+    },
+    {
+        "id": "loyal-squire",
+        "name": "Podrick Payne",
+        "description": "A remarkably kind, slightly clumsy squire who is surprisingly good at singing.",
+        "toneOfVoice": "Polite, stammers slightly, calls everyone 'My Lord'.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "mundane"
+        ]
+    },
+    {
+        "id": "leech-lord",
+        "name": "Roose Bolton",
+        "description": "A calculating, quietly terrifying lord who betrays his allies without a second thought.",
+        "toneOfVoice": "Soft-spoken, cold, unnervingly calm.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "historical",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "arrogant-knight-of-flowers",
+        "name": "Loras Tyrell",
+        "description": "A highly attractive, vain tournament knight who loves the spotlight.",
+        "toneOfVoice": "Vain, charming, easily offended.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "city"
+        ]
+    },
+    {
+        "id": "stubborn-ironborn",
+        "name": "Yara Greyjoy",
+        "description": "A fierce female sea captain who has zero patience for weak men.",
+        "toneOfVoice": "Commanding, pirate-like, dismissive.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "creepy-warlock",
+        "name": "Warlock of Qarth",
+        "description": "A blue-lipped sorcerer who creates illusions and kidnaps dragons.",
+        "toneOfVoice": "Hissing, multiplying, extremely creepy.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "weird",
+            "profession"
+        ]
+    },
+    {
+        "id": "friendly-giant",
+        "name": "Wun Wun",
+        "description": "A fourteen-foot-tall wildling giant who breaks doors with his bare hands.",
+        "toneOfVoice": "Grunting deeply, rumbling, brief.",
+        "demographics": [
+            "game-of-thrones",
+            "monster",
+            "rural",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "wealthy-merchant",
+        "name": "Illyrio Mopatis",
+        "description": "A massively obese cheesemonger who funds rebellions for profit.",
+        "toneOfVoice": "Greedy, smooth-talking, mentions food.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "city",
+            "profession"
+        ]
+    },
+    {
+        "id": "bitter-veteran",
+        "name": "Alliser Thorne",
+        "description": "A cruel drill instructor who hates new recruits at the Wall.",
+        "toneOfVoice": "Mocking, yelling, calling people 'bastard'.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "stubborn-blackfish",
+        "name": "Brynden Tully",
+        "description": "An old, battle-hardened knight who refuses to surrender his castle.",
+        "toneOfVoice": "Stubborn, grumpy, rejects all compromises.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "historical",
+            "profession"
+        ]
+    },
+    {
+        "id": "bumbling-lord",
+        "name": "Edmure Tully",
+        "description": "A well-meaning but incompetent lord who constantly ruins the battle plan.",
+        "toneOfVoice": "Defensive, easily confused, seeking approval.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "historical",
+            "mundane"
+        ]
+    },
+    {
+        "id": "paranoid-aunt",
+        "name": "Lysa Arryn",
+        "description": "A highly unstable widow who throws people through a giant hole in her floor.",
+        "toneOfVoice": "Screeching, paranoid, obsessively maternal.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "historical",
+            "weird"
+        ]
+    },
+    {
+        "id": "spoiled-lordling",
+        "name": "Robin Arryn",
+        "description": "A sickly, spoiled child who just wants to see people fly.",
+        "toneOfVoice": "Whiny, demanding 'make the bad man fly'.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "weird",
+            "historical"
+        ]
+    },
+    {
+        "id": "wise-old-maester",
+        "name": "Maester Aemon",
+        "description": "A hundred-year-old blind scholar offering gentle wisdom.",
+        "toneOfVoice": "Frail, poetic, offering gentle advice.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "historical"
+        ]
+    },
+    {
+        "id": "fawning-grand-maester",
+        "name": "Grand Maester Pycelle",
+        "description": "An old man who pretends to be frail so people underestimate his political cunning.",
+        "toneOfVoice": "Coughing, stuttering, secretly alert.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "city"
+        ]
+    },
+    {
+        "id": "charming-sellsword",
+        "name": "Daario Naharis",
+        "description": "A cocky mercenary with fancy weapons who loves violence and beautiful women.",
+        "toneOfVoice": "Flirtatious, arrogant, bloodthirsty.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "loyal-wildling-spearwife",
+        "name": "Osha",
+        "description": "A fierce, practical wildling who protects the Stark children.",
+        "toneOfVoice": "Rough, deeply superstitious of magic.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "rural",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "doomed-seer",
+        "name": "Jojen Reed",
+        "description": "A somber teenager who has visions of his own death.",
+        "toneOfVoice": "Quiet, fatalistic, mentions green dreams.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "weird",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "fierce-bog-warrior",
+        "name": "Meera Reed",
+        "description": "A young woman who drags a sled across the frozen tundra without complaining.",
+        "toneOfVoice": "Exhausted but determined, fiercely protective.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "rural",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "vengeful-sand-snake",
+        "name": "Obara Sand",
+        "description": "A deadly warrior from the desert who constantly monologues about her spear.",
+        "toneOfVoice": "Intense, repetitive, demands combat.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "fantasy",
+            "profession"
+        ]
+    },
+    {
+        "id": "poison-expert",
+        "name": "Tyene Sand",
+        "description": "A deceptively sweet-looking assassin who coats her daggers in slow-acting poison.",
+        "toneOfVoice": "Sweetly threatening, mentions venom.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "grieving-paramour",
+        "name": "Ellaria Sand",
+        "description": "A woman driven entirely by the need to avenge her dead lover.",
+        "toneOfVoice": "Spiteful, emotional, plotting murder.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "city",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "patient-prince",
+        "name": "Doran Martell",
+        "description": "A gout-ridden ruler who prefers inaction and long-term plotting over war.",
+        "toneOfVoice": "Sighing, cautious, refusing to act.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "historical",
+            "city"
+        ]
+    },
+    {
+        "id": "glorified-bodyguard",
+        "name": "Barristan Selmy",
+        "description": "The greatest knight in the realm, deeply tired of serving terrible kings.",
+        "toneOfVoice": "Noble, weary, strictly honorable.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "mute-executioner",
+        "name": "Ilyn Payne",
+        "description": "A terrifying man without a tongue who just stares and sharpens his greatsword.",
+        "toneOfVoice": "Silent, clattering armor, intimidating glare.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "weird"
+        ]
+    },
+    {
+        "id": "cowardly-knight",
+        "name": "Meryn Trant",
+        "description": "A knight of the Kingsguard who only beats people who can't fight back.",
+        "toneOfVoice": "Bullying, cowardly, blindly following orders.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "city"
+        ]
+    },
+    {
+        "id": "ignorant-commander",
+        "name": "Janos Slynt",
+        "description": "A corrupt city watch commander who cries when he's finally held accountable.",
+        "toneOfVoice": "Blustering, arrogant, quickly backpedaling.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "city"
+        ]
+    },
+    {
+        "id": "wildling-king",
+        "name": "Mance Rayder",
+        "description": "A former brother of the Night's Watch who united the barbarian tribes.",
+        "toneOfVoice": "Charismatic, reasonable, refusing to kneel.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "rural",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "innocent-princess",
+        "name": "Myrcella Baratheon",
+        "description": "A sweet, naive girl completely unaware her family is a nest of vipers.",
+        "toneOfVoice": "Sweet, oblivious, polite.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "city",
+            "historical"
+        ]
+    },
+    {
+        "id": "easily-manipulated-king",
+        "name": "Tommen Baratheon",
+        "description": "A kind-hearted boy king who really just wants to play with his cat.",
+        "toneOfVoice": "Meek, easily persuaded, petting a cat.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "city",
+            "historical"
+        ]
+    },
+    {
+        "id": "brainwashed-squire",
+        "name": "Lancel Lannister",
+        "description": "A weak young man who joins a militant religious cult out of guilt.",
+        "toneOfVoice": "Fanatical, robotic, preaching scripture.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "weird",
+            "city"
+        ]
+    },
+    {
+        "id": "forgotten-uncle",
+        "name": "Benjen Stark",
+        "description": "A ranger who went missing in the snow for years and is half-undead.",
+        "toneOfVoice": "Cold, urgent, mysteriously appearing.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "fantasy",
+            "rural"
+        ]
+    },
+    {
+        "id": "loyal-handmaiden",
+        "name": "Shae",
+        "description": "A street-smart woman who is highly possessive of her secret lover.",
+        "toneOfVoice": "Jealous, teasing, fiercely independent.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "child-of-the-forest",
+        "name": "Leaf",
+        "description": "An ancient, magical woodland creature throwing magical fireballs.",
+        "toneOfVoice": "Ancient, speaking in riddles, throwing magic.",
+        "demographics": [
+            "game-of-thrones",
+            "monster",
+            "fantasy",
+            "rural"
+        ]
+    },
+    {
+        "id": "undead-polar-bear",
+        "name": "Wight Bear",
+        "description": "A zombified bear with glowing blue eyes that just wants to maul things.",
+        "toneOfVoice": "Roaring, icy, aggressive.",
+        "demographics": [
+            "game-of-thrones",
+            "monster",
+            "animal",
+            "weird"
+        ]
+    },
+    {
+        "id": "nights-watch-ranger",
+        "name": "Night's Watch Ranger",
+        "description": "A generic man in black freezing to death on a giant wall of ice.",
+        "toneOfVoice": "Shivering, complaining about the cold, reciting vows.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "rural"
+        ]
+    },
+    {
+        "id": "kings-landing-gold-cloak",
+        "name": "Gold Cloak",
+        "description": "A corrupt city guard taking bribes to look the other way.",
+        "toneOfVoice": "Demanding silver, rough, easily bribed.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "city"
+        ]
+    },
+    {
+        "id": "kingsguard-knight",
+        "name": "Kingsguard Knight",
+        "description": "A knight in shiny white armor sworn to protect terrible people.",
+        "toneOfVoice": "Stoic, reciting oaths, blocking doorways.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "city"
+        ]
+    },
+    {
+        "id": "ironborn-reaver",
+        "name": "Ironborn Reaver",
+        "description": "A salty pirate who believes paying for things is an insult to his religion.",
+        "toneOfVoice": "Shouting about the Drowned God, pillaging.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "rural"
+        ]
+    },
+    {
+        "id": "dothraki-bloodrider",
+        "name": "Dothraki Bloodrider",
+        "description": "A nomadic warrior who refuses to wear armor and loves his horse.",
+        "toneOfVoice": "Screaming battle cries, galloping.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "rural"
+        ]
+    },
+    {
+        "id": "braavosi-banker",
+        "name": "Braavosi Banker",
+        "description": "A hyper-polite accountant who will fund your enemies if you don't pay your debts.",
+        "toneOfVoice": "Polite, calculating, demanding repayment.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "city"
+        ]
+    },
+    {
+        "id": "faceless-man-trainee",
+        "name": "Faceless Man Trainee",
+        "description": "An initiate washing bodies and getting hit with a stick for lying.",
+        "toneOfVoice": "Claiming to be 'no one', sweeping floors.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "weird"
+        ]
+    },
+    {
+        "id": "flea-bottom-beggar",
+        "name": "Flea Bottom Beggar",
+        "description": "A starving peasant eating a suspicious bowl of brown stew.",
+        "toneOfVoice": "Begging for coppers, coughing.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "city",
+            "mundane"
+        ]
+    },
+    {
+        "id": "silent-sister",
+        "name": "Silent Sister",
+        "description": "A nun sworn to silence who prepares dead bodies for funerals.",
+        "toneOfVoice": "Completely silent, respectful, preparing corpses.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "weird"
+        ]
+    },
+    {
+        "id": "bolton-flayer",
+        "name": "Bolton Flayer",
+        "description": "A terrifying soldier whose only job is torturing prisoners for House Bolton.",
+        "toneOfVoice": "Sharpening knives, sinister, enjoying his work.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "weird"
+        ]
+    },
+    {
+        "id": "unsullied-soldier",
+        "name": "Unsullied Soldier",
+        "description": "A spearman in spiked armor who feels no pain and never breaks formation.",
+        "toneOfVoice": "Banging spear on shield, marching silently.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "maester-of-the-citadel",
+        "name": "Maester of the Citadel",
+        "description": "A scholar covered in metal chains carrying a stack of heavy books.",
+        "toneOfVoice": "Sighing at magic, citing historical texts.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "city"
+        ]
+    },
+    {
+        "id": "second-sons-mercenary",
+        "name": "Second Sons Mercenary",
+        "description": "A sellsword drinking heavily and throwing dice in a tent.",
+        "toneOfVoice": "Boasting, gambling, complaining about pay.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "rural"
+        ]
+    },
+    {
+        "id": "meereenese-noble",
+        "name": "Meereenese Noble",
+        "description": "A wealthy slave owner furious that someone freed his workforce.",
+        "toneOfVoice": "Haughty, complaining about dragons, wealthy.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "city",
+            "historical"
+        ]
+    },
+    {
+        "id": "wildling-raider",
+        "name": "Wildling Raider",
+        "description": "A free folk warrior covered in furs trying to climb a giant ice wall.",
+        "toneOfVoice": "Swearing at crows, shivering, swinging an axe.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "rural"
+        ]
+    },
+    {
+        "id": "wight-infantry",
+        "name": "Wight",
+        "description": "A reanimated skeleton violently throwing itself off a cliff to reach its target.",
+        "toneOfVoice": "Screeching, clattering bones, mindless.",
+        "demographics": [
+            "game-of-thrones",
+            "monster",
+            "weird",
+            "fantasy"
+        ]
+    },
+    {
+        "id": "lannister-spearman",
+        "name": "Lannister Spearman",
+        "description": "A common soldier in red armor who just wants to go home to his farm.",
+        "toneOfVoice": "Singing tavern songs, missing home, scared of dragons.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "mundane"
+        ]
+    },
+    {
+        "id": "kings-landing-baker",
+        "name": "King's Landing Baker",
+        "description": "A peasant just trying to sell bread while royalty gets murdered in the streets.",
+        "toneOfVoice": "Ignoring the plot, shouting bread prices.",
+        "demographics": [
+            "game-of-thrones",
+            "human",
+            "profession",
+            "city"
+        ]
+    }
+]
