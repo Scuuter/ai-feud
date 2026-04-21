@@ -83,8 +83,8 @@ GOAL: Maximize coverage so that most raw answers fit into one of these categorie
 
 For each category, provide:
 1. "id": A strict, lowercase-kebab-case identifier (e.g., "locked-doors").
-2. "uiText": A punchy, flavorful name for the game board (e.g., "Checking the Locks!").
-3. "aiPromptName": A broad description of the semantic bucket to help another AI map synonymous answers (e.g., "Verifying that doors, windows, or gates are locked and secure").
+2. "uiText": A short noun or noun phrase that correctly completes the topic sentence. For fill-in-the-blank topics it slots into the blank; for non-blank topics it is a concise answer phrase. Examples: "Drink", "Pet animal", "Brush teeth".
+3. "aiPromptName": A concrete noun enumeration naming the semantic bucket with representative examples (e.g., "Drinkable liquids: coffee, rum, wine.").
 
 Output ONLY valid JSON according to the schema.`;
 }
@@ -96,16 +96,16 @@ export function buildAssignChunkPrompt(input: AssignChunkInput): string {
   return `You are a deterministic data mapping engine.
 TOPIC: "${input.topicText}"
 
-TASK: Map each of the ${input.chunkCount} personaIds to the MOST SPECIFIC category "id" from the list below.
+TASK: Map each of the ${input.chunkCount} personaIds to the MOST SPECIFIC category from the list below. Set assignedCategory to the category's identifier string value (the value of its id field, e.g. "emergency-escape", "beverages") — NOT the word "id".
 
 CATEGORIES:
 ${input.categoriesList}
 
 STRICT RULES:
 1. You MUST choose an exact "id" from the Categories array for assignedCategory.
-2. Every personaId from the input must appear in the output exactly once.
+2. COMPLETENESS: Every personaId from the input MUST appear in the output exactly once. Do not skip, merge, or omit any entry.
 3. DO NOT modify, shorten, or make up new ids.
-4. Process the "Raw Answers" list sequentially.
+4. WILDCARD LAST RESORT: Only assign "wildcard" if the answer has no meaningful semantic relationship with ANY other category. Before assigning "wildcard", check the answer against every other category's description.
 5. No reasoning, no chatter. Output ONLY valid JSON according to the schema.
 
 ANSWERS TO MAP:

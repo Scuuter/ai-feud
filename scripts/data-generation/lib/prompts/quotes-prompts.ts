@@ -86,11 +86,11 @@ PERSONAS:
 ${personaBlock}
 
 TASK: For each persona, write a short (max 15 words), in-character quote that sounds like they said it. 
-The quote must feel like a natural reaction to giving the answer above — it should match their tone and reference their raw answer where relevant.
+The quote must directly reference their raw answer and connect it to the cluster theme — it should match their tone.
 
 Rules:
 - Stay strictly in-character (match the tone field).
-- Mention their answer directly.
+- Directly mention their raw answer (theirAnswer) — this is mandatory, not optional.
 - Keep it punchy and fun for a game show audience.
 - Use the persona's name as the personaName in your output.
 - Output ONLY valid JSON according to the schema.`;

@@ -74,7 +74,7 @@ export const PROMPT_REGISTRY: Record<string, PromptDescriptor> = {
     build: (input) => buildSurveyPrompt(input as unknown as SurveyAnswerInput),
     suggestedModel: 'small',
     suggestedMaxTokens: 100,
-    suggestedTemperature: 0.8,
+    suggestedTemperature: 0.6,
   },
 
   'cluster:extract-categories': {
@@ -113,7 +113,7 @@ export const PROMPT_REGISTRY: Record<string, PromptDescriptor> = {
     build: (input) => buildAssignChunkPrompt(input as unknown as AssignChunkInput),
     schema: assignClustersChunkSchema,
     suggestedModel: 'small',
-    suggestedMaxTokens: 2000,
+    suggestedMaxTokens: 3000,
     suggestedTemperature: 0,
   },
 
@@ -126,8 +126,8 @@ export const PROMPT_REGISTRY: Record<string, PromptDescriptor> = {
     } satisfies SynonymJobInput,
     build: (input) => buildSynonymPrompt(input as unknown as SynonymJobInput),
     schema: synonymJobSchema,
-    suggestedModel: 'small',
-    suggestedMaxTokens: 500,
+    suggestedModel: 'large',
+    suggestedMaxTokens: 2000,
     suggestedTemperature: 0.7,
   },
 
@@ -162,7 +162,7 @@ export const PROMPT_REGISTRY: Record<string, PromptDescriptor> = {
     build: (input) => buildWildcardQuotePrompt(input as unknown as WildcardQuoteJobInput),
     schema: wildcardQuoteJobSchema,
     suggestedModel: 'small',
-    suggestedMaxTokens: 200,
+    suggestedMaxTokens: 500,
     suggestedTemperature: 0.7,
   },
 };

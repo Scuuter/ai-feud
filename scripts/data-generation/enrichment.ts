@@ -56,9 +56,10 @@ import { runWithConcurrency } from './utils/concurrency.js';
 
 async function enrichClusterSynonyms(
   cluster: AnswerCluster,
-  topicText: string
+  topicText: string,
+  siblingClusterTexts: string[]
 ): Promise<string[]> {
-  const prompt = buildSynonymPrompt({ clusterText: cluster.text, topicText });
+  const prompt = buildSynonymPrompt({ clusterText: cluster.text, topicText, siblingClusterTexts });
   const { data: raw } = await callLMStudioWithRetry<unknown>(
     prompt,
     MODEL_SMALL_PARALLEL,
@@ -170,8 +171,13 @@ async function processTopic(
   // ── Sub-step A + B: Parallel cluster enrichment ──────────────────────────
 
   console.log(`   [A] Generating synonyms for ${surveyResult.clusters.length} clusters...`);
+  const allClusterTexts = surveyResult.clusters.map(c => c.text);
   const synonymTasks = surveyResult.clusters.map(cluster => () =>
-    enrichClusterSynonyms(cluster, surveyResult.topicText)
+    enrichClusterSynonyms(
+      cluster,
+      surveyResult.topicText,
+      allClusterTexts.filter(t => t !== cluster.text)
+    )
   );
   const allSynonyms = await runWithConcurrency(synonymTasks, CONCURRENCY_LIMIT);
 

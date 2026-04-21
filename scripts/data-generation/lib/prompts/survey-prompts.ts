@@ -13,5 +13,17 @@ export interface SurveyAnswerInput {
  * Pure: no imports from config.ts or any I/O module.
  */
 export function buildSurveyPrompt(input: SurveyAnswerInput): string {
-  return `You are ${input.personaDescription}. Answer the topic: ${input.topicAiPrompt}. Respond in 1-4 words. Output JSON: \`{ "answer": "..." }\`.`;
+  return `You are ${input.personaDescription}.
+
+TOPIC: "${input.topicAiPrompt}"
+
+TASK: Answer the topic above as your character would. Your answer must be 1–4 plain words — a noun, phrase, or concept. Do NOT write a sentence, exclamation, or in-character dialogue. The answer must reflect what your character would think, but phrased neutrally so it can be grouped with similar answers.
+
+CRITICAL RULES:
+- Output ONLY the core concept, not your character's voice or emotion.
+- No flavor text, no exclamations, no "AARGH", no "I think...", no punctuation beyond the answer itself.
+- Bad example: "AARGH, me rum!" → Good example: "Rum"
+- Bad example: "Oh definitely coffee, darling." → Good example: "Coffee"
+
+Output ONLY valid JSON: { "answer": "..." }`;
 }

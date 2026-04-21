@@ -40,3 +40,6 @@ scripts/output/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.kiro
+.vscode

@@ -111,25 +111,60 @@ describe('buildAssignChunkPrompt', () => {
 // ─── buildSynonymPrompt ───────────────────────────────────────────────────────
 
 describe('buildSynonymPrompt', () => {
-  const input = {
+  const baseInput = {
     clusterText: 'Keys & Wallet',
     topicText: 'Name something you always check before leaving the house.',
   };
 
-  it('returns a non-empty string', () => {
-    expect(buildSynonymPrompt(input)).toBeTruthy();
-  });
-
   it('contains the clusterText', () => {
-    expect(buildSynonymPrompt(input)).toContain('Keys & Wallet');
+    expect(buildSynonymPrompt(baseInput)).toContain('Keys & Wallet');
   });
 
   it('contains the topicText', () => {
-    expect(buildSynonymPrompt(input)).toContain('Name something you always check');
+    expect(buildSynonymPrompt(baseInput)).toContain('Name something you always check');
   });
 
   it('contains no undefined interpolations', () => {
-    expect(hasNoUndefined(buildSynonymPrompt(input))).toBe(true);
+    expect(hasNoUndefined(buildSynonymPrompt(baseInput))).toBe(true);
+  });
+
+  describe('sibling clusters block', () => {
+    it('omits the sibling block when siblingClusterTexts is not provided', () => {
+      const result = buildSynonymPrompt(baseInput);
+      expect(result).not.toContain('ALREADY ON THE BOARD');
+    });
+
+    it('omits the sibling block when siblingClusterTexts is empty', () => {
+      const result = buildSynonymPrompt({ ...baseInput, siblingClusterTexts: [] });
+      expect(result).not.toContain('ALREADY ON THE BOARD');
+    });
+
+    it('includes the sibling block when siblings are provided', () => {
+      const result = buildSynonymPrompt({ ...baseInput, siblingClusterTexts: ['Phone', 'Jacket'] });
+      expect(result).toContain('ALREADY ON THE BOARD');
+    });
+
+    it('lists each sibling cluster in the block', () => {
+      const result = buildSynonymPrompt({ ...baseInput, siblingClusterTexts: ['Phone', 'Jacket'] });
+      expect(result).toContain('"Phone"');
+      expect(result).toContain('"Jacket"');
+    });
+
+    it('does not include the target cluster in the sibling block', () => {
+      // Orchestrator filters out the current cluster before passing siblings —
+      // this test documents that contract: if it leaks through, the prompt is self-contradictory.
+      const result = buildSynonymPrompt({
+        ...baseInput,
+        siblingClusterTexts: ['Phone', 'Jacket'],
+      });
+      const siblingSection = result.split('ALREADY ON THE BOARD')[1] ?? '';
+      expect(siblingSection).not.toContain('"Keys & Wallet"');
+    });
+
+    it('contains no undefined interpolations with siblings', () => {
+      const result = buildSynonymPrompt({ ...baseInput, siblingClusterTexts: ['Phone'] });
+      expect(hasNoUndefined(result)).toBe(true);
+    });
   });
 });
 
