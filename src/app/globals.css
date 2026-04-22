@@ -8,6 +8,16 @@
  * defined inside `[data-demographic]` selectors. The `data-demographic`
  * attribute is applied to the TV frame element, so the "channel skin" is
  * visually contained within the TV chassis and does not bleed into the page.
+ *
+ * Token roles (post-refactor):
+ *   --color-room-bg    → "SCREEN CHROME" tint behind header / subject / topic /
+ *                        input strips, themed per demographic. The board area
+ *                        uses --color-screen-base, which stays closer to the
+ *                        neutral broadcast-paper look so revealed tiles read.
+ *   --color-room-ink   → ink color for any text that sits on --color-room-bg.
+ *   --color-screen-base→ board-area background. Subtle per-channel tint.
+ *   --color-tile-shadow→ the immutable cyan drop-shadow by default, re-tinted
+ *                        per channel (still a chromatic accent, never muddy).
  * ============================================================================= */
 
 @theme inline {
@@ -28,7 +38,6 @@
   --color-tv-silver: #c0c0c0;
   --color-tv-silver-light: #e6e6e6;
   --color-tv-silver-dark: #8f8f8f;
-  --color-tv-static: #f5f5f5;
   --color-vice-blue: #00ffff;
   --color-alert-red: #ff0000;
   --color-wildcard-yellow: #ffd700;
@@ -37,10 +46,11 @@
 
   /* Themed semantic tokens. The raw custom properties (--room-bg, etc.) are
    * only defined inside [data-demographic] selectors below, so these resolve
-   * to their fallbacks outside the TV frame and never leak into page chrome.
+   * to sensible fallbacks outside the TV frame and never leak into page chrome.
    */
   --color-room-bg: var(--room-bg, #ffc0cb);
   --color-room-ink: var(--room-ink, #000000);
+  --color-screen-base: var(--screen-base, #f5f5f5);
   --color-tile-shadow: var(--tile-shadow, #00ffff);
   --color-wildcard-accent: var(--wildcard-accent, #ffd700);
   --color-miss-accent: var(--miss-accent, #ff0000);
@@ -58,13 +68,13 @@
 
 /* =============================================================================
  * Demographic skins
- * Each selector sets ONLY the six theme tokens. Applied to the TV frame
- * element via the `data-demographic` attribute.
+ * Each selector sets ONLY the theme tokens. Applied to the TV frame element.
  * ============================================================================= */
 
 [data-demographic="default"] {
   --room-bg: #ffc0cb;
-  --room-ink: #000000;
+  --room-ink: #1a0a10;
+  --screen-base: #fff6f8;
   --tile-shadow: #00ffff;
   --wildcard-accent: #ffd700;
   --miss-accent: #ff0000;
@@ -72,8 +82,9 @@
 }
 
 [data-demographic="game-of-thrones"] {
-  --room-bg: #3a3f44;
-  --room-ink: #d7d2c8;
+  --room-bg: #2e343a;
+  --room-ink: #e6e1d5;
+  --screen-base: #e6dfce;
   --tile-shadow: #a8d8ea;
   --wildcard-accent: #d4af37;
   --miss-accent: #8b0000;
@@ -81,8 +92,9 @@
 }
 
 [data-demographic="modern-berlin"] {
-  --room-bg: #2a2a2a;
+  --room-bg: #1c1c1c;
   --room-ink: #f5f5f0;
+  --screen-base: #e4e4e2;
   --tile-shadow: #ff00ff;
   --wildcard-accent: #39ff14;
   --miss-accent: #ff0040;
@@ -90,8 +102,9 @@
 }
 
 [data-demographic="italian-village"] {
-  --room-bg: #f4e4bc;
+  --room-bg: #e9d39a;
   --room-ink: #3b2a1a;
+  --screen-base: #faf2da;
   --tile-shadow: #6b8e23;
   --wildcard-accent: #e25822;
   --miss-accent: #9b2335;
@@ -157,15 +170,19 @@
 /* =============================================================================
  * Motion: marquee, blinking cursor, pulsing LIVE dot
  * All animations honor prefers-reduced-motion.
+ *
+ * .animate-marquee reads its duration from --ticker-duration so NewsTicker
+ * can scale it to content length (keeps perceived speed consistent across
+ * channels that have longer or shorter phrase pools).
  * ============================================================================= */
 
 @keyframes ticker-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 
 .animate-marquee {
-  animation: ticker-marquee 30s linear infinite;
+  animation: ticker-marquee var(--ticker-duration, 45s) linear infinite;
 }
 
 @keyframes cursor-blink {
