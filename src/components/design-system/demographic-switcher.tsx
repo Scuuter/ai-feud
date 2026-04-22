@@ -7,7 +7,7 @@ import {
   DEMOGRAPHICS,
   type DemographicId,
   type DemographicSkin,
-} from "@/src/lib/design-system/demographics";
+} from "@/lib/design-system/demographics";
 
 type DemographicSwitcherProps = {
   /** Called whenever the active demographic changes (for parent previews). */

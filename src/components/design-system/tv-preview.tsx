@@ -7,7 +7,7 @@ import {
   DEMOGRAPHICS,
   getDemographic,
   type DemographicSkin,
-} from "@/src/lib/design-system/demographics";
+} from "@/lib/design-system/demographics";
 import { DemographicSwitcher } from "./demographic-switcher";
 import { TVFrame, TVScreen } from "./tv-frame";
 import { Tile } from "./tile";

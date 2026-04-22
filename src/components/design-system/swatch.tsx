@@ -1,4 +1,4 @@
-import type { HexColor } from "@/src/lib/design-system/tokens";
+import type { HexColor } from "@/lib/design-system/tokens";
 
 type SwatchProps = {
   /** CSS color value or custom property reference. */
