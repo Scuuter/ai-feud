@@ -1,26 +1,250 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* =============================================================================
+ * Survey Says: AI Feud — Design Tokens
+ * See docs/design-system.md for the canonical spec.
+ *
+ * Theming rule: demographic tokens (--room-bg, --tile-shadow, etc.) are ONLY
+ * defined inside `[data-demographic]` selectors. The `data-demographic`
+ * attribute is applied to the TV frame element, so the "channel skin" is
+ * visually contained within the TV chassis and does not bleed into the page.
+ *
+ * Token roles:
+ *   --color-room-bg    → "SCREEN CHROME" tint behind header / subject / topic /
+ *                        input strips, themed per demographic.
+ *   --color-room-ink   → ink color for any text that sits on --color-room-bg.
+ *   --color-screen-base→ board-area background. Subtle per-channel tint.
+ *   --color-tile-bg    → tile surface, themed per channel (parchment, concrete…)
+ *   --color-tile-ink   → tile body text, themed per channel.
+ *   --color-tile-rank-bg / --color-tile-rank-ink
+ *                      → rank-cell accent chip on each tile. Carries the
+ *                        strongest per-channel identity (cyan vs slate vs
+ *                        neon-on-black vs wine).
+ *   --color-tile-shadow→ chunky hard drop-shadow on revealed tiles, themed.
+ * ============================================================================= */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Typography. next/font injects --font-blocks-src and --font-base-src; we
+   * compose them here with hard fallbacks so SSR renders a sensible face.
+   */
+  --font-blocks: var(--font-blocks-src), "Courier New", ui-monospace, monospace;
+  --font-base: var(--font-base-src), system-ui, -apple-system, "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+
+  /* Studio / page chrome — the "room the TV sits in". Neutral, non-themed. */
+  --color-studio-bg: #0a0a0a;
+  --color-studio-ink: #e8e8e8;
+  --color-studio-muted: #6a6a6a;
+
+  /* Core Vice City palette (immutable across all demographics) */
+  --color-vice-pink: #ffc0cb;
+  --color-tv-silver: #c0c0c0;
+  --color-tv-silver-light: #e6e6e6;
+  --color-tv-silver-dark: #8f8f8f;
+  --color-vice-blue: #00ffff;
+  --color-alert-red: #ff0000;
+  --color-wildcard-yellow: #ffd700;
+  --color-ink: #000000;
+  --color-paper: #ffffff;
+
+  /* Themed semantic tokens. The raw custom properties (--room-bg, etc.) are
+   * only defined inside [data-demographic] selectors below, so these resolve
+   * to sensible fallbacks outside the TV frame and never leak into page chrome.
+   */
+  --color-room-bg: var(--room-bg, #ffc0cb);
+  --color-room-ink: var(--room-ink, #000000);
+  --color-screen-base: var(--screen-base, #f5f5f5);
+  --color-tile-bg: var(--tile-bg, #ffffff);
+  --color-tile-ink: var(--tile-ink, #000000);
+  --color-tile-rank-bg: var(--tile-rank-bg, var(--color-tile-shadow));
+  --color-tile-rank-ink: var(--tile-rank-ink, #000000);
+  --color-tile-shadow: var(--tile-shadow, #00ffff);
+  --color-wildcard-accent: var(--wildcard-accent, #ffd700);
+  --color-miss-accent: var(--miss-accent, #ff0000);
+  --color-channel-dot: var(--channel-dot, #ff0000);
+
+  /* Type scale */
+  --text-blocks-xl: 4.5rem;
+  --text-blocks-lg: 3rem;
+  --text-blocks-md: 1.75rem;
+  --text-base-lg: 1.375rem;
+  --text-base-md: 1.125rem;
+  --text-base-sm: 0.875rem;
+  --text-base-xs: 0.75rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* =============================================================================
+ * Demographic skins
+ * Each selector sets ONLY the theme tokens. Applied to the TV frame element.
+ * ============================================================================= */
+
+[data-demographic="default"] {
+  --room-bg: #ffc0cb;
+  --room-ink: #1a0a10;
+  --screen-base: #fff6f8;
+  --tile-bg: #ffffff;
+  --tile-ink: #1a0a10;
+  --tile-rank-bg: #00ffff;
+  --tile-rank-ink: #000000;
+  --tile-shadow: #00ffff;
+  --wildcard-accent: #ffd700;
+  --miss-accent: #ff0000;
+  --channel-dot: #ff0000;
+}
+
+[data-demographic="game-of-thrones"] {
+  --room-bg: #2e343a;
+  --room-ink: #e6e1d5;
+  --screen-base: #d9cfb5;
+  --tile-bg: #f2ead6;
+  --tile-ink: #1a1a1a;
+  --tile-rank-bg: #2e343a;
+  --tile-rank-ink: #e6e1d5;
+  --tile-shadow: #a8d8ea;
+  --wildcard-accent: #d4af37;
+  --miss-accent: #8b0000;
+  --channel-dot: #8b0000;
+}
+
+[data-demographic="modern-berlin"] {
+  --room-bg: #1c1c1c;
+  --room-ink: #f5f5f0;
+  --screen-base: #d8d8d4;
+  --tile-bg: #f5f5f0;
+  --tile-ink: #1c1c1c;
+  --tile-rank-bg: #1c1c1c;
+  --tile-rank-ink: #39ff14;
+  --tile-shadow: #ff00ff;
+  --wildcard-accent: #39ff14;
+  --miss-accent: #ff0040;
+  --channel-dot: #39ff14;
+}
+
+[data-demographic="italian-village"] {
+  --room-bg: #e9d39a;
+  --room-ink: #3b2a1a;
+  --screen-base: #f4e7c4;
+  --tile-bg: #fff9e8;
+  --tile-ink: #3b2a1a;
+  --tile-rank-bg: #9b2335;
+  --tile-rank-ink: #faf2da;
+  --tile-shadow: #6b8e23;
+  --wildcard-accent: #e25822;
+  --miss-accent: #9b2335;
+  --channel-dot: #9b2335;
+}
+
+/* =============================================================================
+ * Surface treatments
+ * ============================================================================= */
+
+.tv-scanlines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.05) 0px,
+    rgba(0, 0, 0, 0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+.tv-vignette::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+}
+
+.chassis-gradient {
+  background-image: linear-gradient(
+    180deg,
+    var(--color-tv-silver-light) 0%,
+    var(--color-tv-silver) 45%,
+    var(--color-tv-silver-dark) 100%
+  );
+}
+
+.speaker-grille {
+  background-image: radial-gradient(
+    circle,
+    var(--color-ink) 1px,
+    transparent 1.4px
+  );
+  background-size: 6px 6px;
+  background-color: var(--color-tv-silver-dark);
+}
+
+/* Subtle haze behind the TV so it doesn't float on pure black */
+.studio-backdrop {
+  background-color: var(--color-studio-bg);
+  background-image:
+    radial-gradient(
+      ellipse at 50% 45%,
+      rgba(255, 255, 255, 0.04) 0%,
+      transparent 60%
+    );
+}
+
+/* =============================================================================
+ * Motion: marquee, blinking cursor, pulsing LIVE dot
+ * All animations honor prefers-reduced-motion.
+ *
+ * .animate-marquee reads its duration from --ticker-duration so NewsTicker
+ * can scale it to content length (keeps perceived speed consistent across
+ * channels that have longer or shorter phrase pools).
+ * ============================================================================= */
+
+@keyframes ticker-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+.animate-marquee {
+  animation: ticker-marquee var(--ticker-duration, 45s) linear infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.animate-cursor {
+  animation: cursor-blink 1.05s steps(1, end) infinite;
+}
+
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.85); }
+}
+
+.animate-live-pulse {
+  animation: live-pulse 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-cursor,
+  .animate-live-pulse {
+    animation: none;
   }
 }
 
+/* =============================================================================
+ * Root document defaults — NEUTRAL, not themed. Theme lives inside the TV.
+ * ============================================================================= */
+
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-studio-bg);
+  color: var(--color-studio-ink);
+}
+
+body {
+  font-family: var(--font-base);
+  -webkit-font-smoothing: antialiased;
 }

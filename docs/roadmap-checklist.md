@@ -27,11 +27,17 @@
 
 ### **Epic 3. The Frontend Core UI (Layer C)**
 *Build the Next.js App Router client with Tailwind and Framer Motion. Push `"use client"` as far down the tree as possible.*
+- [x] **Design System Foundation:** Authoritative design system (`docs/design-system.md`) defining the Y2K Vice-City aesthetic, token vocabulary (`--color-*`, `--text-*`, `--radius-*`), typography (Space Grotesk / Archivo Black / JetBrains Mono), demographic "channel skin" protocol, and per-component contracts. Implemented in `src/app/globals.css`, `src/lib/design-system/tokens.ts`, and `src/lib/design-system/demographics.ts`.
+- [x] **Demographic Skins (Glossary Integration):** Typed registry of four skins (Y2K Vice City base, Game of Thrones, Modern Berlin, Italian Village) with palette, typography, textures, sample topic/answers/wildcard, ticker phrases, and room description. Switching a skin retargets `[data-demographic]` on `<html>` and every themed token cascades.
 - [ ] **Game Loop Hook:** Create a custom React hook `useGameLoop` to manage local `GameState` using static JSON data for initial testing.
-- [ ] **Minimalist Layout:** Build the main application UI using purely Tailwind utility classes.
-- [ ] **Component: `<Board />` & `<Tile />`:** Implement the visual grid using `framer-motion` to handle the 3D card flip effects when a guess is correct.
-- [ ] **Component: `<InputTerminal />`:** Build a minimalist text input that captures a user's guess and clears upon pressing "Enter".
-- [ ] **Component: `<StrikeIndicator />`:** Create a large visual overlay/feedback mechanism to show when an incorrect guess yields a `Strike`.
+- [x] **Minimalist Layout:** Main app shell built with Tailwind utilities only (`src/app/layout.tsx`, `src/app/page.tsx`). No component library; typography via `next/font`; background + inks themed via tokens.
+- [x] **Component: `<Board />` & `<Tile />`:** Implemented `Tile` with revealed / unrevealed / wildcard states, chunky ink border + hard drop-shadow, rank badge, score, and flavor quote slot. Board rendered as a 2-column grid inside `<TVScreen />`. *Note: Framer-Motion 3D flip to be wired when the hook lands — static reveal state is in place.*
+- [x] **Component: `<InputTerminal />`:** Minimalist ink-bordered text input with blinking caret, monospace font, uppercase transform, and focused state. Ready to be wired to `useGameLoop`'s submit handler.
+- [x] **Component: `<StrikeIndicator />`:** Full-board overlay supporting `miss` (red X slam) and `wildcard` (accented persona quote card) modes, demo-switchable on the showcase page.
+- [x] **Component: `<TVFrame />` / `<TVScreen />`:** Broadcast chassis (CRT bezel, channel label, physical buttons, screen glow) that wraps the gameplay UI so each demographic reads as its own "channel".
+- [x] **Component: `<NewsTicker />`:** Broadcast-style bottom ticker fed per-demographic phrases, with reduced-motion fallback.
+- [x] **Component: `<DemographicSwitcher />`:** Channel-select radiogroup that drives the active skin and room texture across the whole tree.
+- [x] **Composed Preview Page:** `/` renders the full TV mock with live demographic + overlay switching so the visual system can be reviewed and tested end-to-end before gameplay wiring.
 - [ ] **Viral Loop:** Implement the "Share your score" button that generates and copies a Wordle-style emoji grid to the user's clipboard.
 
 ### **Epic 4. Backend & Database Integration**
