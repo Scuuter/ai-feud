@@ -9,15 +9,18 @@
  * attribute is applied to the TV frame element, so the "channel skin" is
  * visually contained within the TV chassis and does not bleed into the page.
  *
- * Token roles (post-refactor):
+ * Token roles:
  *   --color-room-bg    → "SCREEN CHROME" tint behind header / subject / topic /
- *                        input strips, themed per demographic. The board area
- *                        uses --color-screen-base, which stays closer to the
- *                        neutral broadcast-paper look so revealed tiles read.
+ *                        input strips, themed per demographic.
  *   --color-room-ink   → ink color for any text that sits on --color-room-bg.
  *   --color-screen-base→ board-area background. Subtle per-channel tint.
- *   --color-tile-shadow→ the immutable cyan drop-shadow by default, re-tinted
- *                        per channel (still a chromatic accent, never muddy).
+ *   --color-tile-bg    → tile surface, themed per channel (parchment, concrete…)
+ *   --color-tile-ink   → tile body text, themed per channel.
+ *   --color-tile-rank-bg / --color-tile-rank-ink
+ *                      → rank-cell accent chip on each tile. Carries the
+ *                        strongest per-channel identity (cyan vs slate vs
+ *                        neon-on-black vs wine).
+ *   --color-tile-shadow→ chunky hard drop-shadow on revealed tiles, themed.
  * ============================================================================= */
 
 @theme inline {
@@ -51,6 +54,10 @@
   --color-room-bg: var(--room-bg, #ffc0cb);
   --color-room-ink: var(--room-ink, #000000);
   --color-screen-base: var(--screen-base, #f5f5f5);
+  --color-tile-bg: var(--tile-bg, #ffffff);
+  --color-tile-ink: var(--tile-ink, #000000);
+  --color-tile-rank-bg: var(--tile-rank-bg, var(--color-tile-shadow));
+  --color-tile-rank-ink: var(--tile-rank-ink, #000000);
   --color-tile-shadow: var(--tile-shadow, #00ffff);
   --color-wildcard-accent: var(--wildcard-accent, #ffd700);
   --color-miss-accent: var(--miss-accent, #ff0000);
@@ -75,6 +82,10 @@
   --room-bg: #ffc0cb;
   --room-ink: #1a0a10;
   --screen-base: #fff6f8;
+  --tile-bg: #ffffff;
+  --tile-ink: #1a0a10;
+  --tile-rank-bg: #00ffff;
+  --tile-rank-ink: #000000;
   --tile-shadow: #00ffff;
   --wildcard-accent: #ffd700;
   --miss-accent: #ff0000;
@@ -84,7 +95,11 @@
 [data-demographic="game-of-thrones"] {
   --room-bg: #2e343a;
   --room-ink: #e6e1d5;
-  --screen-base: #e6dfce;
+  --screen-base: #d9cfb5;
+  --tile-bg: #f2ead6;
+  --tile-ink: #1a1a1a;
+  --tile-rank-bg: #2e343a;
+  --tile-rank-ink: #e6e1d5;
   --tile-shadow: #a8d8ea;
   --wildcard-accent: #d4af37;
   --miss-accent: #8b0000;
@@ -94,7 +109,11 @@
 [data-demographic="modern-berlin"] {
   --room-bg: #1c1c1c;
   --room-ink: #f5f5f0;
-  --screen-base: #e4e4e2;
+  --screen-base: #d8d8d4;
+  --tile-bg: #f5f5f0;
+  --tile-ink: #1c1c1c;
+  --tile-rank-bg: #1c1c1c;
+  --tile-rank-ink: #39ff14;
   --tile-shadow: #ff00ff;
   --wildcard-accent: #39ff14;
   --miss-accent: #ff0040;
@@ -104,7 +123,11 @@
 [data-demographic="italian-village"] {
   --room-bg: #e9d39a;
   --room-ink: #3b2a1a;
-  --screen-base: #faf2da;
+  --screen-base: #f4e7c4;
+  --tile-bg: #fff9e8;
+  --tile-ink: #3b2a1a;
+  --tile-rank-bg: #9b2335;
+  --tile-rank-ink: #faf2da;
   --tile-shadow: #6b8e23;
   --wildcard-accent: #e25822;
   --miss-accent: #9b2335;

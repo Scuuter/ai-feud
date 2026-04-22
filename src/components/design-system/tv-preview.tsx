@@ -31,9 +31,14 @@ type OverlayMode = "none" | "miss" | "wildcard";
  *   1. Header strip: player-label · AI FEUD wordmark · ScoreCounter
  *   2. Subject strip: "WE ASKED 100 [SUBJECT PLURAL]…"  (themed)
  *   3. Topic strip:   the actual question               (themed)
- *   4. Board:         dynamic 3 / 5 / 7 / 8 tile grid
+ *   4. Board:         dynamic tile layout (see boardShape below)
  *   5. InputTerminal: interactive guess input
  *   6. NewsTicker:    broadcast ticker
+ *
+ * Board shape rules:
+ *   - tileCount ≤ 4      → vertical single column (avoids oversized tiles)
+ *   - tileCount = 5 | 7  → hero tile spans top row (rank 1), rest in 2 cols
+ *   - tileCount = 6 | 8  → plain 2 × (n/2) grid
  */
 export function TVPreview() {
   const [skin, setSkin] = useState<DemographicSkin>(() =>
@@ -47,8 +52,18 @@ export function TVPreview() {
   // Channel-driven board content.
   const tileCount = skin.tileCount;
   const answers = skin.sampleAnswers.slice(0, tileCount);
-  const rows = Math.ceil(tileCount / 2);
-  const isOdd = tileCount % 2 === 1;
+
+  const isVertical = tileCount <= 4;
+  const hasHeroTile = !isVertical && tileCount % 2 === 1;
+  const cols = isVertical ? 1 : 2;
+  const rows = isVertical
+    ? tileCount
+    : hasHeroTile
+      ? 1 + (tileCount - 1) / 2
+      : tileCount / 2;
+
+  // Reveal the front half so every board state shows both revealed + unrevealed.
+  const revealedCount = Math.ceil(tileCount / 2);
 
   const handlePick = (next: DemographicSkin) => {
     setSkin(next);
@@ -159,11 +174,12 @@ export function TVPreview() {
               </p>
             </div>
 
-            {/* Board — dynamic tile count. Odd counts: final tile spans full row. */}
+            {/* Board — dynamic tile count & shape */}
             <div className="relative flex-1 min-h-0 bg-[var(--color-screen-base)] p-2.5">
               <div
-                className="grid h-full grid-cols-2 gap-2"
+                className="grid h-full gap-2"
                 style={{
+                  gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
                   gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
                 }}
               >
@@ -174,9 +190,9 @@ export function TVPreview() {
                     text={answer.text}
                     score={answer.score}
                     flavorQuote={answer.flavorQuote}
-                    isRevealed={i < Math.ceil(tileCount / 2)}
+                    isRevealed={i < revealedCount}
                     className={
-                      isOdd && i === tileCount - 1 ? "col-span-2" : undefined
+                      hasHeroTile && i === 0 ? "col-span-2" : undefined
                     }
                   />
                 ))}

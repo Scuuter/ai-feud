@@ -1,26 +1,28 @@
 import { clsx } from "clsx";
 
 /**
- * Design-system preview of the game `<Tile />`.
+ * Game `<Tile />` — horizontal row layout.
  *
- * Layout hierarchy (revealed state):
- *   ┌───────────────────────────────────┐
- *   │ [#1]                       32 PTS │  ← top bar: rank · BIG score
- *   │                                   │
- *   │        A ROLLED-UP NEWSPAPER      │  ← answer text (centered)
- *   │                                   │
- *   │  — Tired Dad Wizard: "…"          │  ← optional flavor footer
- *   └───────────────────────────────────┘
+ *   ┌──────┬───────────────────────────────┬───────┐
+ *   │      │  A ROLLED-UP NEWSPAPER        │       │
+ *   │  #1  │  — Tired Dad Wizard: "…"      │  32   │
+ *   │      │                               │  PTS  │
+ *   └──────┴───────────────────────────────┴───────┘
+ *     rank       answer (title + quote)      score
  *
- * Rationale: the score is the central element of the game — we want it to
- * read at a glance from across the room. It lives in a dedicated top rail,
- * rendered in the blocks font at ~9cqi, so it scales with tile size.
+ * Visual hierarchy by size: score > rank > answer > quote. Rank cell is
+ * themed (tile-rank-bg / tile-rank-ink) so each channel carries its own
+ * accent color at a glance. Tile surface and ink are also themed, so the
+ * whole board repaints when the channel changes.
  *
  * Sizing contract: the tile fills its grid cell. Parent is responsible for
- * geometry via `grid-cols` + `grid-rows`. No intrinsic aspect-ratio.
+ * geometry (grid-cols, grid-rows, optional col-span-2 for the hero tile).
+ * No intrinsic aspect-ratio.
  *
- * Optional `className` lets the parent apply `col-span-2` for the trailing
- * wide tile on odd-count boards (3 / 5 / 7).
+ * Container queries (`cqi` on the width axis, `cqb` on the height axis) let
+ * the score / rank / answer scale with the tile itself. This is what makes
+ * the same component read well at 3-tile vertical (wide + short) and 8-tile
+ * grid (narrow + short) sizes.
  *
  * See `docs/design-system.md` §4.1 for the contract.
  */
@@ -45,93 +47,110 @@ export function Tile({
   flavorQuote,
   className,
 }: TileProps) {
+  if (!isRevealed) {
+    return (
+      <article
+        className={clsx(
+          "relative flex h-full min-h-0 w-full min-w-0 items-center justify-center border-4 border-ink",
+          className,
+        )}
+        style={{
+          backgroundColor: "var(--color-ink)",
+          color: "var(--color-tile-shadow)",
+          containerType: "inline-size",
+        }}
+        aria-label={`Unrevealed answer ${rank ?? ""}`}
+      >
+        {typeof rank === "number" ? (
+          <span className="absolute left-2 top-2 inline-flex h-5 min-w-5 items-center justify-center bg-[var(--color-tile-shadow)] px-1 font-blocks text-[11px] leading-none text-ink">
+            {rank}
+          </span>
+        ) : null}
+        <span
+          className="font-blocks leading-none"
+          style={{ fontSize: "clamp(2rem, 10cqb, 5rem)" }}
+          aria-hidden="true"
+        >
+          ?
+        </span>
+      </article>
+    );
+  }
+
   return (
     <article
       className={clsx(
-        "relative flex h-full min-h-0 w-full min-w-0 flex-col border-4 border-ink",
-        isRevealed
-          ? "bg-paper text-ink shadow-[4px_4px_0px_var(--color-tile-shadow)]"
-          : "bg-ink text-[var(--color-tile-shadow)]",
+        "relative flex h-full min-h-0 w-full min-w-0 flex-row items-stretch border-4 border-ink",
         className,
       )}
-      style={{ containerType: "inline-size" }}
+      style={{
+        backgroundColor: "var(--color-tile-bg)",
+        color: "var(--color-tile-ink)",
+        boxShadow: "4px 4px 0px var(--color-tile-shadow)",
+        containerType: "inline-size",
+      }}
       aria-label={
-        isRevealed
+        typeof score === "number"
           ? `Answer ${rank ?? ""}: ${text} — ${score} points`
-          : `Unrevealed answer ${rank ?? ""}`
+          : `Answer: ${text}`
       }
     >
-      {isRevealed ? (
-        <>
-          {/* Top rail: rank badge + big score */}
-          <header
-            className={clsx(
-              "flex items-center justify-between gap-2 border-b-2 border-ink/20 px-2.5",
-            )}
-            style={{ paddingTop: "0.35rem", paddingBottom: "0.35rem" }}
+      {/* Rank cell — themed accent, vertically centered, mid-weight numeral */}
+      {typeof rank === "number" ? (
+        <div
+          className="flex shrink-0 items-center justify-center border-r-4 border-ink px-2"
+          style={{
+            backgroundColor: "var(--color-tile-rank-bg)",
+            color: "var(--color-tile-rank-ink)",
+            minWidth: "clamp(2.5rem, 12cqi, 4.5rem)",
+          }}
+        >
+          <span
+            className="font-blocks leading-none tabular-nums"
+            style={{ fontSize: "clamp(1.5rem, 7cqi, 2.25rem)" }}
           >
-            {typeof rank === "number" ? (
-              <span className="inline-flex h-5 min-w-5 items-center justify-center bg-ink px-1 font-blocks text-[11px] leading-none text-paper">
-                {rank}
-              </span>
-            ) : (
-              <span aria-hidden="true" />
-            )}
-            {typeof score === "number" ? (
-              <span className="flex items-baseline gap-1 tabular-nums">
-                <span
-                  className="font-blocks leading-none text-ink"
-                  style={{ fontSize: "clamp(1.25rem, 8cqi, 2.25rem)" }}
-                >
-                  {score}
-                </span>
-                <span className="font-base text-[10px] font-bold uppercase tracking-widest text-ink/60">
-                  PTS
-                </span>
-              </span>
-            ) : null}
-          </header>
+            {rank}
+          </span>
+        </div>
+      ) : null}
 
-          {/* Answer body */}
-          <div className="flex flex-1 min-h-0 flex-col items-center justify-center gap-1 px-3 py-1.5 text-center">
-            <p
-              className="font-base font-bold leading-tight text-balance uppercase"
-              style={{ fontSize: "clamp(0.8rem, 4.2cqi, 1.25rem)" }}
-            >
-              {text}
-            </p>
-            {flavorQuote ? (
-              <p
-                className="font-base italic leading-snug text-pretty opacity-75"
-                style={{ fontSize: "clamp(0.6rem, 2.6cqi, 0.8rem)" }}
-              >
-                <span className="not-italic font-bold">
-                  &mdash; {flavorQuote.personaName}:
-                </span>{" "}
-                {`"${flavorQuote.text}"`}
-              </p>
-            ) : null}
-          </div>
-        </>
-      ) : (
-        <>
-          {/* Unrevealed: rank chip top-left, huge "?" centered */}
-          {typeof rank === "number" ? (
-            <span className="absolute left-2 top-2 inline-flex h-5 min-w-5 items-center justify-center bg-[var(--color-tile-shadow)] px-1 font-blocks text-[11px] leading-none text-ink">
-              {rank}
-            </span>
-          ) : null}
-          <div className="flex flex-1 items-center justify-center">
+      {/* Answer column — title on top, optional quote below, both centered */}
+      <div className="flex min-w-0 flex-1 flex-col items-center justify-center gap-1 px-3 py-1.5 text-center">
+        <p
+          className="font-base font-bold uppercase leading-tight text-balance"
+          style={{ fontSize: "clamp(0.8rem, 4.2cqi, 1.25rem)" }}
+        >
+          {text}
+        </p>
+        {flavorQuote ? (
+          <p
+            className="font-base italic leading-snug text-pretty opacity-70"
+            style={{ fontSize: "clamp(0.6rem, 2.6cqi, 0.8rem)" }}
+          >
+            <span className="not-italic font-bold">
+              &mdash; {flavorQuote.personaName}:
+            </span>{" "}
+            {`"${flavorQuote.text}"`}
+          </p>
+        ) : null}
+      </div>
+
+      {/* Score cell — vertically centered, biggest numeral on the tile */}
+      {typeof score === "number" ? (
+        <div className="flex shrink-0 items-center justify-center border-l-2 border-ink/20 px-3">
+          <span className="flex items-baseline gap-1 tabular-nums">
             <span
               className="font-blocks leading-none"
-              style={{ fontSize: "clamp(2.5rem, 18cqi, 5rem)" }}
-              aria-hidden="true"
+              style={{ fontSize: "clamp(1.5rem, 9cqi, 2.75rem)" }}
             >
-              ?
+              {score}
             </span>
-          </div>
-        </>
-      )}
+            <span className="font-base text-[10px] font-bold uppercase tracking-widest opacity-60">
+              PTS
+            </span>
+          </span>
+        </div>
+      ) : null}
     </article>
   );
 }
