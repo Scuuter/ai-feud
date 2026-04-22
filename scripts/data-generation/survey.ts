@@ -7,7 +7,7 @@ import {
   DATA_VERSION,
 } from "./config.js";
 import { Topic, Persona, RawResponse } from "./types.js";
-import { loadJson, ensureDir, writeJson, fileExists, buildOutputFilename } from "./utils/fs.js";
+import { loadJson, ensureDir, writeJson, fileExists, buildOutputFilename, buildOutputDir } from "./utils/fs.js";
 import { callLMStudioWithRetry } from "./utils/llm.js";
 import { renderProgressBar } from "./utils/progress.js";
 import { runWithConcurrency } from './utils/concurrency.js';
@@ -80,7 +80,8 @@ async function main() {
 
   console.log(`Using ${personas.length} personas for demographic "${demographicName}"`);
 
-  ensureDir(OUTPUT_RAW_DIR);
+  const rawDir = buildOutputDir(OUTPUT_RAW_DIR, demographicName);
+  ensureDir(rawDir);
 
   let topicsToProcess = topics;
   if (topicId) {
@@ -92,7 +93,7 @@ async function main() {
   } else if (runMissing) {
     topicsToProcess = topics.filter(topic => {
       const filename = buildOutputFilename(topic.id, demographicName, DATA_VERSION);
-      return !fileExists(`${OUTPUT_RAW_DIR}/${filename}`);
+      return !fileExists(`${rawDir}/${filename}`);
     });
     console.log(`Found ${topicsToProcess.length} topics missing raw data.`);
   }
@@ -115,7 +116,7 @@ async function main() {
     };
 
     const filename = buildOutputFilename(topic.id, demographicName, DATA_VERSION);
-    const outputPath = `${OUTPUT_RAW_DIR}/${filename}`;
+    const outputPath = `${rawDir}/${filename}`;
     await writeJson(outputPath, output);
     console.log(`Saved to ${outputPath}`);
   }

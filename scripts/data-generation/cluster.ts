@@ -18,7 +18,7 @@ import {
   WildCard,
   AnswerCategory,
 } from "./types.js";
-import { loadJson, ensureDir, writeJson, getNextVersionPath, getNextDebugRunDir, fileExists, buildOutputFilename } from "./utils/fs.js";
+import { loadJson, ensureDir, writeJson, getNextVersionPath, getNextDebugRunDir, fileExists, buildOutputFilename, buildOutputDir } from "./utils/fs.js";
 import { callLMStudioWithRetry } from "./utils/llm.js";
 import { normalizeScoresTo100 } from "./lib/normalization.js";
 import { aggregateAssignments, type AggregateAssignmentsResult } from "./lib/aggregation.js";
@@ -62,7 +62,7 @@ async function extractCategories(rawData: RawSurveyData, topicText: string, debu
     MODEL_LARGE_REASONING,
     0.7,
     16000,
-    1,
+    undefined,
     debugLabel,
     extractCategoriesSchema,
     debugSubDir
@@ -110,18 +110,21 @@ async function assignClusters(rawData: RawSurveyData, categories: AnswerCategory
       MODEL_SMALL_PARALLEL,
       0,
       2000,
-      1,
+      undefined,
       debugLabel,
       assignClustersChunkSchema,
       debugSubDir,
     )
       .then((res) => res.data)
-      .catch((): AssignClustersChunkResult => ({
-        assignments: chunk.map((r) => ({
-          personaId: r.personaId,
-          assignedCategory: 'wildcard',
-        })),
-      }));
+      .catch((err): AssignClustersChunkResult => {
+        console.error(`\n[REDUCE ERROR] Chunk failed after retries, assigning to wildcard:`, err.message);
+        return {
+          assignments: chunk.map((r) => ({
+            personaId: r.personaId,
+            assignedCategory: 'wildcard',
+          })),
+        };
+      });
   });
 
   const chunkResults = await runWithConcurrency(chunkTasks, CONCURRENCY_LIMIT, (done, total) => {
@@ -148,11 +151,12 @@ async function processTopic(
   topicText: string,
   demographicName: string,
   version: string,
+  rawDir: string,
   providedCategories?: AnswerCategory[]
 ): Promise<SurveyResult> {
   const debugSubDir = getNextDebugRunDir(topicId, DEBUG_OUTPUT_DIR);
   const rawFilename = buildOutputFilename(topicId, demographicName, version);
-  const rawPath = `${OUTPUT_RAW_DIR}/${rawFilename}`;
+  const rawPath = `${rawDir}/${rawFilename}`;
 
   const rawData = await loadJson<RawSurveyData>(rawPath);
   console.log(`Processing ${topicId} with ${rawData.rawResponses.length} responses`);
@@ -220,8 +224,11 @@ async function main() {
   const demographicName = demographic ?? DEMOGRAPHIC_NAME;
   const version = DATA_VERSION;
 
+  const rawDir = buildOutputDir(OUTPUT_RAW_DIR, demographicName);
+  const outputDir = buildOutputDir(OUTPUT_DIR, demographicName);
+  ensureDir(outputDir);
+
   const topics = await loadJson<Topic[]>(`${DATA_DIR}/topics-v1.json`);
-  ensureDir(OUTPUT_DIR);
 
   let topicsToProcess = topics;
   if (specificTopicId) {
@@ -234,8 +241,8 @@ async function main() {
     topicsToProcess = topics.filter(topic => {
       const rawFilename = buildOutputFilename(topic.id, demographicName, version);
       const outputFilename = buildOutputFilename(topic.id, demographicName, version);
-      const rawExists = fileExists(`${OUTPUT_RAW_DIR}/${rawFilename}`);
-      const outputExists = fileExists(`${OUTPUT_DIR}/${outputFilename}`);
+      const rawExists = fileExists(`${rawDir}/${rawFilename}`);
+      const outputExists = fileExists(`${outputDir}/${outputFilename}`);
       return rawExists && !outputExists;
     });
     console.log(`Found ${topicsToProcess.length} topics with raw data but no clusterized output.`);
@@ -255,9 +262,9 @@ async function main() {
         ? parsedCategories
         : (parsedCategories?.categories || undefined);
 
-      const result = await processTopic(topic.id, topic.uiText, demographicName, version, categories);
+      const result = await processTopic(topic.id, topic.uiText, demographicName, version, rawDir, categories);
       const outputFilename = buildOutputFilename(topic.id, demographicName, version);
-      const outputPath = `${OUTPUT_DIR}/${outputFilename}`;
+      const outputPath = `${outputDir}/${outputFilename}`;
       writeJson(outputPath, result);
       console.log(`Saved to ${outputPath}`);
     } catch (error) {

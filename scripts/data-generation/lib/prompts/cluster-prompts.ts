@@ -21,7 +21,7 @@ export const extractCategoriesSchema = {
           },
           required: ['id', 'uiText', 'aiPromptName'],
         },
-        minItems: 5,
+        minItems: 4,
         maxItems: 8,
       },
     },
@@ -78,12 +78,12 @@ TOPIC: "${input.topicText}"
 RAW ANSWERS:
 ${answersBlock}
 
-TASK: Analyze the ${input.answerCount} answers and extract 5 to 8 core categories that represent the most frequent semantic themes.
+TASK: Analyze the ${input.answerCount} answers and extract 4 to 8 core categories that represent the most frequent semantic themes.
 GOAL: Maximize coverage so that most raw answers fit into one of these categories. Ensure categories do not overlap.
 
 For each category, provide:
 1. "id": A strict, lowercase-kebab-case identifier (e.g., "locked-doors").
-2. "uiText": A short noun or noun phrase that correctly completes the topic sentence. For fill-in-the-blank topics it slots into the blank; for non-blank topics it is a concise answer phrase. Examples: "Drink", "Pet animal", "Brush teeth".
+2. "uiText": A short noun or noun phrase that correctly completes the topic sentence. The exact short phrase a player would say on the show. It must sound like a natural spoken answer, not a category label. For fill-in-the-blank topics it slots into the blank; for non-blank topics it is a concise answer phrase. Examples: "Drink", "Pet animal", "Brush teeth".
 3. "aiPromptName": A concrete noun enumeration naming the semantic bucket with representative examples (e.g., "Drinkable liquids: coffee, rum, wine.").
 
 Output ONLY valid JSON according to the schema.`;

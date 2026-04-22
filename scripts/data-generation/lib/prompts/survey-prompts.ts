@@ -22,7 +22,7 @@ export function buildSurveyPrompt(input: SurveyAnswerInput): string {
 
 TOPIC: "${input.topicAiPrompt}"
 
-TASK: Answer the topic above as your character would. Your answer must be 1–4 plain words — a noun, phrase, or concept. Do NOT write a sentence, exclamation, or in-character dialogue. The answer must reflect what your character would think, but phrased neutrally so it can be grouped with similar answers.
+TASK: Answer the topic above as your character would. Your answer must be 1–4 plain words — a noun, phrase, or concept. Do NOT write a sentence, exclamation, or in-character dialogue. The answer must reflect what your character would think about topic, but phrased neutrally so it can be grouped with similar answers.
 
 CRITICAL RULES:
 - Output ONLY the core concept, not your character's voice or emotion.

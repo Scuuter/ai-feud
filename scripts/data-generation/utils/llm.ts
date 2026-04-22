@@ -134,7 +134,8 @@ export async function callLMStudio<T = unknown>(
   });
 
   if (!response.ok) {
-    throw new Error('LM Studio error: ' + response.status);
+    const body = await response.text().catch(() => '');
+    throw new Error(`LM Studio error: ${response.status}${body ? ' — ' + body.slice(0, 200) : ''}`);
   }
 
   let fullContent = '';
@@ -165,15 +166,19 @@ export async function callLMStudio<T = unknown>(
 
   if (!fullContent) {
     console.error('[ERROR] No content accumulated, fullContent is empty');
+    if (debugLabel.startsWith('cluster')) {
+      const p = dumpDebugFile(prompt, '(empty response)', model, debugLabel, debugSubDir);
+      console.error('[DEBUG] Empty response dump: ' + p);
+    }
     throw new Error('No content received from stream');
   }
 
+  // Always dump for cluster calls — success or failure — so errors leave a trace
   let debugPath = '';
   if (debugLabel.startsWith('cluster')) {
     debugPath = dumpDebugFile(prompt, fullContent, model, debugLabel, debugSubDir);
     console.log('[DEBUG] Raw response saved: ' + debugPath);
   }
-
   const generation_time = (Date.now() - startTime) / 1000;
   const stats: GenerationStats = {
     generation_time,
@@ -205,12 +210,20 @@ export async function callLMStudio<T = unknown>(
   }
 }
 
+/** How long to wait (ms) when the server signals the model is still loading. */
+const MODEL_LOADING_BACKOFF_MS = 10_000;
+
+/** Errors that indicate the model is not yet ready — worth waiting longer for. */
+function isModelLoadingError(err: Error): boolean {
+  return /503|model.*load|loading|not.*ready/i.test(err.message);
+}
+
 export async function callLMStudioWithRetry<T = unknown>(
   prompt: string,
   model: string,
   temperature?: number,
   maxTokens?: number,
-  retries: number = 1,
+  retries: number = 3,
   debugLabel: string = 'unknown',
   jsonSchema?: Record<string, unknown>,
   debugSubDir?: string
@@ -223,8 +236,10 @@ export async function callLMStudioWithRetry<T = unknown>(
     } catch (error) {
       lastError = error as Error;
       if (i < retries - 1) {
-        console.log(`\n[API CALL] Retry attempt ${i + 1}/${retries}...`);
-        await new Promise((resolve) => setTimeout(resolve, 1000 * (i + 1)));
+        const loading = isModelLoadingError(lastError);
+        const delayMs = loading ? MODEL_LOADING_BACKOFF_MS : 1000 * (i + 1);
+        console.log(`\n[API CALL] Retry ${i + 1}/${retries - 1}${loading ? ' (model loading — waiting ' + delayMs / 1000 + 's)' : ''}...`);
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
       }
     }
   }

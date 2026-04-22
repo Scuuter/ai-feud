@@ -31,7 +31,7 @@ import type {
   RawSurveyData,
   Topic,
 } from './types.js';
-import { loadJson, writeJson, getNextVersionPath, loadJsonSync, fileExists, buildOutputFilename } from './utils/fs.js';
+import { loadJson, writeJson, loadJsonSync, fileExists, buildOutputFilename, buildOutputDir } from './utils/fs.js';
 import { callLMStudioWithRetry } from './utils/llm.js';
 import { parseCliArgs } from './utils/cli.js';
 import {
@@ -152,10 +152,12 @@ async function processTopic(
   topicId: string,
   demographicName: string,
   version: string,
+  rawDir: string,
+  outputDir: string,
 ): Promise<void> {
   const filename = buildOutputFilename(topicId, demographicName, version);
 
-  const latestPath = `${OUTPUT_DIR}/${filename}`;
+  const latestPath = `${outputDir}/${filename}`;
   if (!fileExists(latestPath)) {
     console.warn(`   [SKIP] No clustered output found for topic "${topicId}". Run cluster.ts first.`);
     return;
@@ -163,7 +165,7 @@ async function processTopic(
 
   const surveyResult = await loadJson<SurveyResult>(latestPath);
 
-  const rawPath = `${OUTPUT_RAW_DIR}/${buildOutputFilename(topicId, demographicName, version)}`;
+  const rawPath = `${rawDir}/${buildOutputFilename(topicId, demographicName, version)}`;
   if (!fileExists(rawPath)) {
     console.warn(`   [SKIP] No raw survey data found for topic "${topicId}".`);
     return;
@@ -214,9 +216,8 @@ async function processTopic(
 
   const finalResult = assembleFinalResult(surveyResult, enrichedClusters, enrichedWildcards);
 
-  const outputPath = getNextVersionPath(latestPath);
-  writeJson(outputPath, finalResult);
-  console.log(`   Saved enriched result to ${outputPath}`);
+  writeJson(latestPath, finalResult);
+  console.log(`   Saved enriched result to ${latestPath}`);
 }
 
 // ─── main ─────────────────────────────────────────────────────────────────────
@@ -226,6 +227,9 @@ async function main() {
 
   const demographicName = demographic ?? DEMOGRAPHIC_NAME;
   const version = DATA_VERSION;
+
+  const rawDir = buildOutputDir(OUTPUT_RAW_DIR, demographicName);
+  const outputDir = buildOutputDir(OUTPUT_DIR, demographicName);
 
   const topics = await loadJson<Topic[]>(`${DATA_DIR}/topics-v1.json`);
 
@@ -240,11 +244,11 @@ async function main() {
   } else if (runMissing) {
     topicsToProcess = topics.filter(topic => {
       const filename = buildOutputFilename(topic.id, demographicName, version);
-      const outputExists = fileExists(`${OUTPUT_DIR}/${filename}`);
+      const outputExists = fileExists(`${outputDir}/${filename}`);
       if (!outputExists) return false;
 
       try {
-        const data = loadJsonSync<Partial<SurveyResult>>(`${OUTPUT_DIR}/${filename}`);
+        const data = loadJsonSync<Partial<SurveyResult>>(`${outputDir}/${filename}`);
         return !data.enrichedAt;
       } catch {
         return false;
@@ -262,7 +266,7 @@ async function main() {
   for (const topic of topicsToProcess) {
     console.log(`\n=== Enriching topic: ${topic.id} ===`);
     try {
-      await processTopic(topic.id, demographicName, version);
+      await processTopic(topic.id, demographicName, version, rawDir, outputDir);
     } catch (error) {
       console.error(`Error enriching ${topic.id}:`, error);
     }

@@ -39,6 +39,14 @@ export function buildOutputFilename(topicId: string, demographic: string, versio
 }
 
 /**
+ * Returns the demographic-scoped subdirectory under a base output dir.
+ * e.g. buildOutputDir('/scripts/output/raw', 'game-of-thrones') → '/scripts/output/raw/game-of-thrones'
+ */
+export function buildOutputDir(baseDir: string, demographic: string): string {
+  return path.join(baseDir, demographic);
+}
+
+/**
  * Returns a versioned file path (e.g. foo-v2.json, foo-v3.json) to avoid
  * overwriting an existing file. If basePath does not yet exist, returns basePath as-is.
  */
