@@ -1,105 +1,136 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { clsx } from "clsx";
 import {
-  DEFAULT_DEMOGRAPHIC_ID,
   DEMOGRAPHICS,
   type DemographicId,
   type DemographicSkin,
 } from "@/lib/design-system/demographics";
 
-type DemographicSwitcherProps = {
-  /** Called whenever the active demographic changes (for parent previews). */
-  onChange?: (demographic: DemographicSkin) => void;
-  /** Optional className applied to the root. */
+type ChannelMenuProps = {
+  /** Currently-active demographic id. */
+  activeId: DemographicId;
+  /** Called when a channel is picked. */
+  onPick: (skin: DemographicSkin) => void;
+  /** Called when the menu should close (Escape / backdrop). */
+  onClose: () => void;
+  /** Optional className applied to the root overlay. */
   className?: string;
 };
 
 /**
- * A chunky broadcast-style channel selector. Writes `data-demographic` on
- * `document.documentElement` so the CSS token overrides in `globals.css`
- * cascade to every component on the page. Also applies the demographic's
- * optional `roomTextureClass` to the body.
+ * In-TV channel-select menu. Rendered as a full-screen overlay inside the
+ * `<TVScreen />` when the chassis "CH" button is pressed. Styled like a real
+ * CRT OSD: dimmed scrim, hard-bordered panel, monospace channel numbers.
+ *
+ * Escape closes the menu. Focus is auto-moved to the active channel on open.
  */
-export function DemographicSwitcher({
-  onChange,
+export function ChannelMenu({
+  activeId,
+  onPick,
+  onClose,
   className,
-}: DemographicSwitcherProps) {
-  const [active, setActive] = useState<DemographicId>(DEFAULT_DEMOGRAPHIC_ID);
-
-  const applyDemographic = useCallback((id: DemographicId) => {
-    const skin = DEMOGRAPHICS.find((d) => d.id === id) ?? DEMOGRAPHICS[0];
-    if (typeof document !== "undefined") {
-      document.documentElement.setAttribute("data-demographic", skin.id);
-      // Reset then apply texture class on body, if any
-      const body = document.body;
-      body.classList.remove("room-texture-stone", "room-texture-concrete");
-      if (skin.roomTextureClass) {
-        body.classList.add(skin.roomTextureClass);
-      }
-    }
-    setActive(skin.id);
-    onChange?.(skin);
-  }, [onChange]);
+}: ChannelMenuProps) {
+  const activeRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
-    // Emit initial skin to the parent on mount
-    const skin = DEMOGRAPHICS.find((d) => d.id === active) ?? DEMOGRAPHICS[0];
-    onChange?.(skin);
-    // We intentionally only want this on mount.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    // Focus the currently-active channel when the menu opens
+    activeRef.current?.focus();
+
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [onClose]);
 
   return (
     <div
       className={clsx(
-        "bg-ink border-4 border-ink p-3 shadow-[6px_6px_0px_var(--color-tile-shadow)]",
+        "absolute inset-0 z-20 flex items-center justify-center p-5",
         className,
       )}
-      role="radiogroup"
-      aria-label="Channel / demographic skin"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Channel select"
     >
-      <p className="mb-3 font-blocks text-[var(--text-base-sm)] uppercase tracking-widest text-paper">
-        CHANNEL SELECT
-      </p>
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
-        {DEMOGRAPHICS.map((skin) => {
-          const isActive = skin.id === active;
-          return (
-            <button
-              key={skin.id}
-              type="button"
-              role="radio"
-              aria-checked={isActive}
-              onClick={() => applyDemographic(skin.id)}
-              className={clsx(
-                "group flex flex-col items-start gap-2 border-4 p-3 text-left transition-transform",
-                "hover:-translate-y-0.5 hover:-translate-x-0.5",
-                isActive
-                  ? "border-paper bg-paper text-ink shadow-[4px_4px_0px_var(--color-wildcard-accent)]"
-                  : "border-paper/30 bg-ink text-paper hover:border-paper/70",
-              )}
-            >
-              <div className="flex w-full items-center gap-2">
-                <span
-                  aria-hidden="true"
-                  className="inline-block h-3 w-3 border border-current"
-                  style={{ backgroundColor: skin.palette.tileShadow }}
-                />
-                <span className="font-blocks text-[var(--text-base-xs)] uppercase tracking-wider">
-                  CH {String(DEMOGRAPHICS.indexOf(skin) + 1).padStart(2, "0")}
-                </span>
-              </div>
-              <span className="font-blocks text-[var(--text-base-md)] leading-tight uppercase">
-                {skin.displayName}
-              </span>
-              <span className="font-base text-[var(--text-base-xs)] leading-snug opacity-80 text-pretty">
-                {skin.tagline}
-              </span>
-            </button>
-          );
-        })}
+      {/* Scrim — click to dismiss */}
+      <button
+        type="button"
+        aria-label="Close channel menu"
+        onClick={onClose}
+        className="absolute inset-0 bg-ink/70 cursor-default"
+      />
+
+      {/* Panel */}
+      <div
+        className="relative z-10 w-full max-w-lg border-4 border-paper bg-ink shadow-[8px_8px_0px_var(--color-tile-shadow)]"
+        role="radiogroup"
+        aria-label="Channels"
+      >
+        <header className="flex items-center justify-between gap-3 border-b-4 border-paper bg-paper px-3 py-2">
+          <span className="font-blocks text-[var(--text-base-sm)] uppercase tracking-widest text-ink">
+            CHANNEL SELECT
+          </span>
+          <span className="font-blocks text-[var(--text-base-xs)] uppercase tracking-widest text-ink/60">
+            ESC TO CLOSE
+          </span>
+        </header>
+
+        <ul className="divide-y-2 divide-paper/20">
+          {DEMOGRAPHICS.map((skin, i) => {
+            const isActive = skin.id === activeId;
+            const channelNumber = String(i + 1).padStart(2, "0");
+            return (
+              <li key={skin.id}>
+                <button
+                  type="button"
+                  role="radio"
+                  aria-checked={isActive}
+                  ref={isActive ? activeRef : undefined}
+                  onClick={() => onPick(skin)}
+                  className={clsx(
+                    "group flex w-full items-center gap-3 px-3 py-2.5 text-left",
+                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-tile-shadow)]",
+                    isActive
+                      ? "bg-paper text-ink"
+                      : "text-paper hover:bg-paper/10",
+                  )}
+                >
+                  <span
+                    aria-hidden="true"
+                    className={clsx(
+                      "inline-block h-5 w-8 border-2 text-center font-blocks leading-none text-[12px] tabular-nums flex items-center justify-center",
+                      isActive ? "border-ink bg-ink text-paper" : "border-paper/60",
+                    )}
+                  >
+                    {channelNumber}
+                  </span>
+                  <span className="flex-1 min-w-0">
+                    <span className="block font-blocks text-[var(--text-base-md)] leading-tight uppercase">
+                      {skin.displayName}
+                    </span>
+                    <span className="block font-base text-[var(--text-base-xs)] leading-snug opacity-80 text-pretty truncate">
+                      {skin.tagline}
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className={clsx(
+                      "inline-block h-3 w-3 border",
+                      isActive ? "border-ink" : "border-paper/60",
+                    )}
+                    style={{ backgroundColor: skin.palette.tileShadow }}
+                  />
+                </button>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );

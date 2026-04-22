@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { clsx } from "clsx";
-import { PhysicalButton } from "./physical-button";
 
 type TVFrameProps = {
   children: ReactNode;
@@ -8,6 +7,10 @@ type TVFrameProps = {
   className?: string;
   /** Channel label shown on the chin display (e.g., "CH 04 · VICE CITY FEED"). */
   channelLabel?: string;
+  /** Current demographic id — drives the scoped theme via [data-demographic]. */
+  demographicId?: string;
+  /** Slot for chassis chin buttons (rendered on the right side of the chin). */
+  chinButtons?: ReactNode;
 };
 
 /**
@@ -16,40 +19,47 @@ type TVFrameProps = {
  *   - An inner screen slot (passed as children, typically <TVScreen />)
  *   - A chin housing the physical buttons and the channel-label LCD strip
  *
- * Geometry guaranteed to stay within `max-w-5xl` with an `aspect-[4/3]` feel.
+ * The chassis is sized to fill its parent's available height (the parent is
+ * expected to cap it to the viewport). Use `h-full` on a containing element.
+ *
+ * Theming: the `data-demographic` attribute lives HERE, not on <html>, so
+ * demographic tokens are scoped to the TV only.
  */
-export function TVFrame({ children, className, channelLabel }: TVFrameProps) {
+export function TVFrame({
+  children,
+  className,
+  channelLabel,
+  demographicId = "default",
+  chinButtons,
+}: TVFrameProps) {
   return (
     <div
+      data-demographic={demographicId}
       className={clsx(
-        "chassis-gradient relative mx-auto w-full max-w-5xl",
+        "chassis-gradient relative flex flex-col mx-auto w-full max-w-6xl h-full",
         "rounded-3xl border-4 border-tv-silver-dark",
         "shadow-[inset_0_2px_0_var(--color-tv-silver-light),inset_0_-4px_0_rgba(0,0,0,0.2),12px_12px_0_rgba(0,0,0,0.35)]",
-        "p-4 sm:p-6 lg:p-8",
+        "p-3 sm:p-5",
         className,
       )}
     >
-      <div className="flex gap-3 sm:gap-5">
-        {/* Left speaker grille */}
+      {/* Screen + speakers row — grows to fill the chassis height */}
+      <div className="flex gap-3 sm:gap-4 flex-1 min-h-0">
         <div
           aria-hidden="true"
-          className="speaker-grille hidden sm:block w-6 lg:w-8 self-stretch border-2 border-tv-silver-dark"
+          className="speaker-grille hidden sm:block w-5 lg:w-6 self-stretch border-2 border-tv-silver-dark"
         />
-
-        {/* Inner screen slot */}
-        <div className="flex-1">{children}</div>
-
-        {/* Right speaker grille */}
+        <div className="flex-1 min-h-0 min-w-0">{children}</div>
         <div
           aria-hidden="true"
-          className="speaker-grille hidden sm:block w-6 lg:w-8 self-stretch border-2 border-tv-silver-dark"
+          className="speaker-grille hidden sm:block w-5 lg:w-6 self-stretch border-2 border-tv-silver-dark"
         />
       </div>
 
       {/* Chin: channel LCD + physical buttons */}
-      <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
         {channelLabel ? (
-          <div className="bg-ink border-2 border-tv-silver-dark px-3 py-1.5 shadow-[inset_2px_2px_0px_rgba(0,0,0,0.6)]">
+          <div className="bg-ink border-2 border-tv-silver-dark px-3 py-1 shadow-[inset_2px_2px_0px_rgba(0,0,0,0.6)]">
             <span
               className="font-blocks text-[var(--text-base-sm)] uppercase tracking-widest"
               style={{ color: "var(--color-tile-shadow)" }}
@@ -61,13 +71,7 @@ export function TVFrame({ children, className, channelLabel }: TVFrameProps) {
           <span aria-hidden="true" />
         )}
 
-        <div className="flex items-end gap-2">
-          <PhysicalButton label="VOL−" />
-          <PhysicalButton label="VOL+" />
-          <PhysicalButton label="MUTE" />
-          <PhysicalButton label="SHARE" />
-          <PhysicalButton label="PWR" variant="power" />
-        </div>
+        <div className="flex items-center gap-1.5">{chinButtons}</div>
       </div>
     </div>
   );
@@ -80,7 +84,11 @@ type TVScreenProps = {
 
 /**
  * The inner playable area. Applies scanlines + vignette and a hard black
- * inner border. Position: relative so the <StrikeIndicator /> can overlay.
+ * inner border. Fills the parent height (no forced aspect ratio) so the
+ * ticker reliably lands on the bottom rail. Position: relative so overlays
+ * (StrikeIndicator, ChannelMenu) can use absolute positioning.
+ *
+ * `containerType: inline-size` is set so children can use `cqi` sizing.
  */
 export function TVScreen({ children, className }: TVScreenProps) {
   return (
@@ -88,9 +96,10 @@ export function TVScreen({ children, className }: TVScreenProps) {
       className={clsx(
         "tv-scanlines tv-vignette relative overflow-hidden",
         "bg-tv-static border-4 border-ink",
-        "aspect-[4/3] w-full",
+        "h-full w-full",
         className,
       )}
+      style={{ containerType: "inline-size" }}
     >
       {children}
     </div>
