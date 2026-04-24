@@ -11,8 +11,8 @@
  *  - assembleFinalResult
  */
 import { describe, it, expect } from 'vitest';
-import type { AnswerCluster, WildCard, SurveyResult } from '@/scripts/data-generation/types.js';
-import type { RawSurveyData } from '@/scripts/data-generation/types.js';
+import type { AnswerCluster, WildCard, SurveyResult } from '@scripts/data-generation/types.js';
+import type { RawSurveyData } from '@scripts/data-generation/types.js';
 import {
   selectPersonasForCluster,
   selectPersonaForWildcard,
@@ -20,7 +20,7 @@ import {
   validateClusterQuotes,
   validateWildcardQuote,
   assembleFinalResult,
-} from '@/scripts/data-generation/lib/enrichment.js';
+} from '@scripts/data-generation/lib/enrichment.js';
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 

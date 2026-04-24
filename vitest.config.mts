@@ -8,7 +8,12 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     alias: {
-      "@": path.resolve(__dirname, "."),
+      "@": path.resolve(__dirname, "src"),
+      "@tests": path.resolve(__dirname, "tests"),
+      "@scripts": path.resolve(__dirname, "scripts"),
+    },
+    env: {
+      PROJECT_ROOT: __dirname,
     },
   },
 });

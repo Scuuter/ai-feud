@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { extractJsonFromLLMOutput } from "../../../scripts/data-generation/utils/llm.js";
+import { extractJsonFromLLMOutput } from "@scripts/data-generation/utils/llm.js";
 
 describe("extractJsonFromLLMOutput", () => {
   it("extracts simple JSON", () => {

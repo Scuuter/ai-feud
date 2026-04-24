@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseCliArgs } from '../../../scripts/data-generation/utils/cli';
+import { parseCliArgs } from '@scripts/data-generation/utils/cli';
 
 describe('parseCliArgs', () => {
   it('no args → defaults: runMissing false, all others undefined', () => {

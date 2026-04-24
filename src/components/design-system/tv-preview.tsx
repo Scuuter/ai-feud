@@ -8,12 +8,12 @@ import {
 } from "@/lib/design-system/demographics";
 import { ChannelMenu } from "./demographic-switcher";
 import { TVFrame, TVScreen } from "./tv-frame";
-import { Tile } from "./tile";
 import { InputTerminal } from "./input-terminal";
 import { NewsTicker } from "./news-ticker";
 import { StrikeIndicator } from "./strike-indicator";
 import { PhysicalButton } from "./physical-button";
 import { ScoreCounter } from "./score-counter";
+import { GameBoard } from "@/components/game/GameBoard";
 
 type OverlayMode = "none" | "miss" | "wildcard";
 
@@ -52,15 +52,6 @@ export function TVPreview() {
   // Channel-driven board content.
   const tileCount = skin.tileCount;
   const answers = skin.sampleAnswers.slice(0, tileCount);
-
-  const isVertical = tileCount <= 4;
-  const hasHeroTile = !isVertical && tileCount % 2 === 1;
-  const cols = isVertical ? 1 : 2;
-  const rows = isVertical
-    ? tileCount
-    : hasHeroTile
-      ? 1 + (tileCount - 1) / 2
-      : tileCount / 2;
 
   // Reveal the front half so every board state shows both revealed + unrevealed.
   const revealedCount = Math.ceil(tileCount / 2);
@@ -176,27 +167,7 @@ export function TVPreview() {
 
             {/* Board — dynamic tile count & shape */}
             <div className="relative flex-1 min-h-0 bg-[var(--color-screen-base)] p-2.5">
-              <div
-                className="grid h-full gap-2"
-                style={{
-                  gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-                  gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
-                }}
-              >
-                {answers.map((answer, i) => (
-                  <Tile
-                    key={answer.rank}
-                    rank={answer.rank}
-                    text={answer.text}
-                    score={answer.score}
-                    flavorQuote={answer.flavorQuote}
-                    isRevealed={i < revealedCount}
-                    className={
-                      hasHeroTile && i === 0 ? "col-span-2" : undefined
-                    }
-                  />
-                ))}
-              </div>
+              <GameBoard answers={answers} revealedCount={revealedCount} />
             </div>
 
             {/* Input terminal — interactive */}

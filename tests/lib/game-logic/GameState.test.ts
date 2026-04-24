@@ -11,7 +11,7 @@
  *  - getScore
  */
 import { describe, it, expect } from 'vitest';
-import type { SurveyResult, AnswerCluster, Round } from '@/src/lib/game-logic/types.js';
+import type { SurveyResult, AnswerCluster, Round } from '@/lib/game-logic/types.js';
 import {
   createRound,
   applyCorrectGuess,
@@ -20,8 +20,8 @@ import {
   checkLossCondition,
   isRoundComplete,
   getScore,
-} from '@/src/lib/game-logic/GameState.js';
-import surveyFixture from '@/tests/fixtures/survey-result-v1.json';
+} from '@/lib/game-logic/GameState.js';
+import surveyFixture from '@tests/fixtures/survey-result-v1.json';
 
 const SURVEY = surveyFixture as SurveyResult;
 const [CLUSTER_A, CLUSTER_B, CLUSTER_C] = SURVEY.clusters;

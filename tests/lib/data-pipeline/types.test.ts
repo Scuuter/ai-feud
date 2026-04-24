@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import path from 'node:path';
-import { loadJson } from '../../../scripts/data-generation/utils/fs.js';
-import type { Persona, Topic, RawSurveyData, RawResponse, FlavorQuote, AnswerCluster, WildCard, SurveyResult } from '../../../scripts/data-generation/types.js';
+import { loadJson } from '@scripts/data-generation/utils/fs.js';
+import type { Persona, Topic, RawSurveyData, RawResponse, FlavorQuote, AnswerCluster, WildCard, SurveyResult } from '@scripts/data-generation/types.js';
 
 const FIXTURES_DIR = path.join(process.cwd(), 'tests', 'fixtures');
 

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { normalizeScoresTo100 } from '../../../scripts/data-generation/lib/normalization';
+import { normalizeScoresTo100 } from '@scripts/data-generation/lib/normalization';
 
 describe('normalizeScoresTo100', () => {
   it('empty input → empty output', () => {

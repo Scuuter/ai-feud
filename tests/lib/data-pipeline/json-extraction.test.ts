@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { extractJsonFromLLMOutput } from '../../../scripts/data-generation/utils/llm';
+import { extractJsonFromLLMOutput } from '@scripts/data-generation/utils/llm';
 
 describe('extractJsonFromLLMOutput', () => {
   it('clean JSON object → returned as-is', () => {

@@ -55,17 +55,23 @@ export const THEMED_TOKEN_LABELS: Record<ThemedTokenKey, string> = {
  * Typography
  * ------------------------------------------------------------------------- */
 
-export const TYPOGRAPHY_SCALE = [
-  { key: "blocks-xl", sample: "AI FEUD", family: "blocks", px: 72, purpose: "Wordmark, giant ? and X." },
-  { key: "blocks-lg", sample: "0", family: "blocks", px: 48, purpose: "Score and strike counters." },
-  { key: "blocks-md", sample: "CH 04", family: "blocks", px: 28, purpose: "Channel label, OSD headers." },
-  { key: "base-lg", sample: "Name a weapon a wizard would use if they lost their wand.", family: "base", px: 22, purpose: "Question header text." },
-  { key: "base-md", sample: "A Rolled-Up Newspaper", family: "base", px: 18, purpose: "Revealed tile answer." },
-  { key: "base-sm", sample: "— Tyrion Lannister: \"I drink and I know things.\"", family: "base", px: 14, purpose: "Flavor quote (italic), OSD labels, ticker body." },
-  { key: "base-xs", sample: "VOL  ·  CH  ·  MUTE", family: "base", px: 12, purpose: "Bezel labels, footer credits." },
-] as const;
+/**
+ * Keyed typography scale. Use the key to reference a step without magic
+ * array indexing. Each entry maps to a CSS class pair: `font-{family}` +
+ * `text-{key}` (e.g. `font-blocks text-blocks-xl`).
+ */
+export const TYPOGRAPHY_SCALE = {
+  "blocks-xl": { family: "blocks", px: 72, sample: "AI FEUD",                                                    purpose: "Wordmark, giant ? and X." },
+  "blocks-lg": { family: "blocks", px: 48, sample: "0",                                                          purpose: "Score and strike counters." },
+  "blocks-md": { family: "blocks", px: 28, sample: "CH 04",                                                      purpose: "Channel label, OSD headers." },
+  "base-lg":   { family: "base",   px: 22, sample: "Name a weapon a wizard would use if they lost their wand.",  purpose: "Question header text." },
+  "base-md":   { family: "base",   px: 18, sample: "A Rolled-Up Newspaper",                                      purpose: "Revealed tile answer." },
+  "base-sm":   { family: "base",   px: 14, sample: "— Tyrion Lannister: \"I drink and I know things.\"",         purpose: "Flavor quote (italic), OSD labels, ticker body." },
+  "base-xs":   { family: "base",   px: 12, sample: "VOL  ·  CH  ·  MUTE",                                        purpose: "Bezel labels, footer credits." },
+} as const satisfies Record<string, { family: "blocks" | "base"; px: number; sample: string; purpose: string }>;
 
-export type TypographyStep = (typeof TYPOGRAPHY_SCALE)[number];
+export type TypographyKey = keyof typeof TYPOGRAPHY_SCALE;
+export type TypographyStep = (typeof TYPOGRAPHY_SCALE)[TypographyKey];
 
 /* ---------------------------------------------------------------------------
  * Motion

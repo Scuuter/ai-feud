@@ -8,14 +8,14 @@
  *  - matchGuess (orchestration, wildcard vs cluster differentiation)
  */
 import { describe, it, expect } from 'vitest';
-import type { SurveyResult, AnswerCluster, WildCard } from '@/src/lib/game-logic/types.js';
+import type { SurveyResult, AnswerCluster, WildCard } from '@/lib/game-logic/types.js';
 import {
   normalizeInput,
   exactMatch,
   fuzzyMatch,
   matchGuess,
-} from '@/src/lib/game-logic/Matcher.js';
-import surveyFixture from '@/tests/fixtures/survey-result-v1.json';
+} from '@/lib/game-logic/Matcher.js';
+import surveyFixture from '@tests/fixtures/survey-result-v1.json';
 
 const SURVEY = surveyFixture as SurveyResult;
 const CLUSTERS: AnswerCluster[] = SURVEY.clusters;

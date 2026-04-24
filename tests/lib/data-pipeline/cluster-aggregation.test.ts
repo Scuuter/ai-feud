@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { aggregateAssignments } from '../../../scripts/data-generation/lib/aggregation';
-import type { AnswerCategory } from '../../../scripts/data-generation/types';
+import { aggregateAssignments } from '@scripts/data-generation/lib/aggregation';
+import type { AnswerCategory } from '@scripts/data-generation/types';
 
 const categories: AnswerCategory[] = [
   { id: 'cat-a', uiText: 'Category A', aiPromptName: 'Bucket A' },

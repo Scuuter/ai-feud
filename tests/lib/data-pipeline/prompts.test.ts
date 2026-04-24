@@ -5,16 +5,16 @@
  * and that no `undefined` values are interpolated.
  */
 import { describe, it, expect } from 'vitest';
-import { buildSurveyPrompt } from '../../../scripts/data-generation/lib/prompts/survey-prompts.js';
+import { buildSurveyPrompt } from '@scripts/data-generation/lib/prompts/survey-prompts.js';
 import {
   buildExtractCategoriesPrompt,
   buildAssignChunkPrompt,
-} from '../../../scripts/data-generation/lib/prompts/cluster-prompts.js';
-import { buildSynonymPrompt } from '../../../scripts/data-generation/lib/prompts/synonyms-prompts.js';
+} from '@scripts/data-generation/lib/prompts/cluster-prompts.js';
+import { buildSynonymPrompt } from '@scripts/data-generation/lib/prompts/synonyms-prompts.js';
 import {
   buildClusterQuotePrompt,
   buildWildcardQuotePrompt,
-} from '../../../scripts/data-generation/lib/prompts/quotes-prompts.js';
+} from '@scripts/data-generation/lib/prompts/quotes-prompts.js';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
