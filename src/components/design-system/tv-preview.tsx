@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   DEFAULT_DEMOGRAPHIC_ID,
   getDemographic,
@@ -48,6 +48,14 @@ export function TVPreview() {
   const [overlay, setOverlay] = useState<OverlayMode>("none");
   const [guess, setGuess] = useState("");
   const [score, setScore] = useState(0);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Focus orchestration: guarantee the input gets focus back right after an overlay clears
+  useEffect(() => {
+    if (overlay === "none" && !menuOpen) {
+      inputRef.current?.focus();
+    }
+  }, [overlay, menuOpen]);
 
   // Channel-driven board content.
   const tileCount = skin.tileCount;
@@ -174,6 +182,7 @@ export function TVPreview() {
             {/* Input terminal — interactive */}
             <div className="border-t-4 border-ink bg-[var(--color-room-bg)] px-3 py-2">
               <InputTerminal
+                ref={inputRef}
                 value={guess}
                 onChange={setGuess}
                 onSubmit={handleSubmit}

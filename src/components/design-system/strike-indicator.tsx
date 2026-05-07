@@ -3,8 +3,8 @@ import { useDismissProps } from "@/hooks/useDismissProps";
 import { clsx } from "clsx";
 
 type StrikeIndicatorProps =
-  | { mode: "miss"; onDismiss?: () => void }
-  | { mode: "wildcard"; personaName: string; flavorQuote: string; onDismiss?: () => void };
+  | { mode: "miss"; onDismiss: () => void }
+  | { mode: "wildcard"; personaName: string; flavorQuote: string; onDismiss: () => void };
 
 /**
  * Static preview of the <StrikeIndicator />. Rendered as an absolute overlay
@@ -24,22 +24,19 @@ export function StrikeIndicator(props: StrikeIndicatorProps) {
   const dismissProps = useDismissProps(props.onDismiss);
 
   useEffect(() => {
-    // Steal focus on mount if it's an interactive modal
-    if (props.onDismiss && containerRef.current) {
+    // Always steal focus on mount to capture dismissal keys
+    if (containerRef.current) {
       containerRef.current.focus();
     }
-  }, [props.onDismiss]);
+  }, []);
 
-  const baseClasses = clsx(
-    "absolute inset-0 flex items-center justify-center focus:outline-none",
-    !props.onDismiss && "pointer-events-none"
-  );
+  const baseClasses = "absolute inset-0 flex items-center justify-center focus:outline-none";
 
   if (props.mode === "miss") {
     return (
       <div
         ref={containerRef}
-        tabIndex={props.onDismiss ? 0 : undefined}
+        tabIndex={0}
         className={baseClasses}
         style={{
           backgroundColor:
@@ -68,7 +65,7 @@ export function StrikeIndicator(props: StrikeIndicatorProps) {
   return (
     <div
       ref={containerRef}
-      tabIndex={props.onDismiss ? 0 : undefined}
+      tabIndex={0}
       className={clsx(baseClasses, "p-6")}
       role="alert"
       aria-label={`Wildcard: ${props.personaName}`}

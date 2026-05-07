@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState, type KeyboardEvent, type ChangeEvent } from "react";
+import { useId, useState, forwardRef, type KeyboardEvent, type ChangeEvent } from "react";
 import { clsx } from "clsx";
 
 type InputTerminalProps = {
@@ -37,78 +37,84 @@ type InputTerminalProps = {
  *   - Native caret handles blinking; we deliberately do NOT render a custom
  *     block cursor to avoid caret-doubling.
  */
-export function InputTerminal({
-  value,
-  onChange,
-  onSubmit,
-  placeholder = "TYPE A GUESS · PRESS ENTER",
-  disabled = false,
-  maxLength = 60,
-}: InputTerminalProps) {
-  const inputId = useId();
-  const [internal, setInternal] = useState("");
-  const isControlled = value !== undefined;
-  const current = isControlled ? value! : internal;
+export const InputTerminal = forwardRef<HTMLInputElement, InputTerminalProps>(
+  function InputTerminal(
+    {
+      value,
+      onChange,
+      onSubmit,
+      placeholder = "TYPE A GUESS · PRESS ENTER",
+      disabled = false,
+      maxLength = 60,
+    },
+    ref,
+  ) {
+    const inputId = useId();
+    const [internal, setInternal] = useState("");
+    const isControlled = value !== undefined;
+    const current = isControlled ? value! : internal;
 
-  const commit = (next: string) => {
-    if (!isControlled) setInternal(next);
-    onChange?.(next);
-  };
+    const commit = (next: string) => {
+      if (!isControlled) setInternal(next);
+      onChange?.(next);
+    };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    commit(e.target.value);
-  };
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+      commit(e.target.value);
+    };
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const trimmed = current.trim();
-      if (!trimmed) return;
-      onSubmit?.(trimmed);
-      if (!isControlled) setInternal("");
-    } else if (e.key === "Escape") {
-      e.preventDefault();
-      commit("");
-    }
-  };
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const trimmed = current.trim();
+        if (!trimmed) return;
+        onSubmit?.(trimmed);
+        if (!isControlled) setInternal("");
+      } else if (e.key === "Escape") {
+        e.preventDefault();
+        commit("");
+      }
+    };
 
-  return (
-    <label
-      htmlFor={inputId}
-      className={clsx(
-        "flex h-14 items-center gap-2 bg-paper border-4 px-4 cursor-text transition-colors",
-        "border-[var(--color-tile-shadow)] focus-within:shadow-[4px_4px_0px_var(--color-tile-shadow)]",
-        disabled && "opacity-60 cursor-not-allowed",
-      )}
-    >
-      <span
-        aria-hidden="true"
-        className="font-blocks text-[var(--text-base-lg)] leading-none text-[var(--color-tile-shadow)]"
-      >
-        &gt;
-      </span>
-      <input
-        id={inputId}
-        type="text"
-        value={current}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        placeholder={placeholder}
-        disabled={disabled}
-        maxLength={maxLength}
-        autoComplete="off"
-        autoCorrect="off"
-        autoCapitalize="characters"
-        spellCheck={false}
-        inputMode="text"
+    return (
+      <label
+        htmlFor={inputId}
         className={clsx(
-          "flex-1 min-w-0 bg-transparent outline-none border-0",
-          "font-base text-[var(--text-base-lg)] font-bold uppercase tracking-wide leading-none",
-          "text-ink placeholder:text-ink/35",
-          "caret-[var(--color-tile-shadow)]",
+          "flex h-14 items-center gap-2 bg-paper border-4 px-4 cursor-text transition-colors",
+          "border-[var(--color-tile-shadow)] focus-within:shadow-[4px_4px_0px_var(--color-tile-shadow)]",
+          disabled && "opacity-60 cursor-not-allowed",
         )}
-        aria-label="Guess input"
-      />
-    </label>
-  );
-}
+      >
+        <span
+          aria-hidden="true"
+          className="font-blocks text-[var(--text-base-lg)] leading-none text-[var(--color-tile-shadow)]"
+        >
+          &gt;
+        </span>
+        <input
+          ref={ref}
+          id={inputId}
+          type="text"
+          value={current}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          placeholder={placeholder}
+          disabled={disabled}
+          maxLength={maxLength}
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="characters"
+          spellCheck={false}
+          inputMode="text"
+          className={clsx(
+            "flex-1 min-w-0 bg-transparent outline-none border-0",
+            "font-base text-[var(--text-base-lg)] font-bold uppercase tracking-wide leading-none",
+            "text-ink placeholder:text-ink/35",
+            "caret-[var(--color-tile-shadow)]",
+          )}
+          aria-label="Guess input"
+        />
+      </label>
+    );
+  },
+);

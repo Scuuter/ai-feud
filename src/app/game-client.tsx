@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { getDemographic } from "@/lib/design-system/demographics";
 import { TVFrame, TVScreen } from "@/components/design-system/tv-frame";
 import { InputTerminal } from "@/components/design-system/input-terminal";
@@ -25,6 +25,14 @@ export function GameClient({ surveyData }: { surveyData: SurveyResult }) {
   } = useGameLoop(surveyData);
 
   const [guess, setGuess] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Focus orchestration: guarantee the input gets focus back right after an overlay clears
+  useEffect(() => {
+    if (!showStrike && !currentWildcard && !isComplete) {
+      inputRef.current?.focus();
+    }
+  }, [showStrike, currentWildcard, isComplete]);
 
   const handleSubmit = (value: string) => {
     if (!value) return;
@@ -120,6 +128,7 @@ export function GameClient({ surveyData }: { surveyData: SurveyResult }) {
             {/* Input terminal */}
             <div className="border-t-4 border-ink bg-[var(--color-room-bg)] px-3 py-2">
               <InputTerminal
+                ref={inputRef}
                 value={guess}
                 onChange={setGuess}
                 onSubmit={handleSubmit}
