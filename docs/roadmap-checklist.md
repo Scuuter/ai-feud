@@ -8,8 +8,8 @@
 - [x] **Configure Environment:** Setup `.env.local` with the local LM Studio server URL.
 - [x] **Implement `survey.ts`:** Write a Node.js script in `/scripts/data-generation/` to take a list of `Topic`s and a `Demographic`, pinging the LLM to output 100 unique `Persona` responses.
 - [x] **Implement `cluster.ts`:** Write a multi-stage map-reduce script to extract 5-8 core concepts using the topic context, map all responses to clusters or wildcards, and normalize scores to sum to 100.
-- [ ] **Implement `enrichment.ts`:** Enrich clustered `SurveyResult` files in three parallel sub-steps: (A) generate 3–5 game-show synonyms for each cluster; (B) generate `QUOTES_PER_CLUSTER` in-character flavor quotes per cluster using personas already assigned to it; (C) generate one flavor quote per wildcard using its `rawAnswer`. Sets `enrichedAt` on the output. Wildcards' `synonyms` array is kept empty for future use.
-- [ ] **Implement Prompt Library + `prompt-tester.ts`:** Extract all inline prompt strings from `survey.ts` and `cluster.ts` into `lib/prompts/`. Add `synonyms-prompts.ts` and `quotes-prompts.ts` for enrichment. Implement `prompt-tester.ts` CLI for semi-manual prompt tuning against a live LM Studio instance.
+- [x] **Implement `enrichment.ts`:** Enrich clustered `SurveyResult` files in three parallel sub-steps: (A) generate 3–5 game-show synonyms for each cluster; (B) generate `QUOTES_PER_CLUSTER` in-character flavor quotes per cluster using personas already assigned to it; (C) generate one flavor quote per wildcard using its `rawAnswer`. Sets `enrichedAt` on the output. Wildcards' `synonyms` array is kept empty for future use.
+- [x] **Implement Prompt Library + `prompt-tester.ts`:** Extract all inline prompt strings from `survey.ts` and `cluster.ts` into `lib/prompts/`. Add `synonyms-prompts.ts` and `quotes-prompts.ts` for enrichment. Implement `prompt-tester.ts` CLI for semi-manual prompt tuning against a live LM Studio instance.
 - [ ] **Format Output:** Ensure the final pipeline outputs valid JSON adhering exactly to the `SurveyResult` interface (`topic`, `demographicName`, `clusters`, `wildcards`).
 - [ ] **Data Generation:** Run the pipeline to generate **50 MVP questions** for initial testing and gameplay validation.
 
@@ -38,7 +38,6 @@
 - [x] **Component: `<NewsTicker />`:** Broadcast-style bottom ticker fed per-demographic phrases, with reduced-motion fallback.
 - [x] **Component: `<DemographicSwitcher />`:** Channel-select radiogroup that drives the active skin and room texture across the whole tree.
 - [x] **Composed Preview Page:** `/` renders the full TV mock with live demographic + overlay switching so the visual system can be reviewed and tested end-to-end before gameplay wiring.
-- [ ] **Viral Loop:** Implement the "Share your score" button that generates and copies a Wordle-style emoji grid to the user's clipboard.
 
 ### **Epic 4. Backend & Database Integration**
 - [ ] **Setup MongoDB Atlas:** Initialize the NoSQL document store.

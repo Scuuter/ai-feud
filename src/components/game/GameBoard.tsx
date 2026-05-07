@@ -37,7 +37,7 @@ export function computeBoardShape(tileCount: TileCount): BoardShape {
 
 type GameBoardProps = {
   answers: SampleAnswer[];
-  revealedCount: number;
+  revealedRanks: number[];
 };
 
 /**
@@ -45,7 +45,7 @@ type GameBoardProps = {
  * TVPreview owns state (which tiles are revealed, which skin is active).
  * Tile owns internal presentation.
  */
-export function GameBoard({ answers, revealedCount }: GameBoardProps) {
+export function GameBoard({ answers, revealedRanks }: GameBoardProps) {
   const tileCount = answers.length as TileCount;
   const { cols, rows, hasHeroTile } = computeBoardShape(tileCount);
 
@@ -64,7 +64,7 @@ export function GameBoard({ answers, revealedCount }: GameBoardProps) {
           text={answer.text}
           score={answer.score}
           flavorQuote={answer.flavorQuote}
-          isRevealed={i < revealedCount}
+          isRevealed={revealedRanks.includes(answer.rank)}
           className={hasHeroTile && i === 0 ? "col-span-2" : undefined}
         />
       ))}

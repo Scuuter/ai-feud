@@ -1,6 +1,10 @@
+import { useEffect, useRef } from "react";
+import { useDismissProps } from "@/hooks/useDismissProps";
+import { clsx } from "clsx";
+
 type StrikeIndicatorProps =
-  | { mode: "miss" }
-  | { mode: "wildcard"; personaName: string; flavorQuote: string };
+  | { mode: "miss"; onDismiss?: () => void }
+  | { mode: "wildcard"; personaName: string; flavorQuote: string; onDismiss?: () => void };
 
 /**
  * Static preview of the <StrikeIndicator />. Rendered as an absolute overlay
@@ -16,16 +20,34 @@ type StrikeIndicatorProps =
  * See `docs/design-system.md` §4.2.
  */
 export function StrikeIndicator(props: StrikeIndicatorProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dismissProps = useDismissProps(props.onDismiss);
+
+  useEffect(() => {
+    // Steal focus on mount if it's an interactive modal
+    if (props.onDismiss && containerRef.current) {
+      containerRef.current.focus();
+    }
+  }, [props.onDismiss]);
+
+  const baseClasses = clsx(
+    "absolute inset-0 flex items-center justify-center focus:outline-none",
+    !props.onDismiss && "pointer-events-none"
+  );
+
   if (props.mode === "miss") {
     return (
       <div
-        className="pointer-events-none absolute inset-0 flex items-center justify-center"
+        ref={containerRef}
+        tabIndex={props.onDismiss ? 0 : undefined}
+        className={baseClasses}
         style={{
           backgroundColor:
             "color-mix(in srgb, var(--color-miss-accent) 18%, transparent)",
         }}
         role="alert"
         aria-label="Strike"
+        {...dismissProps}
       >
         <span
           className="font-blocks leading-none"
@@ -45,9 +67,12 @@ export function StrikeIndicator(props: StrikeIndicatorProps) {
 
   return (
     <div
-      className="pointer-events-none absolute inset-0 flex items-center justify-center p-6"
+      ref={containerRef}
+      tabIndex={props.onDismiss ? 0 : undefined}
+      className={clsx(baseClasses, "p-6")}
       role="alert"
       aria-label={`Wildcard: ${props.personaName}`}
+      {...dismissProps}
     >
       <div
         className="max-w-md border-4 border-ink p-5 shadow-[8px_8px_0px_var(--color-ink)]"
@@ -66,3 +91,4 @@ export function StrikeIndicator(props: StrikeIndicatorProps) {
     </div>
   );
 }
+

@@ -55,6 +55,7 @@ export function TVPreview() {
 
   // Reveal the front half so every board state shows both revealed + unrevealed.
   const revealedCount = Math.ceil(tileCount / 2);
+  const revealedRanks = answers.slice(0, revealedCount).map((a) => a.rank);
 
   const handlePick = (next: DemographicSkin) => {
     setSkin(next);
@@ -167,7 +168,7 @@ export function TVPreview() {
 
             {/* Board — dynamic tile count & shape */}
             <div className="relative flex-1 min-h-0 bg-[var(--color-screen-base)] p-2.5">
-              <GameBoard answers={answers} revealedCount={revealedCount} />
+              <GameBoard answers={answers} revealedRanks={revealedRanks} />
             </div>
 
             {/* Input terminal — interactive */}
@@ -184,12 +185,13 @@ export function TVPreview() {
           </div>
 
           {/* Overlays: menu and strike share the same z layer above the board */}
-          {overlay === "miss" ? <StrikeIndicator mode="miss" /> : null}
+          {overlay === "miss" ? <StrikeIndicator mode="miss" onDismiss={() => toggleOverlay("miss")} /> : null}
           {overlay === "wildcard" ? (
             <StrikeIndicator
               mode="wildcard"
               personaName={skin.sampleWildcard.personaName}
               flavorQuote={skin.sampleWildcard.flavorQuote}
+              onDismiss={() => toggleOverlay("wildcard")}
             />
           ) : null}
           {menuOpen ? (
