@@ -12,14 +12,7 @@
    * `docs/schema.md` - EXACT MongoDB NoSQL interfaces. **Never invent dummy data.**
    * `docs/tech-stack.md` - Strict framework rules and anti-patterns.
 
-## 2. Navigation & Context Retrieval
-
-**NEVER guess file paths.** Before calling read or edit tools on a file, you MUST verify its exact path.
-When you need to understand the project structure or find a file, **DO NOT** run an unfiltered `ls` or `tree` command.
-**ALWAYS run this exact command to map the repository:**
-`tree -I "node_modules|.git|.next|public|coverage|scripts/output/debug|output/debug"`
-
-## 3. Architectural Boundaries
+## 2. Architectural Boundaries
 
 The project is strictly segregated. Do not mix dependencies between these layers:
 
@@ -37,40 +30,14 @@ The project is strictly segregated. Do not mix dependencies between these layers
 
   * Next.js App Router. Default to Server Components. Push `"use client"` down to interactive UI elements only (e.g., Framer Motion tiles, Inputs).
 
-## 4. Operating Modes
+## 3. Coding Discipline
 
-When prompted by the user, adopt the corresponding mode and strictly follow its workflow:
+* Write modular code strictly following `docs/tech-stack.md`.
+* Do not overwrite entire files for small changes; rely on precise text replacement.
+* Always read the current state of the file before editing.
+* Run tests frequently. If a test fails, read the terminal output and fix the implementation.
 
-### Mode A: The Architect (Planning)
-
-* **Goal:** Decompose features from roadmap into actionable tasks.
-
-* **Workflow:** Read the design document and roadmap checklist -> Pick next available step in checklist -> Propose a technical plan -> Ensure all required technical and product decisions are made -> Write a checklist in `docs/tasks/[feature].md`, add clarifying questions on decisions to be made. Do not write application code in this mode.
-
-### Mode B: The TDD Engineer (Testing)
-
-* **Goal:** Write tests before implementation.
-
-* **Workflow:** Create failing Vitest files in `/tests/`. Focus on edge cases and pure logic. Test must behave as a contract for class/feature/component. **You must prove the test fails via the terminal** before proceeding to write implementation code.
-
-### Mode C: The Implementer (Coding)
-
-* **Goal:** Pass the tests and build the feature.
-
-* **Workflow:** Write modular code strictly following `docs/tech-stack.md`. Do not overwrite entire files for small changes; rely on precise text replacement. Always read the current state of the file before editing. Run tests frequently. If a test fails, read the terminal output and fix the implementation.
-
-### Mode D: The Prompt Engineer (Optimisation)
-
-* **Goal:** Improve data pipeline prompt quality without touching orchestration logic.
-
-* **Workflow:**
-  1. Read `docs/tech-stack.md` §4 (Offline Scripts / Prompt Library) to understand the architecture.
-  2. Identify the target prompt in `scripts/data-generation/lib/prompts/`. Each prompt stage has its own file; schemas live alongside builders in the same module.
-  3. Edit **only** the builder function body in the relevant `*-prompts.ts` file. Do not touch schemas or orchestrators.
-  4. Validate the change interactively using `prompt-tester.ts` (see Command Palette below).
-  5. Run `npm run test -- run tests/lib/data-pipeline/prompts.test.ts` to confirm shape tests still pass.
-
-## 5. Strict Anti-Patterns
+## 4. Strict Anti-Patterns
 
 * **NO Hallucinated Libraries:** Strictly adhere to the Allowed Libraries list found in `docs/tech-stack.md`. Do not invent or import unapproved packages (e.g., No Redux, no MUI, no Prisma, no Supabase).
 
@@ -78,28 +45,26 @@ When prompted by the user, adopt the corresponding mode and strictly follow its 
 
 * **NO "Any" Types:** Use strict TS. Use `unknown` and narrow if necessary.
 
-## 6. Command Palette (Standard Skills)
+## 5. Agent Skills
 
-Use these standard commands to interact with the project:
-* **Test All:** `npm run test -- run`
-* **Test Game Logic:** `npm run test -- run src/lib/game-logic`
-* **Test Data Pipeline:** `npm run test -- run tests/lib/data-pipeline`
-* **Linting:** `npm run lint`
-* **Dev Server:** `npm run dev`
+Per-repo configuration consumed by engineering skills (`/tdd`, `/triage`, `/to-issues`, `/to-prd`, `/diagnose`, `/improve-codebase-architecture`, etc.).
 
-data generation pipeline: DON'T RUN AUTONOMOUSLY, ONLY FOR USER MANUAL USAGE
-* **Generate MVP Data:** `npx tsx scripts/data-generation/survey.ts && npx tsx scripts/data-generation/cluster.ts`
-* **Enrich Data:** `npx tsx scripts/data-generation/enrichment.ts`
+### Navigation
 
-### Prompt Tester (Mode D only — requires LM Studio running locally)
+Repo exploration rules and tree command with exclusion filters. See `docs/agents/navigation.md`.
 
-```bash
-# List all registered prompts with descriptions and model hints
-npx tsx scripts/data-generation/prompt-tester.ts --list
+### Commands
 
-# Run a prompt with its default fixture and print the LLM response
-npx tsx scripts/data-generation/prompt-tester.ts --prompt <key>
+Test suites, dev server, linting, and data pipeline commands. See `docs/agents/commands.md`.
 
-# Override the fixture with custom JSON for targeted edge-case testing
-npx tsx scripts/data-generation/prompt-tester.ts --prompt <key> --fixture '{"field":"value"}'
-```
+### Issue tracker
+
+GitHub Issues (primary) with local `.scratch/` drafting. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default canonical labels (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context. `CONTEXT.md` + `docs/adr/` at repo root. Existing domain docs in `docs/glossary.md`. See `docs/agents/domain.md`.
