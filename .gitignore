@@ -43,3 +43,6 @@ next-env.d.ts
 
 .kiro
 .vscode
+
+.scratch
+/scripts/output

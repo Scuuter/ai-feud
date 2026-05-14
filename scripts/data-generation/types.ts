@@ -1,3 +1,9 @@
+export interface DemographicFile {
+  name: string;
+  description: string;
+  personas: Persona[];
+}
+
 export interface Persona {
   id: string;
   name: string;
@@ -45,6 +51,7 @@ export interface AnswerCluster {
   score: number;
   /** Persona IDs assigned to this cluster by the Reduce stage; used by enrichment.ts to generate targeted flavor quotes */
   personaIds: string[];
+  /** Short, 1-3 word matchable tokens (shorthand, abbreviations, common typos) */
   synonyms: string[];
   flavorQuotes: FlavorQuote[];
 }
@@ -53,6 +60,7 @@ export interface WildCard {
   personaId: string;
   /** The persona's original raw survey answer; populated by cluster.ts */
   rawAnswer: string;
+  /** Short, 1-3 word matchable tokens (shorthand, abbreviations, common typos) */
   synonyms: string[];      // reserved for future use, kept empty
   flavorQuote: FlavorQuote;
 }

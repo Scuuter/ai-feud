@@ -38,7 +38,7 @@ export interface WildCard {
   personaId: string;
   /** The persona's original raw survey answer, populated by cluster.ts */
   rawAnswer: string;
-  /** Valid variations and typos for Exact/Fuzzy matching */  
+  /** Short, 1-3 word matchable tokens (shorthand, abbreviations, common typos) */  
   synonyms: string[];     // reserved for future enrichment; kept empty for now
   /** Curated quotes from specific personas to show in the UI for flavor */  
   flavorQuote: FlavorQuote;  
@@ -51,7 +51,7 @@ export interface AnswerCluster {
   score: number;  
   /** Persona IDs assigned to this cluster by the Reduce stage; used by enrichment.ts to generate targeted flavor quotes */
   personaIds: string[];
-  /** Valid variations and typos for Exact/Fuzzy matching */  
+  /** Short, 1-3 word matchable tokens (shorthand, abbreviations, common typos) */  
   synonyms: string[];  
   /** Curated quotes from specific personas to show in the UI for flavor */  
   flavorQuotes: FlavorQuote[];  
@@ -62,6 +62,29 @@ export interface FlavorQuote {
   personaName: string;  
   /** The exact raw string they provided */  
   text: string;  
+}
+```
+
+### **File: data/personas-[demographic].json (Offline Data)**
+
+*Note for AI Agents: Defines the personas and world-grounding context used by the data pipeline.*
+
+```typescript
+export interface DemographicFile {
+  /** The unique identifier of the demographic, e.g. "game-of-thrones" */
+  name: string;
+  /** A global description of the universe/theme to anchor the AI's world-grounding */
+  description: string;
+  /** The Personas belonging to this demographic */
+  personas: Persona[];
+}
+
+export interface Persona {
+  id: string;
+  name: string;
+  description: string;
+  toneOfVoice: string;
+  demographics: string[];
 }
 ```
 

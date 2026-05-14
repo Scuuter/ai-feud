@@ -24,7 +24,7 @@ export interface AnswerCluster {
   score: number;
   /** Persona IDs assigned to this cluster; used by enrichment.ts */
   personaIds: string[];
-  /** Valid variations and typos for Exact/Fuzzy matching */
+  /** Short, 1-3 word matchable tokens (shorthand, abbreviations, common typos) */
   synonyms: string[];
   /** Curated quotes from specific personas to show in the UI */
   flavorQuotes: FlavorQuote[];
@@ -35,7 +35,7 @@ export interface WildCard {
   personaId: string;
   /** The persona's original raw survey answer */
   rawAnswer: string;
-  /** Valid variations for Exact/Fuzzy matching (reserved; empty until enriched) */
+  /** Short, 1-3 word matchable tokens (shorthand, abbreviations, common typos) */
   synonyms: string[];
   /** Curated quote from this persona for flavor text in the UI */
   flavorQuote: FlavorQuote;

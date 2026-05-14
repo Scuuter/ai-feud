@@ -11,7 +11,7 @@
   * A single AI identity used to generate a survey response.  
   * *Example:* "14th Century Blacksmith" or "Anxious House Cat."  
 * **Demographic**  
-  * A theme or collection defining the 100 Personas used to answer a specific Topic.  
+  * A self-contained data unit defining a theme, including a global description for world-grounding and the 100 Personas used to answer a specific Topic.  
 * **SurveyResult**  
   * The primary "Source of Truth" document for a game. It is the finalized, processed result of combining a Topic with a Demographic.  
 * **AnswerCluster**  
@@ -19,7 +19,7 @@
 * **AnswerCategory** (Pipeline Only)
   * A precursor to an AnswerCluster. Extracted during the "Map" stage, it represents a logical grouping concept before scores or synonyms are attached.
 * **Synonym**  
-  * An array of strings attached to an AnswerCluster. These are acceptable alternative words a player might type that conceptually match the cluster.
+  * An array of strings attached to an AnswerCluster. These are strictly short, 1-3 word matchable tokens (common words, shorthand, and abbreviations) a player would type, not creative paraphrases.
 * **WildCard**
   * A unique or outlier AI response that could not be logically grouped into an AnswerCluster. These are preserved for "flavor" but do not contribute to the 100-point board score.
 * **FlavorQuote**
@@ -44,8 +44,8 @@
 
 ## **3. Entity Correlations (How they map together)**
 
-1. The Data Pipeline takes **1 Topic** and **1 Demographic** (which contains **100 Personas**).  
-2. The AI generates 100 raw strings, which the Pipeline clusters to create **1 SurveyResult**.  
+1. The Data Pipeline takes **1 Topic** (using its `aiPrompt`) and **1 Demographic** (including its global `description` and **100 Personas**).  
+2. The AI generates 100 raw strings. A pure filter drops errors, and then the Pipeline clusters valid responses to create **1 SurveyResult**.  
 3. That **SurveyResult** contains **5-8 AnswerClusters**, each containing an array of **Synonyms** and a point value.  
 4. During a live **Round** within a **Room**, a **Player** submits a **Guess** to the Semantic Matcher.  
 5. The Matcher checks the **Guess** against the active **SurveyResult**.  
