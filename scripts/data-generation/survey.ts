@@ -6,7 +6,7 @@ import {
   DEMOGRAPHIC_NAME,
   DATA_VERSION,
 } from "./config.js";
-import { Topic, Persona, RawResponse } from "./types.js";
+import { Topic, Persona, RawResponse, DemographicFile } from "./types.js";
 import { loadJson, ensureDir, writeJson, fileExists, buildOutputFilename, buildOutputDir } from "./utils/fs.js";
 import { callLMStudioWithRetry } from "./utils/llm.js";
 import { renderProgressBar } from "./utils/progress.js";
@@ -17,6 +17,7 @@ import { buildSurveyPrompt } from "./lib/prompts/survey-prompts.js";
 async function runSurvey(topic: Topic, personas: Persona[], demographicContext?: string): Promise<RawResponse[]> {
   const tasks = personas.map((persona) => async (): Promise<RawResponse> => {
     const prompt = buildSurveyPrompt({
+      personaName: persona.name,
       personaDescription: persona.description,
       topicAiPrompt: topic.aiPrompt,
       demographicContext,
@@ -25,7 +26,7 @@ async function runSurvey(topic: Topic, personas: Persona[], demographicContext?:
       const { data: response } = await callLMStudioWithRetry<{ answer: string }>(
         prompt,
         MODEL_SMALL_PARALLEL,
-        0.8,
+        0.5,
         100,
         undefined,
         'survey_' + persona.id,
@@ -66,12 +67,15 @@ async function main() {
     : `${DATA_DIR}/personas-v1.json`;
   const demographicName = demographic ?? DEMOGRAPHIC_NAME;
 
-  const allPersonas = await loadJson<Persona[]>(personasFile);
+  const demographicData = await loadJson<DemographicFile>(personasFile);
+  const allPersonas = demographicData.personas;
 
   // Filter by demographic tag when specified
   const personas = demographic
     ? allPersonas.filter(p => p.demographics.includes(demographic))
     : allPersonas;
+
+  const demographicDescription = demographicData.description;
 
   if (demographic && personas.length === 0) {
     console.error(`Error: No personas found with demographic tag "${demographic}" in ${personasFile}`);
@@ -107,7 +111,7 @@ async function main() {
   for (const topic of topicsToProcess) {
     console.log(`\n=== Processing topic: ${topic.id} ===`);
 
-    const rawResponses = await runSurvey(topic, personas, demographic);
+    const rawResponses = await runSurvey(topic, personas, demographicDescription);
 
     const output = {
       topicId: topic.id,

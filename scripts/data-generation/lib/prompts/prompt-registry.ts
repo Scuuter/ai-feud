@@ -68,13 +68,15 @@ export const PROMPT_REGISTRY: Record<string, PromptDescriptor> = {
     name: 'Survey: Persona Answer',
     description: 'Generates a short raw survey answer from the perspective of a persona.',
     defaultFixture: {
+      personaName: 'Conspiracy Theorist',
       personaDescription: 'a paranoid conspiracy theorist who sees patterns everywhere',
       topicAiPrompt: 'Name something you always check before leaving the house.',
+      demographicContext: 'A modern urban environment with pervasive technology and deep-seated social anxiety.',
     } satisfies SurveyAnswerInput,
     build: (input) => buildSurveyPrompt(input as unknown as SurveyAnswerInput),
     suggestedModel: 'small',
     suggestedMaxTokens: 100,
-    suggestedTemperature: 0.6,
+    suggestedTemperature: 0.5,
   },
 
   'cluster:extract-categories': {

@@ -4,9 +4,10 @@
  */
 
 export interface SurveyAnswerInput {
+  personaName: string;
   personaDescription: string;
   topicAiPrompt: string;
-  /** Optional demographic context, e.g. "game-of-thrones". Included in the prompt when provided. */
+  /** Optional demographic world-grounding description. Included in the prompt when provided. */
   demographicContext?: string;
 }
 
@@ -16,9 +17,9 @@ export interface SurveyAnswerInput {
  */
 export function buildSurveyPrompt(input: SurveyAnswerInput): string {
   const demographicLine = input.demographicContext
-    ? `\nCONTEXT: You are a character from the "${input.demographicContext}" universe.\n`
+    ? `\nWORLD CONTEXT: ${input.demographicContext}\n`
     : '';
-  return `You are ${input.personaDescription}.${demographicLine}
+  return `IDENTITY: You are ${input.personaName}, ${input.personaDescription}.${demographicLine}
 
 TOPIC: "${input.topicAiPrompt}"
 

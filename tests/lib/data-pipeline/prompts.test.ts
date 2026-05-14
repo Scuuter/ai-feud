@@ -26,6 +26,7 @@ function hasNoUndefined(str: string): boolean {
 
 describe('buildSurveyPrompt', () => {
   const input = {
+    personaName: 'Conspiracy Theorist',
     personaDescription: 'a paranoid conspiracy theorist',
     topicAiPrompt: 'Name something you always check before leaving the house.',
   };
